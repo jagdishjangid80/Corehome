@@ -81,7 +81,7 @@ const ScrollComponent = () => {
               </p>
             </div>
             <div className="md:w-1/2 flex justify-center relative">
-              <div className="relative w-[300px] h-[300px] sm:w-[200px] sm:h-[200px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] flex justify-center">
+              <div className="relative w-[550px] h-[500px] sm:w-[200px] sm:h-[200px] md:w-[400px] md:h-[400px] lg:w-[650px] lg:h-[600px] flex justify-center">
                 <img
                   src={aboutlast}
                   alt="Who We Are"
@@ -91,7 +91,7 @@ const ScrollComponent = () => {
                 <img
                   src={aboutmain}
                   alt="Who We Are"
-                  className="w-[70%] h-[70%] sm:w-[60%] sm:h-[60%] md:w-[75%] md:h-[75%] lg:w-[80%] lg:h-[80%] rounded-lg shadow-lg object-cover absolute bottom-[-5%] sm:bottom-[-2%] md:bottom-[-3%] right-[-10%] sm:right-[-5%] md:right-[-8%] lg:right-[-10%] z-20"
+                  className="w-[80%] h-[80%] sm:w-[60%] sm:h-[60%] md:w-[85%] md:h-[85%] lg:w-[85%] lg:h-[85%] rounded-lg shadow-lg object-cover absolute bottom-[-5%] sm:bottom-[-2%] md:bottom-[-3%] right-[-30%] sm:right-[-5%] md:right-[-28%] lg:right-[-10%] z-20"
                 />
               </div>
             </div>

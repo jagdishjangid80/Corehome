@@ -158,7 +158,7 @@ const About = () => {
             <img
               src={aboutRight}
               alt="Who We Are"
-              className="w-[450px] h-[450px] md:w-[500px] md:h-[500px] rounded-lg shadow-lg object-cover"
+              className="w-[550px] h-[550px] md:w-[550px] md:h-[550px] rounded-lg shadow-lg object-cover"
             />
           </div>
         </div>
@@ -169,7 +169,7 @@ const About = () => {
             <img
               src={aboutWhatWeDo}
               alt="What We Do"
-              className="w-[450px] h-[450px] md:w-[500px] md:h-[500px] rounded-lg shadow-lg object-cover"
+              className="w-[550px] h-[550px] md:w-[550px] md:h-[550px] rounded-lg shadow-lg object-cover"
             />
           </div>
           <div className="md:w-1/2 flex flex-col justify-center items-center md:items-start space-y-6 h-full mt-6 sm:mt-[25px]">
