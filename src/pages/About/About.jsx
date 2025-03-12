@@ -70,7 +70,7 @@ const categoriesWithImages = [
 const About = () => {
   return (
     <div className="bg-black text-white py-16">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 px-6">
+      <div className="max-w-full mx-auto flex flex-col md:flex-row items-center gap-10 px-26">
         <div className="md:w-1/2 text-center md:text-left">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold">
             About Us
@@ -118,8 +118,8 @@ const About = () => {
         </div>
       </div>
 
-      <div className="bg-black text-white py-16 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
+      <div className="bg-black text-white py-16">
+        <div className="max-w-full mx-auto flex flex-col md:flex-row items-center gap-10 px-26">
           <div className="md:w-1/2 space-y-6">
             <h1 className="text-5xl md:text-5xl font-bold">Who We Are</h1>
             <p className="text-2xl">
@@ -164,7 +164,7 @@ const About = () => {
         </div>
       </div>
       <div className="bg-black text-white py-10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
+        <div className="max-w-full mx-auto flex flex-col md:flex-row items-center gap-10 px-26">
           <div className="md:w-1/2 flex justify-center">
             <img
               src={aboutWhatWeDo}
