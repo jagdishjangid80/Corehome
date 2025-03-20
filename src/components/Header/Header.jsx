@@ -22,7 +22,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 50); // Elements appear when scrolled past 50px
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -56,38 +56,39 @@ const Header = () => {
     <>
       <header
         className={`fixed top-0 w-full z-50 bg-black transition-all duration-300 ${
-          isScrolled ? "h-16 sm:h-20 md:h-24" : "h-20 sm:h-24 md:h-28"
+          isScrolled ? "h-20 sm:h-20 md:h-24" : "h-20 sm:h-24 md:h-28"
         } flex items-center justify-between px-4 sm:px-6 md:px-8`}
       >
-        
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="flex items-center gap-2 text-white cursor-pointer p-2 transition-opacity duration-300"
-        >
-          <FontAwesomeIcon
-            icon={faBarsStaggered}
-            size="lg"
-            className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 transition-transform duration-300 rotate-[120deg] hover:rotate-0"
-          />
-          <span className="hidden md:inline text-lg md:text-xl font-bold">
-            MENU
-          </span>
-        </button>
+        {isScrolled && (
+          <>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex items-center gap-2 text-white cursor-pointer p-2 transition-opacity duration-300"
+            >
+              <FontAwesomeIcon
+                icon={faBarsStaggered}
+                size="lg"
+                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 transition-transform duration-300 rotate-[120deg] hover:rotate-0"
+              />
+              <span className="hidden md:inline text-lg md:text-xl font-bold">
+                MENU
+              </span>
+            </button>
 
-        
-        <img
-          src={logo}
-          alt="Logo"
-          className="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 h-auto"
-        />
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 h-auto"
+            />
 
-       
-        <button className="flex items-center gap-2 text-white cursor-pointer p-2 transition-opacity duration-300">
-          <span className="hidden md:inline text-lg md:text-xl font-bold">
-            SEARCH
-          </span>
-          <MagnifyingGlassIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
-        </button>
+            <button className="flex items-center gap-2 text-white cursor-pointer p-2 transition-opacity duration-300">
+              <span className="hidden md:inline text-lg md:text-xl font-bold">
+                SEARCH
+              </span>
+              <MagnifyingGlassIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+            </button>
+          </>
+        )}
       </header>
 
       {menuOpen && (
@@ -98,7 +99,6 @@ const Header = () => {
             backgroundSize: "cover",
           }}
         >
-          
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 md:p-8">
             <button
               onClick={closeMenu}

@@ -10,7 +10,9 @@ const Brand = () => {
   const [activePopup, setActivePopup] = useState(null);
 
   return (
-    <div className="bg-black pt-6 sm:pt-8 md:pt-10 lg:pt-12 xl:pt-14 pb-6 sm:pb-8 md:pb-10 lg:pb-12 xl:pb-14 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+    <div className="bg-black pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-6 sm:pb-8 md:pb-10 lg:pb-12 xl:pb-14 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+      {/* Adjusted padding-top to account for a fixed header (e.g., 64px or h-16) */}
+      
       {/* Brand Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 w-full max-w-full mx-auto">
         {brandData.map((brand, index) => (

@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import back from "../../assets/images/about/innovation.png";
+import back from "../../assets/images/about/innovation.png"; // Verify this path
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 const Innovation = () => {
   const [step, setStep] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    productName: "",
+    email: "",
+  });
 
   const options = ["Web Search", "Core Home Website", "Inventor Community", "Other"];
 
@@ -14,8 +20,31 @@ const Innovation = () => {
     );
   };
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, 5));
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const nextStep = () => {
+    if (step === 1 && (!formData.firstName || !formData.lastName || !formData.productName)) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    setStep((prev) => Math.min(prev + 1, 5));
+  };
+
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
+
+  const handleSubmit = () => {
+    if (!formData.email) {
+      alert("Please enter your email.");
+      return;
+    }
+    console.log("Form submitted:", { ...formData, selectedOptions }); // Replace with API call
+    setFormData({ firstName: "", lastName: "", productName: "", email: "" });
+    setSelectedOptions([]);
+    setStep(1);
+  };
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full px-4 py-6 sm:px-6 md:px-12 lg:px-20 bg-black text-white">
@@ -31,16 +60,43 @@ const Innovation = () => {
             <p className="text-white mb-4 text-lg sm:text-xl">Let's start with your names.</p>
             <form className="space-y-4">
               <div>
-                <label className="block text-white">FIRST NAME*</label>
-                <input type="text" placeholder="e.g. John" className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0" required />
+                <label htmlFor="firstName" className="block text-white">FIRST NAME*</label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  placeholder="e.g. John"
+                  className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0"
+                  required
+                />
               </div>
               <div>
-                <label className="block text-white">LAST NAME*</label>
-                <input type="text" placeholder="e.g. Doe" className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0" required />
+                <label htmlFor="lastName" className="block text-white">LAST NAME*</label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  placeholder="e.g. Doe"
+                  className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0"
+                  required
+                />
               </div>
               <div>
-                <label className="block text-white">PRODUCT NAME*</label>
-                <input type="text" placeholder="Product Name" className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0" required />
+                <label htmlFor="productName" className="block text-white">PRODUCT NAME*</label>
+                <input
+                  id="productName"
+                  name="productName"
+                  type="text"
+                  value={formData.productName}
+                  onChange={handleInputChange}
+                  placeholder="Product Name"
+                  className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0"
+                  required
+                />
               </div>
               <div className="flex justify-end">
                 <button type="button" onClick={nextStep} className="w-full bg-white text-black p-2 rounded-md hover:bg-[#ebbb53] cursor-pointer">
@@ -131,14 +187,23 @@ const Innovation = () => {
               Thanks for taking the time to complete this form. <br /> Please enter your email below and we will be in contact with you shortly.
             </p>
             <div className="mt-4">
-              <label className="block text-white">ENTER YOUR EMAIL</label>
-              <input type="email" placeholder="jd@example.com" className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0" required />
+              <label htmlFor="email" className="block text-white">ENTER YOUR EMAIL</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="jd@example.com"
+                className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0"
+                required
+              />
             </div>
             <div className="flex justify-between gap-2 w-full mt-5">
               <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
                 <ArrowLeftIcon className="w-6 h-6 text-white" />
               </button>
-              <button onClick={() => setStep(1)} className="w-2/3 bg-white text-black p-2 rounded-md hover:bg-[#ebbb53] cursor-pointer">
+              <button onClick={handleSubmit} className="w-2/3 bg-white text-black p-2 rounded-md hover:bg-[#ebbb53] cursor-pointer">
                 Submit
               </button>
             </div>

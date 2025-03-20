@@ -32,7 +32,7 @@ const Home = () => {
         <img
           src={logo}
           alt="Logo"
-          className="absolute z-20 w-[120px] sm:w-[180px] md:w-[300px] lg:w-[400px] xl:w-[500px] top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2"
+          className="absolute z-20 w-[320px] sm:w-[180px] md:w-[300px] lg:w-[400px] xl:w-[500px] top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2"
         />
       </div>
       <div className="absolute bottom-5 text-center z-20 w-full px-4 flex justify-center">
@@ -66,4 +66,3 @@ const Home = () => {
 };
 
 export default Home;
-
