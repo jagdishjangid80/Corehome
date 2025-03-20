@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Header.css";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
