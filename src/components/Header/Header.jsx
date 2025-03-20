@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
 import backgroundImage from "../../assets/images/background3.png";
-import styles from "./Header.module.css"; // Import as a module
+import "./header.css";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -53,43 +53,41 @@ const Header = () => {
   };
 
   return (
-    <div className={styles.headerContainer}> {/* Use module styles */}
-      <header className="fixed top-0 w-full z-50 flex justify-between items-center bg-black h-16 sm:h-20 md:h-22 lg:h-24 xl:h-26">
+    <>
+      <header
+        className={`fixed top-0 w-full z-50 bg-black transition-all duration-300 ${
+          isScrolled ? "h-16 sm:h-20 md:h-24" : "h-20 sm:h-24 md:h-28"
+        } flex items-center justify-between px-4 sm:px-6 md:px-8`}
+      >
+        
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`flex items-center gap-2 text-white cursor-pointer p-2 sm:p-3 md:p-4 transition-opacity duration-300 ${
-            isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
+          className="flex items-center gap-2 text-white cursor-pointer p-2 transition-opacity duration-300"
         >
           <FontAwesomeIcon
             icon={faBarsStaggered}
-            size="xl"
-            className="transition-transform duration-300 rotate-[120deg] hover:rotate-0"
+            size="lg"
+            className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 transition-transform duration-300 rotate-[120deg] hover:rotate-0"
           />
-          <span className="hidden md:inline text-lg sm:text-xl md:text-2xl font-bold text-white">
+          <span className="hidden md:inline text-lg md:text-xl font-bold">
             MENU
           </span>
         </button>
 
+        
         <img
           src={logo}
           alt="Logo"
-          className={`w-16 h-auto sm:w-20 md:w-24 lg:w-28 xl:w-32 transition-opacity duration-300 ${
-            isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
+          className="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 h-auto"
         />
-        <button
-          className={`flex items-center gap-2 text-white cursor-pointer p-2 sm:p-3 md:p-4 transition-opacity duration-300 ${
-            isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <span className="hidden md:inline text-lg sm:text-xl md:text-2xl font-bold text-white">
+
+       
+        <button className="flex items-center gap-2 text-white cursor-pointer p-2 transition-opacity duration-300">
+          <span className="hidden md:inline text-lg md:text-xl font-bold">
             SEARCH
           </span>
           <MagnifyingGlassIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
         </button>
-
-        <div className={styles.headerBlurBottom}></div>
       </header>
 
       {menuOpen && (
@@ -100,19 +98,23 @@ const Header = () => {
             backgroundSize: "cover",
           }}
         >
-          <div className="flex justify-between items-center p-4 sm:p-5 md:p-6 lg:p-8">
-            <button onClick={closeMenu} className="flex items-center gap-2">
+          
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 md:p-8">
+            <button
+              onClick={closeMenu}
+              className="flex items-center gap-2 mb-4 sm:mb-0"
+            >
               <XMarkIcon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10" />
               <span className="text-lg sm:text-xl md:text-2xl xl:text-3xl">
                 MENU
               </span>
             </button>
             <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-6">
-              <span className="uppercase tracking-widest text-xs sm:text-sm md:text-lg xl:text-xl">
+              <span className="uppercase tracking-widest text-xs sm:text-sm md:text-lg">
                 Follow
               </span>
               <div className="w-8 h-[2px] bg-white sm:w-10 md:w-12"></div>
-              <div className="flex space-x-2 sm:space-x-3 md:space-x-4">
+              <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
                 {[
                   { icon: <FaTwitter />, hoverColor: "hover:bg-gray-900" },
                   { icon: <FaFacebook />, hoverColor: "hover:bg-blue-600" },
@@ -128,8 +130,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-
-          <nav className="absolute w-11/12 sm:w-4/5 md:w-2/5 lg:w-1/3 xl:w-1/4 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl flex flex-col gap-3 sm:gap-4 md:gap-5">
+          <nav className="absolute w-11/12 sm:w-3/4 md:w-1/2 lg:w-2/5 xl:w-1/3 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl flex flex-col gap-3 sm:gap-4 md:gap-5">
             {[
               { to: "/", label: "Home", section: "home" },
               {
@@ -203,7 +204,7 @@ const Header = () => {
           </nav>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

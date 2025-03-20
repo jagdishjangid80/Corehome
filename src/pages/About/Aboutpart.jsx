@@ -5,6 +5,7 @@ import aboutlast from "../../assets/images/about/about4.png";
 import aboutmain from "../../assets/images/about/aboutmain.png";
 import Materials from "./Materials";
 import Move from "./Move";
+import Brand from "../Brand/Brand";
 
 const Aboutpart = () => {
   const controls = useAnimation();
@@ -59,6 +60,7 @@ const Aboutpart = () => {
   }, [controls, sectionWidth]);
 
   return (
+    <>
     <div className="w-screen h-screen overflow-hidden bg-black">
       <motion.div
         animate={controls}
@@ -96,23 +98,19 @@ const Aboutpart = () => {
             </div>
           </div>
         </div>
-
-        {/* Section 2: Support */}
         <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
           <Support />
         </div>
-
-        {/* Section 3: Materials */}
         <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
           <Materials />
         </div>
-
-        {/* Section 4: Move */}
         <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
           <Move />
         </div>
       </motion.div>
     </div>
+    <Brand/>
+    </>
   );
 };
 
