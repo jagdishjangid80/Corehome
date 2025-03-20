@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
 import backgroundImage from "../../assets/images/background3.png";
+import styles from "./Header.module.css"; // Import as a module
 
 const Header = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Header = () => {
   };
 
   return (
-    <div className="header-container">
+    <div className={styles.headerContainer}> {/* Use module styles */}
       <header className="fixed top-0 w-full z-50 flex justify-between items-center bg-black h-16 sm:h-20 md:h-22 lg:h-24 xl:h-26">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -87,7 +88,10 @@ const Header = () => {
           </span>
           <MagnifyingGlassIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
         </button>
+
+        <div className={styles.headerBlurBottom}></div>
       </header>
+
       {menuOpen && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col text-white transition-opacity"
