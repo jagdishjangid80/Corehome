@@ -39,7 +39,7 @@ import ab10 from "../../assets/images/categories/ab10.png";
 import ab15 from "../../assets/images/categories/ab15.png";
 import ab20 from "../../assets/images/categories/ab20.png";
 import Aboutpart from "../About/Aboutpart";
-
+import { motion } from "framer-motion";
 const values = [
   "Revolutionize Kitchenware",
   "Capture Integrity",
@@ -97,6 +97,15 @@ const About = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.3, duration: 0.6 },
+    }),
+  };
+
   return (
     <div className="bg-black text-white pt-20 md:pt-24 lg:pt-28">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 lg:pt-16 pb-6 sm:pb-10 lg:pb-16">
@@ -110,33 +119,60 @@ const About = () => {
             className="hidden md:block w-full h-auto max-w-[200px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[480px] xl:max-w-[560px] rounded-lg shadow-lg"
           />
         </div>
-
         <div className="flex flex-col justify-center items-center md:items-start space-y-4 sm:space-y-6 lg:space-y-8">
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed">
+          <motion.p
+            className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed"
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            custom={0}
+          >
             Our mission is simple: to make sustainable, trend-forward products
-            that people will love. Our guiding light in creating unique
-            products for the home are innovation, originality, collaboration,
-            and sustainability. Thinking outside of the box is how we stay at
-            the forefront of design, constantly striving to bring exciting,
+            that people will love. Our guiding light in creating unique products
+            for the home are innovation, originality, collaboration, and
+            sustainability. Thinking outside of the box is how we stay at the
+            forefront of design, constantly striving to bring exciting,
             sustainably-sourced products to market.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col md:flex-row gap-3 md:gap-4 w-full">
+          <motion.div
+            className="flex flex-col md:flex-row gap-3 md:gap-4 w-full"
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            custom={1}
+          >
             <Link to="/brand">
-              <button className="w-full md:w-auto px-4 py-2 md:px-5 md:py-2.5 bg-white text-black text-sm sm:text-base md:text-lg font-bold uppercase rounded hover:bg-[#ebbb53] transition duration-300">
+              <motion.button
+                className="w-full md:w-auto px-4 py-2 md:px-5 md:py-2.5 bg-white text-black text-sm sm:text-base md:text-lg font-bold uppercase rounded hover:bg-[#ebbb53] transition duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 Explore Our Brands
-              </button>
+              </motion.button>
             </Link>
-            <button className="w-full md:w-auto px-4 py-2 md:px-5 md:py-2.5 border border-white text-sm sm:text-base md:text-lg font-bold uppercase rounded hover:bg-white hover:text-black transition duration-300">
+            <motion.button
+              className="w-full md:w-auto px-4 py-2 md:px-5 md:py-2.5 border border-white text-sm sm:text-base md:text-lg font-bold uppercase rounded hover:bg-white hover:text-black transition duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Learn More
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 lg:gap-4 w-full">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 lg:gap-4 w-full"
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            custom={2}
+          >
             {values.map((item, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="flex flex-row items-center justify-start space-x-2 md:space-x-3 lg:space-x-4 p-2"
+                variants={fadeIn}
+                custom={index + 3}
               >
                 {images[index] && (
                   <img
@@ -148,54 +184,92 @@ const About = () => {
                 <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium">
                   {item}
                 </span>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Who We Are Section */}
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 lg:pt-20 pb-6 sm:pb-10 lg:pb-16">
-        <div className="space-y-4 sm:space-y-6 md:space-y-5 lg:space-y-8">
-          <h1 className="text-xl sm:text-2xl md:text-3_Initxl lg:text-5xl xl:text-5xl font-bold">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.5 } },
+          }}
+          className="space-y-4 sm:space-y-6 md:space-y-5 lg:space-y-8"
+        >
+          <motion.h1
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.7, ease: "easeOut" },
+              },
+            }}
+            className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl font-bold"
+          >
             Who We Are
-          </h1>
-          <p className="text-lg sm:text-lg md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+          </motion.h1>
+
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.9, ease: "easeOut" },
+              },
+            }}
+            className="text-lg sm:text-lg md:text-lg lg:text-xl xl:text-2xl leading-relaxed"
+          >
             A forward-thinking team of in-house product developers, designers,
             engineers, marketing experts, and account managers.
-          </p>
+          </motion.p>
           <div className="space-y-4 md:space-y-5 lg:space-y-6">
-            <div>
-              <h2 className="text-lg sm:text-lg md:text-2xl lg:text-4xl xl:text-4xl font-bold text-amber-400">
-                Passion
-              </h2>
-              <p className="text-lg sm:text-lg md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
-                We aim to foster an environment where everyone can bring their
-                best selves and feel excited about each new day.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-4xl font-bold text-amber-400">
-                Creativity
-              </h2>
-              <p className="text-lg sm:text-lg md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
-                We pride ourselves on being trend-savvy and ahead of the curve
-                when bringing unique products to the houseware market.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-2xl sm:text-2xl md:text-2xl lg:text-4xl xl:text-4xl font-bold text-amber-400">
-                Innovation
-              </h2>
-              <p className="text-lg sm:text-lg md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
-                With every product, we prioritize performance alongside style
-                and sacrifice nothing in favor of having it all. By working
-                closely with our very own factories, we ensure only the very
-                best arrives in your home.
-              </p>
-            </div>
+            {[
+              {
+                title: "Passion",
+                text: "We aim to foster an environment where everyone can bring their best selves and feel excited about each new day.",
+              },
+              {
+                title: "Creativity",
+                text: "We pride ourselves on being trend-savvy and ahead of the curve when bringing unique products to the houseware market.",
+              },
+              {
+                title: "Innovation",
+                text: "With every product, we prioritize performance alongside style and sacrifice nothing in favor of having it all. By working closely with our very own factories, we ensure only the very best arrives in your home.",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.7,
+                      delay: index * 0.5,
+                      ease: "easeOut",
+                    },
+                  },
+                }}
+              >
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-4xl font-bold text-amber-400">
+                  {item.title}
+                </h2>
+                <p className="text-lg sm:text-lg md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
+
         <div className="flex justify-center md:justify-end">
           <img
             src={imageArray[currentImage]}
@@ -214,7 +288,13 @@ const About = () => {
             className="w-full max-w-[340px] sm:max-w-[400px] lg:h-[785px] md:max-w-[400px] lg:max-w-[500px] xl:max-w-[700px] rounded-lg shadow-lg"
           />
         </div>
-        <div className="space-y-4 md:space-y-5 lg:space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="space-y-4 md:space-y-5 lg:space-y-6"
+        >
           <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl font-bold">
             What We Do
           </h1>
@@ -222,9 +302,17 @@ const About = () => {
             We combine cutting-edge technology with bold aesthetics to produce
             home and lifestyle essentials.
           </p>
+
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-3">
             {categoriesWithImages.map((item, index) => (
-              <div key={index} className="flex flex-col items-center">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="flex flex-col items-center"
+              >
                 <img
                   src={item.image}
                   alt={item.name}
@@ -233,10 +321,10 @@ const About = () => {
                 <span className="font-semibold text-lg sm:text-lg md:text-base lg:text-lg mt-2 text-center">
                   {item.name}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
       <Aboutpart />
     </div>
