@@ -1,6 +1,4 @@
-
-
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import Support from "./Support";
 import aboutlast from "../../assets/images/about/about4.png";
@@ -8,6 +6,7 @@ import aboutmain from "../../assets/images/about/aboutmain.png";
 import Materials from "./Materials";
 import Move from "./Move";
 import Brand from "../Brand/Brand";
+import PopsSection from "./PopsSection";
 
 const Aboutpart = () => {
   const controls = useAnimation();
@@ -15,11 +14,11 @@ const Aboutpart = () => {
   const isAnimating = useRef(false);
   const [scrollIndex, setScrollIndex] = useState(0);
   const [isHorizontalScrollDone, setIsHorizontalScrollDone] = useState(false);
-  const [isReverseHorizontalScrollDone, setIsReverseHorizontalScrollDone] = useState(false);
+  const [isReverseHorizontalScrollDone, setIsReverseHorizontalScrollDone] =
+    useState(false);
 
   const getSectionWidth = () =>
     typeof window !== "undefined" ? window.innerWidth : 1920;
-
   const [sectionWidth, setSectionWidth] = useState(getSectionWidth());
 
   useEffect(() => {
@@ -28,7 +27,6 @@ const Aboutpart = () => {
     const handleWheel = (event) => {
       if (isAnimating.current) return;
       event.preventDefault();
-
       isAnimating.current = true;
 
       setScrollIndex((prev) => {
@@ -36,7 +34,7 @@ const Aboutpart = () => {
 
         if (event.deltaY > 0 && prev < totalSections - 1) {
           newIndex += 1;
-          setIsReverseHorizontalScrollDone(false); // Reset reverse lock when moving forward
+          setIsReverseHorizontalScrollDone(false);
         } else if (event.deltaY < 0 && prev > 0) {
           newIndex -= 1;
         }
@@ -47,6 +45,8 @@ const Aboutpart = () => {
 
         if (newIndex === totalSections - 1) {
           setIsHorizontalScrollDone(true);
+        } else {
+          setIsHorizontalScrollDone(false);
         }
 
         if (newIndex === 0) {
@@ -76,7 +76,7 @@ const Aboutpart = () => {
 
           if (deltaY > 0 && prev < totalSections - 1) {
             newIndex += 1;
-            setIsReverseHorizontalScrollDone(false); // Reset reverse lock when moving forward
+            setIsReverseHorizontalScrollDone(false);
           } else if (deltaY < 0 && prev > 0) {
             newIndex -= 1;
           }
@@ -87,6 +87,8 @@ const Aboutpart = () => {
 
           if (newIndex === totalSections - 1) {
             setIsHorizontalScrollDone(true);
+          } else {
+            setIsHorizontalScrollDone(false);
           }
 
           if (newIndex === 0) {
@@ -110,6 +112,20 @@ const Aboutpart = () => {
       window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [controls, sectionWidth]);
+
+  const fadeVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+    exit: {
+      opacity: 0,
+      y: -20,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
 
   return (
     <>
@@ -160,9 +176,34 @@ const Aboutpart = () => {
           </div>
         </motion.div>
       </div>
-      <div>
-        <Brand />
-      </div>
+
+      <AnimatePresence>
+        {isHorizontalScrollDone && (
+          <motion.div
+            key="pops-section"
+            variants={fadeVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <PopsSection />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isReverseHorizontalScrollDone && (
+          <motion.div
+            key="brand-section"
+            variants={fadeVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <Brand />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <Brand />
     </>
   );
 };
