@@ -3,28 +3,45 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: #000; 
+  background: #000;
 }
 
+/* Top Blur Effect */
 .smoke-overlay {
   position: absolute;
   width: 100%;
   height: 30%;
   top: 0;
-  background: radial-gradient(circle, rgba(4, 4, 4, 0.15) 35%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.15) 85%, transparent 30%);
   filter: blur(20px);
   opacity: 0.6;
   pointer-events: none;
 }
-
+/* Bottom Blur Effect - Stronger Black Blur */
 .smoke-overlay-bottom {
   position: absolute;
-  width: 100%;
-  height: 30%;
   bottom: 0;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.15) 35%, transparent 70%);
-  filter: blur(20px);
-  opacity: 0.6;
+  width: 100%;
+  height: 20%;  /* Increased height for a more visible effect */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5), transparent);
+  filter: blur(25px);
+  opacity: 1;  /* Full opacity for a darker effect */
+  z-index: 10;  /* Keeps it above background images */
   pointer-events: none;
 }
+/* Background Image Container Height Adjustments */
+.background-container {
+  height: 50vh; /* Default height */
+}
 
+@media (max-width: 768px) {  /* Small screens */
+  .background-container {
+    height: 40vh;
+  }
+}
+
+@media (max-width: 480px) {  /* Extra small screens */
+  .background-container {
+    height: 30vh;
+  }
+}

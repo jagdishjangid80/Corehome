@@ -56,7 +56,7 @@ const Header = () => {
     <>
       <header
         className={`fixed top-0 w-full z-50 bg-black transition-all duration-300 ${
-          isScrolled ? "h-20 sm:h-20 md:h-24" : "h-20 sm:h-24 md:h-28"
+          isScrolled ? "h-[100px]" : "h-[100px]"
         } flex items-center justify-between px-4 sm:px-6 md:px-8`}
       >
         {isScrolled && (
