@@ -10,6 +10,7 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
+import manu from "../../assets/images/manu.png";
 import backgroundImage from "../../assets/images/background3.png";
 import "./header.css";
 
@@ -22,7 +23,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50); // Elements appear when scrolled past 50px
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -202,6 +203,13 @@ const Header = () => {
               </div>
             ))}
           </nav>
+          <div className="absolute bottom-4 right-4 p-4">
+            <img
+              src={manu}
+              alt="Brand Logo"
+              className="w-20 sm:w-30 md:w-30 lg:w-30 h-auto"
+            />
+          </div>
         </div>
       )}
     </>

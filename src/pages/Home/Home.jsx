@@ -76,7 +76,6 @@ const Home = () => {
   return (
     <>
       <motion.div className="relative w-full h-screen flex overflow-hidden">
-        {/* Background Infinite Scroll Sections */}
         <div className="absolute inset-0 flex">
           <div className="hidden md:block md:w-1/3 background-container">
             <InfiniteScroll images={imagesLeft} direction="down" />
@@ -128,9 +127,6 @@ const Home = () => {
             </motion.h1>
           </motion.div>
         )}
-
-        {/* Blur Effect & Scroll Text */}
-
         <div className="absolute bottom-8 w-full flex justify-center items-center text-center">
           <p className="text-white text-lg md:text-xl lg:text-2xl font-extrabold">
             SCROLL TO <span className="text-yellow-400">ENTER</span>
