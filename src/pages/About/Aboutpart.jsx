@@ -11,25 +11,14 @@ const Aboutpart = () => {
   const controls = useAnimation();
   const totalSections = 4;
   const isAnimating = useRef(false);
+  const [scrollIndex, setScrollIndex] = useState(0);
+  const [isHorizontalScrollDone, setIsHorizontalScrollDone] = useState(false);
+  const [isReverseHorizontalScrollDone, setIsReverseHorizontalScrollDone] = useState(false);
 
   const getSectionWidth = () =>
     typeof window !== "undefined" ? window.innerWidth : 1920;
 
   const [sectionWidth, setSectionWidth] = useState(getSectionWidth());
-  const [scrollIndex, setScrollIndex] = useState(
-    Number(localStorage.getItem("scrollIndex")) || 0
-  );
-
-  useEffect(() => {
-    const updateWidth = () => setSectionWidth(getSectionWidth());
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
-
-  useEffect(() => {
-    const boundedIndex = Math.max(0, Math.min(scrollIndex, totalSections - 1));
-    controls.start({ x: -boundedIndex * sectionWidth });
-  }, [scrollIndex, sectionWidth, controls]);
 
   useEffect(() => {
     let touchStartY = 0;
@@ -37,12 +26,15 @@ const Aboutpart = () => {
     const handleWheel = (event) => {
       if (isAnimating.current) return;
       event.preventDefault();
+
       isAnimating.current = true;
 
       setScrollIndex((prev) => {
         let newIndex = prev;
+
         if (event.deltaY > 0 && prev < totalSections - 1) {
           newIndex += 1;
+          setIsReverseHorizontalScrollDone(false); // Reset reverse lock when moving forward
         } else if (event.deltaY < 0 && prev > 0) {
           newIndex -= 1;
         }
@@ -50,6 +42,14 @@ const Aboutpart = () => {
         newIndex = Math.max(0, Math.min(newIndex, totalSections - 1));
         localStorage.setItem("scrollIndex", newIndex);
         controls.start({ x: -newIndex * sectionWidth });
+
+        if (newIndex === totalSections - 1) {
+          setIsHorizontalScrollDone(true);
+        }
+
+        if (newIndex === 0) {
+          setIsReverseHorizontalScrollDone(true);
+        }
 
         return newIndex;
       });
@@ -71,8 +71,10 @@ const Aboutpart = () => {
 
         setScrollIndex((prev) => {
           let newIndex = prev;
+
           if (deltaY > 0 && prev < totalSections - 1) {
             newIndex += 1;
+            setIsReverseHorizontalScrollDone(false); // Reset reverse lock when moving forward
           } else if (deltaY < 0 && prev > 0) {
             newIndex -= 1;
           }
@@ -80,6 +82,14 @@ const Aboutpart = () => {
           newIndex = Math.max(0, Math.min(newIndex, totalSections - 1));
           localStorage.setItem("scrollIndex", newIndex);
           controls.start({ x: -newIndex * sectionWidth });
+
+          if (newIndex === totalSections - 1) {
+            setIsHorizontalScrollDone(true);
+          }
+
+          if (newIndex === 0) {
+            setIsReverseHorizontalScrollDone(true);
+          }
 
           return newIndex;
         });
@@ -104,7 +114,7 @@ const Aboutpart = () => {
       <div className="w-screen h-screen overflow-hidden bg-black">
         <motion.div
           animate={controls}
-          transition={{ type: "tween", duration: 0.8, ease: "easeInOut" }}
+          transition={{ type: "tween", duration: 1, ease: "easeInOut" }}
           className="flex flex-nowrap"
           style={{ width: `${totalSections * 100}vw` }}
         >
@@ -149,9 +159,8 @@ const Aboutpart = () => {
         </motion.div>
       </div>
       <div>
-      <Brand/>
+        <Brand />
       </div>
-     
     </>
   );
 };
