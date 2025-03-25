@@ -12,8 +12,7 @@ import {
 import logo from "../../assets/images/logo.png";
 import manu from "../../assets/images/manu.png";
 import backgroundImage from "../../assets/images/background3.png";
-import "./header.css";
-
+import "../../assets/styles/header.css";
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,38 +55,39 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 w-full z-50 bg-black transition-all duration-300 ${
+        className={`header-bg fixed top-0 w-full z-50 bg-black transition-all duration-300 ${
           isScrolled ? "h-[100px]" : "h-[100px]"
         } flex items-center justify-between px-4 sm:px-6 md:px-8`}
       >
         {isScrolled && (
           <>
+            <div className="header-content">
             <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-2 text-white cursor-pointer p-2 transition-opacity duration-300"
-            >
-              <FontAwesomeIcon
-                icon={faBarsStaggered}
-                size="lg"
-                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 transition-transform duration-300 rotate-[120deg] hover:rotate-0"
+  onClick={() => setMenuOpen(!menuOpen)}
+  className="flex items-center gap-2 text-white cursor-pointer p-2"
+>
+  <FontAwesomeIcon
+    icon={faBarsStaggered}
+    size="lg"
+    className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 transition-transform duration-300 rotate-[120deg] hover:rotate-0"
+  />
+  <span className="hidden md:inline text-lg md:text-xl font-bold">
+    MENU
+  </span>
+</button>
+
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 h-auto"
               />
-              <span className="hidden md:inline text-lg md:text-xl font-bold">
-                MENU
-              </span>
-            </button>
-
-            <img
-              src={logo}
-              alt="Logo"
-              className="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 h-auto"
-            />
-
-            <button className="flex items-center gap-2 text-white cursor-pointer p-2 transition-opacity duration-300">
-              <span className="hidden md:inline text-lg md:text-xl font-bold">
-                SEARCH
-              </span>
-              <MagnifyingGlassIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
-            </button>
+              <button className="flex items-center gap-2 text-white cursor-pointer p-2">
+                <span className="hidden md:inline text-lg md:text-xl font-bold">
+                  SEARCH
+                </span>
+                <MagnifyingGlassIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+              </button>
+            </div>
           </>
         )}
       </header>

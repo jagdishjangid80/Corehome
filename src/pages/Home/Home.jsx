@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import "./Home.css";
 import InfiniteScroll from "../../components/InfiniteScroll";
 import About from "../About/About";
+import "../../assets/styles/Home.css";
+import LogoComponent from "../../components/Home/LogoComponent";
+import PopsComponent from "../../components/Home/PopsComponent";
 import background1 from "../../assets/images/background1.png";
 import background2 from "../../assets/images/background2.png";
 import background3 from "../../assets/images/background3.png";
@@ -14,7 +16,6 @@ import background8 from "../../assets/images/background8.png";
 import background9 from "../../assets/images/background9.png";
 import background10 from "../../assets/images/background10.png";
 import background11 from "../../assets/images/background11.png";
-import logo from "../../assets/images/manu.png";
 
 const Home = () => {
   const imagesLeft = [
@@ -80,59 +81,27 @@ const Home = () => {
           <div className="hidden md:block md:w-1/3 background-container">
             <InfiniteScroll images={imagesLeft} direction="down" />
           </div>
-
-          <div className="w-full md:w-2/3 background-container flex">
-            <div className="w-full md:w-1/2">
-              <InfiniteScroll images={imagesCenter} direction="up" />
-            </div>
-            <div className="w-full md:w-1/2">
-              <InfiniteScroll images={imagesRight} direction="down" />
-            </div>
+          <div className="hidden md:block md:w-1/3 background-container">
+            <InfiniteScroll images={imagesCenter} direction="up" />
+          </div>
+          <div className="hidden md:block md:w-1/3 background-container">
+            <InfiniteScroll images={imagesRight} direction="down" />
           </div>
         </div>
+        <LogoComponent showPops={showPops} showLogo={showLogo} />
+        <PopsComponent showPops={showPops} />
+        <div className="smoke-overlay-bottom"></div>
 
-        {/* Logo */}
-        {showLogo && (
-          <motion.div
-            className="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center"
-            initial={{ scale: 1, opacity: 1 }}
-            animate={{ scale: showPops ? 0.2 : 1, opacity: showPops ? 0 : 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <img
-              src={logo}
-              alt="Logo"
-              className="w-[550px] sm:w-[180px] md:w-[320px] lg:w-[550px]"
-            />
-          </motion.div>
-        )}
-
-        {/* Pop-up Text */}
-        {showPops && (
-          <motion.div
-            className="absolute inset-0 bg-black flex justify-center items-center z-50 backdrop-blur-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <motion.h1
-              className="text-white sm:text-3xl md:text-2xl lg:text-5xl font-bold text-center"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-            >
-              Discover the future of housewares
-            </motion.h1>
-          </motion.div>
-        )}
-        <div className="absolute bottom-8 w-full flex justify-center items-center text-center">
+        <motion.div
+          className="absolute bottom-10 w-full flex justify-center items-center text-center z-52"
+          initial={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: showPops ? 0 : 1, scale: showPops ? 0.8 : 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <p className="text-white text-lg md:text-xl lg:text-2xl font-extrabold">
             SCROLL TO <span className="text-yellow-400">ENTER</span>
           </p>
-        </div>
-        <div className="smoke-overlay-bottom "></div>
+        </motion.div>
       </motion.div>
 
       <About />

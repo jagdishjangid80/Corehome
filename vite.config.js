@@ -11,4 +11,9 @@ export default defineConfig({
    server: {
     historyApiFallback: true,
   },
+  resolve: {
+    alias: {
+      "@": "/src"
+    }
+  }
 })

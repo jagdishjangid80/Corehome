@@ -13,103 +13,55 @@ const Aboutpart = () => {
   const totalSections = 4;
   const isAnimating = useRef(false);
   const [scrollIndex, setScrollIndex] = useState(0);
-  const [isHorizontalScrollDone, setIsHorizontalScrollDone] = useState(false);
-  const [isReverseHorizontalScrollDone, setIsReverseHorizontalScrollDone] =
-    useState(false);
+  const [sectionWidth, setSectionWidth] = useState(0);
 
-  const getSectionWidth = () =>
-    typeof window !== "undefined" ? window.innerWidth : 1920;
-  const [sectionWidth, setSectionWidth] = useState(getSectionWidth());
+  const getSectionWidth = () => {
+    return window.innerWidth; // Dynamically get the width of the window
+  };
 
   useEffect(() => {
-    let touchStartY = 0;
-
-    const handleWheel = (event) => {
-      if (isAnimating.current) return;
-      event.preventDefault();
-      isAnimating.current = true;
-
-      setScrollIndex((prev) => {
-        let newIndex = prev;
-
-        if (event.deltaY > 0 && prev < totalSections - 1) {
-          newIndex += 1;
-          setIsReverseHorizontalScrollDone(false);
-        } else if (event.deltaY < 0 && prev > 0) {
-          newIndex -= 1;
-        }
-
-        newIndex = Math.max(0, Math.min(newIndex, totalSections - 1));
-        localStorage.setItem("scrollIndex", newIndex);
-        controls.start({ x: -newIndex * sectionWidth });
-
-        if (newIndex === totalSections - 1) {
-          setIsHorizontalScrollDone(true);
-        } else {
-          setIsHorizontalScrollDone(false);
-        }
-
-        if (newIndex === 0) {
-          setIsReverseHorizontalScrollDone(true);
-        }
-
-        return newIndex;
-      });
-
-      setTimeout(() => (isAnimating.current = false), 800);
+    const updateWidth = () => {
+      setSectionWidth(getSectionWidth());
     };
 
-    const handleTouchStart = (event) => {
-      touchStartY = event.touches[0].clientY;
+    // Listen to window resize
+    window.addEventListener("resize", updateWidth);
+
+    updateWidth(); // Set initial width on first render
+
+    return () => {
+      window.removeEventListener("resize", updateWidth);
     };
+  }, []);
 
-    const handleTouchMove = (event) => {
-      if (isAnimating.current) return;
-      const touchEndY = event.touches[0].clientY;
-      const deltaY = touchStartY - touchEndY;
+  const handleWheel = (event) => {
+    if (isAnimating.current) return;
+    event.preventDefault();
+    isAnimating.current = true;
 
-      if (Math.abs(deltaY) > 50) {
-        isAnimating.current = true;
-
-        setScrollIndex((prev) => {
-          let newIndex = prev;
-
-          if (deltaY > 0 && prev < totalSections - 1) {
-            newIndex += 1;
-            setIsReverseHorizontalScrollDone(false);
-          } else if (deltaY < 0 && prev > 0) {
-            newIndex -= 1;
-          }
-
-          newIndex = Math.max(0, Math.min(newIndex, totalSections - 1));
-          localStorage.setItem("scrollIndex", newIndex);
-          controls.start({ x: -newIndex * sectionWidth });
-
-          if (newIndex === totalSections - 1) {
-            setIsHorizontalScrollDone(true);
-          } else {
-            setIsHorizontalScrollDone(false);
-          }
-
-          if (newIndex === 0) {
-            setIsReverseHorizontalScrollDone(true);
-          }
-
-          return newIndex;
-        });
-
-        setTimeout(() => (isAnimating.current = false), 800);
+    setScrollIndex((prev) => {
+      let newIndex = prev;
+      if (event.deltaY > 0 && prev < totalSections - 1) {
+        newIndex += 1;
+      } else if (event.deltaY < 0 && prev > 0) {
+        newIndex -= 1;
       }
-    };
 
+      newIndex = Math.max(0, Math.min(newIndex, totalSections - 1));
+
+      controls.start({ x: -newIndex * sectionWidth });
+
+      return newIndex;
+    });
+
+    setTimeout(() => (isAnimating.current = false), 800);
+  };
+
+  useEffect(() => {
     window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchmove", handleTouchMove);
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [controls, sectionWidth]);
 
@@ -136,6 +88,7 @@ const Aboutpart = () => {
           className="flex flex-nowrap"
           style={{ width: `${totalSections * 100}vw` }}
         >
+          {/* Section 1 */}
           <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
             <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row items-center text-center md:text-left gap-6 sm:gap-8 lg:gap-10 px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
               <div className="w-full md:w-1/2">
@@ -165,12 +118,18 @@ const Aboutpart = () => {
               </div>
             </div>
           </div>
+
+          {/* Section 2 */}
           <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
             <Support />
           </div>
+
+          {/* Section 3 */}
           <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
             <Materials />
           </div>
+
+          {/* Section 4 */}
           <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
             <Move />
           </div>
@@ -178,7 +137,7 @@ const Aboutpart = () => {
       </div>
 
       <AnimatePresence>
-        {isHorizontalScrollDone && (
+        {scrollIndex === totalSections - 1 && (
           <motion.div
             key="pops-section"
             variants={fadeVariants}
@@ -187,19 +146,6 @@ const Aboutpart = () => {
             exit="exit"
           >
             <PopsSection />
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {isReverseHorizontalScrollDone && (
-          <motion.div
-            key="brand-section"
-            variants={fadeVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <Brand />
           </motion.div>
         )}
       </AnimatePresence>

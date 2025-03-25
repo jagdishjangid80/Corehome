@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const InfiniteScroll = ({ images, direction }) => {
+const InfiniteScroll = ({ images, direction = "up" }) => {
   return (
     <div className="relative w-full h-screen flex overflow-hidden">
       <motion.div
@@ -11,7 +11,7 @@ const InfiniteScroll = ({ images, direction }) => {
       >
         {[...images, ...images].map((image, index) => (
           <div key={index} className="w-full h-auto">
-            <img src={image} alt="" className="w-full h-screen object-cover" />
+            <img src={image} alt={`Background ${index + 1}`} className="w-full h-screen object-cover" />
           </div>
         ))}
       </motion.div>

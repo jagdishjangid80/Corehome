@@ -1,65 +1,122 @@
 import React from "react";
+import { FaFacebook, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
 
 const PopUpCard = ({ data, onClose }) => {
+  React.useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center z-50 overflow-y-auto scrollbar-hide">
       <div
-        className="relative bg-white w-[85%] h-[80%] sm:w-[85%] sm:h-[85%] md:w-[80%] md:h-[80%] lg:w-full lg:h-full flex flex-col justify-center items-center text-center overflow-y-auto rounded-lg"
+        className="relative w-full h-screen flex justify-center items-center overflow-hidden"
         style={{
           backgroundImage: data.background ? `url(${data.background})` : "none",
           backgroundSize: "cover",
           backgroundPosition: "center",
+          minHeight: "100vh",
         }}
       >
-        {/* Go Back Button */}
         <button
           onClick={onClose}
-          className="absolute top-2 sm:top-4 md:top-5 lg:top-6 left-2 sm:left-4 md:left-5 lg:left-6 px-2 sm:px-4 md:px-5 py-1 sm:py-2 bg-gray-300 text-black rounded-md text-xs sm:text-sm md:text-base lg:text-lg font-semibold"
+          className="absolute top-4 left-4 bg-gray-300 text-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-400 transition-all duration-300 z-50"
         >
           Go Back
         </button>
+        <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-80"></div>
+        {data.logo && (
+          <img
+            src={data.logo}
+            alt="Brand Logo"
+            className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain drop-shadow-lg"
+          />
+        )}
+      </div>
 
-        {/* Logo */}
-        <img
-          src={data.logo || "default-logo.png"}
-          alt="Brand Logo"
-          className="w-12 sm:w-18 md:w-20 lg:w-24 xl:w-28 h-12 sm:h-18 md:h-20 lg:h-24 xl:h-28 mt-8 sm:mt-14 md:mt-16 lg:mt-20 xl:mt-24 mb-2 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8"
-        />
+      <div className="relative w-full flex flex-col justify-center items-center text-center py-10 px-6 min-h-[100vh] bg-gradient-to-b from-black to-black">
+        <div className="w-[90%] md:w-[60%] lg:w-[50%] xl:w-[40%] text-white">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold px-6 sm:px-10 md:px-16 lg:px-20">
+            {data.description || "No Description Available"}
+          </p>
+          {data.visitText && (
+            <div className="mt-4 flex justify-center">
+              <a
+                href={data.visitText}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 text-yellow-300 font-bold py-2 px-6 rounded-md hover:shadow-lg hover:text-yellow-500 transition-all duration-300 text-4xl"
+              >
+                {data.visitText || "Click Here"}
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
 
-        {/* Description */}
-        <p className="text-gray-900 mb-2 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 px-3 sm:px-6 md:px-8 lg:px-10 xl:px-12 text-xs sm:text-base md:text-lg lg:text-xl xl:text-2xl w-full max-w-[85%] sm:max-w-5xl font-bold">
-          {data.description || "No Description Available"}
-        </p>
-
-        {/* Website Link */}
+      {/* Social Media Icons - Right Center */}
+      <div className="fixed top-1/2 right-6 transform -translate-y-1/2 flex flex-col space-y-5 text-3xl z-50">
         {data.website && (
           <a
             href={data.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block text-red-900 font-semibold py-1 sm:py-2 md:py-3 px-2 sm:px-4 md:px-5 lg:px-6 mb-2 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 hover:underline text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl"
+            className="hover:text-blue-500 transition-all duration-300"
           >
-            {data.visitText || "Visit Website"}
+            <FaGlobe className="h-8 w-8 text-white hover:text-blue-500 transition-all duration-300" />
           </a>
         )}
+        {data.twitter && (
+          <a
+            href={data.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-400 transition-all duration-300"
+          >
+            <FaTwitter className="h-8 w-8 text-white hover:text-blue-400 transition-all duration-300" />
+          </a>
+        )}
+        {data.instagram && (
+          <a
+            href={data.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-pink-500 transition-all duration-300"
+          >
+            <FaInstagram className="h-8 w-8 text-white hover:text-pink-500 transition-all duration-300" />
+          </a>
+        )}
+        {data.facebook && (
+          <a
+            href={data.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-700 transition-all duration-300"
+          >
+            <FaFacebook className="h-8 w-8 text-white hover:text-blue-700 transition-all duration-300" />
+          </a>
+        )}
+      </div>
 
-        {/* Image Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 px-3 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-3 sm:py-5 md:py-6 lg:py-8 xl:py-10 overflow-x-auto">
-          {data.images && data.images.length > 0 ? (
-            data.images.map((img, index) => (
+      {/* Image Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full mx-auto bg-gradient-to-t from-black to-transparent">
+        {data.images && data.images.length > 0 ? (
+          data.images.map((img, index) => (
+            <div key={index} className="w-full flex justify-center">
               <img
-                key={index}
                 src={img}
                 alt={`Preview ${index + 1}`}
-                className="w-[100px] sm:w-[120px] md:w-[150px] lg:w-[324px] xl:w-[350px] h-[100px] sm:h-[120px] md:h-[150px] lg:h-[324px] xl:h-[350px] object-cover rounded-md"
+                className="w-full h-auto max-w-[600px] object-cover rounded-md border border-gray-200 shadow-lg"
               />
-            ))
-          ) : (
-            <p className="text-gray-500 col-span-full text-xs sm:text-base md:text-lg lg:text-xl xl:text-2xl">
-              No Images
-            </p>
-          )}
-        </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500 text-lg col-span-full text-center">
+            No Images Available
+          </p>
+        )}
       </div>
     </div>
   );

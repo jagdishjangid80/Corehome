@@ -218,7 +218,7 @@ const popupData = [
       "Brooklyn Steel's products are masterfully crafted to provide chef grade tools for any home cook. Cookware that captures sleek industrial design with high quality finishes and materials.",
     buttonText: "Close",
     background: background4,
-    visitText: "Visit Website",
+    visitText: "Visit  Website",
     logo: logo4,
     images: [pops22, pops23, pops24, pops25, pops26, pops27, pops28],
   },

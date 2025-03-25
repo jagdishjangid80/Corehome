@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import back from "../../assets/images/about/innovation.png"; // Verify this path
+import back from "../../assets/images/about/innovation.png"; 
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 const Innovation = () => {
@@ -40,175 +40,235 @@ const Innovation = () => {
       alert("Please enter your email.");
       return;
     }
-    console.log("Form submitted:", { ...formData, selectedOptions }); // Replace with API call
+    console.log("Form submitted:", { ...formData, selectedOptions }); 
     setFormData({ firstName: "", lastName: "", productName: "", email: "" });
     setSelectedOptions([]);
     setStep(1);
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full px-4 py-6 sm:px-6 md:px-12 lg:px-20 bg-black text-white">
-      <div
-        className="relative w-full md:w-1/2 h-72 sm:h-80 md:h-96 lg:h-[500px] bg-cover bg-center flex items-center justify-center text-white text-xl font-bold"
-        style={{ backgroundImage: `url(${back})` }}
-      >
-        <div className="text-white font-extrabold text-2xl sm:text-3xl lg:text-4xl">Let's Innovate</div>
+    <div className="flex flex-row items-stretch min-h-screen w-full bg-black text-white">
+      {/* Left Image Section */}
+      <div className="w-1/2 h-screen relative">
+        <div
+          className="w-full h-full bg-cover bg-center"
+          style={{ 
+            backgroundImage: `url(${back})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+        <div 
+          className="absolute inset-0 bg-black/20 backdrop-blur-[2px]"
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl">
+            Let's Innovate
+          </div>
+        </div>
       </div>
-      <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 lg:p-12">
-        {step === 1 && (
-          <div>
-            <p className="text-white mb-4 text-lg sm:text-xl">Let's start with your names.</p>
-            <form className="space-y-4">
-              <div>
-                <label htmlFor="firstName" className="block text-white">FIRST NAME*</label>
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  placeholder="e.g. John"
-                  className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0"
-                  required
-                />
+      <div className="w-1/2 p-6 sm:p-8 md:p-10 lg:p-12 flex items-center justify-center">
+        <div className="w-full max-w-xl">
+          {step === 1 && (
+            <div>
+              <p className="text-white mb-4 text-xl sm:text-2xl drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                Let's start with your names.
+              </p>
+              <p className="text-white mb-4 text-xl sm:text-2xl drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                Please fill in the details below so that we can get in
+                contact with you about our product
+              </p>
+              <form className="space-y-6">
+                <div>
+                  <label htmlFor="firstName" className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                    FIRST NAME*
+                  </label>
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    placeholder="e.g. John"
+                    className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0 text-white text-lg"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                    LAST NAME*
+                  </label>
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    placeholder="e.g. Doe"
+                    className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0 text-white text-lg"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="productName" className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                    PRODUCT NAME*
+                  </label>
+                  <input
+                    id="productName"
+                    name="productName"
+                    type="text"
+                    value={formData.productName}
+                    onChange={handleInputChange}
+                    placeholder="Product Name"
+                    className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0 text-white text-lg"
+                    required
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <button 
+                    type="button" 
+                    onClick={nextStep} 
+                    className="w-full bg-white text-black p-3 rounded-md hover:bg-[#ebbb53] cursor-pointer text-lg font-semibold"
+                  >
+                    Next
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div>
+              <div className="grid grid-cols-2 gap-4">
+                {options.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => handleOptionClick(option)}
+                    className={`w-full p-3 rounded-md border border-white cursor-pointer transition duration-300 ease-in-out text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] ${
+                      selectedOptions.includes(option) ? "bg-[#ebbb53] shadow-lg" : "bg-transparent text-white"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
               </div>
-              <div>
-                <label htmlFor="lastName" className="block text-white">LAST NAME*</label>
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  placeholder="e.g. Doe"
-                  className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="productName" className="block text-white">PRODUCT NAME*</label>
-                <input
-                  id="productName"
-                  name="productName"
-                  type="text"
-                  value={formData.productName}
-                  onChange={handleInputChange}
-                  placeholder="Product Name"
-                  className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0"
-                  required
-                />
-              </div>
-              <div className="flex justify-end">
-                <button type="button" onClick={nextStep} className="w-full bg-white text-black p-2 rounded-md hover:bg-[#ebbb53] cursor-pointer">
-                  Next
+              <div className="flex justify-between mt-6">
+                <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
+                  <ArrowLeftIcon className="w-6 h-6 text-white" />
+                </button>
+                <button onClick={nextStep} className="w-2/3 bg-white text-black p-3 rounded-md hover:bg-[#ebbb53] cursor-pointer text-lg font-semibold">
+                  Next Step
                 </button>
               </div>
-            </form>
-          </div>
-        )}
+            </div>
+          )}
 
-        {step === 2 && (
-          <div>
-            <div className="grid grid-cols-2 gap-4">
-              {options.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => handleOptionClick(option)}
-                  className={`w-full p-2 rounded-md border border-white cursor-pointer transition duration-300 ease-in-out ${
-                    selectedOptions.includes(option) ? "bg-[#ebbb53] shadow-lg" : "bg-transparent text-white"
-                  }`}
-                >
-                  {option}
+          {step === 3 && (
+            <div>
+              <form className="space-y-6">
+                <div>
+                  <label className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                    Have you previously had this product manufactured or prototyped? If yes, explain.*
+                  </label>
+                  <textarea 
+                    placeholder="Type Here" 
+                    className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0 text-white text-lg" 
+                    required 
+                  />
+                </div>
+                <div>
+                  <label className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                    Do you have any CAD drawings, product blueprints? Or professional renderings of your products?*
+                  </label>
+                  <textarea 
+                    placeholder="Type Here" 
+                    className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0 text-white text-lg" 
+                    required 
+                  />
+                </div>
+              </form>
+              <div className="flex justify-between mt-6">
+                <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
+                  <ArrowLeftIcon className="w-6 h-6 text-white" />
                 </button>
-              ))}
+                <button onClick={nextStep} className="w-2/3 bg-white text-black p-3 rounded-md hover:bg-[#ebbb53] cursor-pointer text-lg font-semibold">
+                  Next Step
+                </button>
+              </div>
             </div>
-            <div className="flex justify-between mt-6">
-              <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
-                <ArrowLeftIcon className="w-6 h-6 text-white" />
-              </button>
-              <button onClick={nextStep} className="w-2/3 bg-white text-black p-2 rounded-md hover:bg-[#ebbb53] cursor-pointer">
-                Next Step
-              </button>
-            </div>
-          </div>
-        )}
+          )}
 
-        {step === 3 && (
-          <div>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-white">Have you previously had this product manufactured or prototyped? If yes, explain.*</label>
-                <textarea placeholder="Type Here" className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0" required />
+          {step === 4 && (
+            <div>
+              <form className="space-y-6">
+                <div>
+                  <label className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                    Have you filed with the USPTO for a specific trademark?*
+                  </label>
+                  <textarea 
+                    placeholder="Type Here" 
+                    className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0 text-white text-lg" 
+                    required 
+                  />
+                </div>
+                <div>
+                  <label className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                    Have you submitted your product idea to any other companies for consideration?*
+                  </label>
+                  <textarea 
+                    placeholder="Type Here" 
+                    className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0 text-white text-lg" 
+                    required 
+                  />
+                </div>
+              </form>
+              <div className="flex justify-between mt-6">
+                <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
+                  <ArrowLeftIcon className="w-6 h-6 text-white" />
+                </button>
+                <button onClick={nextStep} className="w-2/3 bg-white text-black p-3 rounded-md hover:bg-[#ebbb53] cursor-pointer text-lg font-semibold">
+                  Next Step
+                </button>
               </div>
-              <div>
-                <label className="block text-white">Do you have any CAD drawings, product blueprints? Or professional renderings of your products?*</label>
-                <textarea placeholder="Type Here" className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0" required />
-              </div>
-            </form>
-            <div className="flex justify-between mt-6">
-              <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
-                <ArrowLeftIcon className="w-6 h-6 text-white" />
-              </button>
-              <button onClick={nextStep} className="w-2/3 bg-white text-black p-2 rounded-md hover:bg-[#ebbb53] cursor-pointer">
-                Next Step
-              </button>
             </div>
-          </div>
-        )}
+          )}
 
-        {step === 4 && (
-          <div>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-white">Have you filed with the USPTO for a specific trademark?*</label>
-                <textarea placeholder="Type Here" className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0" required />
+          {step === 5 && (
+            <div className="text-slate-50">
+              <h2 className="text-2xl font-bold mb-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                Complete Submission
+              </h2>
+              <p className="text-base sm:text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                Thanks for taking the time to complete this form. <br /> Please enter your email below and we will be in contact with you shortly.
+              </p>
+              <div className="mt-4">
+                <label htmlFor="email" className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                  ENTER YOUR EMAIL
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="jd@example.com"
+                  className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0 text-white text-lg"
+                  required
+                />
               </div>
-              <div>
-                <label className="block text-white">Have you submitted your product idea to any other companies for consideration?*</label>
-                <textarea placeholder="Type Here" className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0" required />
+              <div className="flex justify-between gap-2 w-full mt-6">
+                <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
+                  <ArrowLeftIcon className="w-6 h-6 text-white" />
+                </button>
+                <button onClick={handleSubmit} className="w-2/3 bg-white text-black p-3 rounded-md hover:bg-[#ebbb53] cursor-pointer text-lg font-semibold">
+                  Submit
+                </button>
               </div>
-            </form>
-            <div className="flex justify-between mt-6">
-              <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
-                <ArrowLeftIcon className="w-6 h-6 text-white" />
-              </button>
-              <button onClick={nextStep} className="w-2/3 bg-white text-black p-2 rounded-md hover:bg-[#ebbb53] cursor-pointer">
-                Next Step
-              </button>
             </div>
-          </div>
-        )}
-
-        {step === 5 && (
-          <div className="text-slate-50">
-            <h2 className="text-xl font-bold mb-4">Complete Submission</h2>
-            <p className="text-sm sm:text-base">
-              Thanks for taking the time to complete this form. <br /> Please enter your email below and we will be in contact with you shortly.
-            </p>
-            <div className="mt-4">
-              <label htmlFor="email" className="block text-white">ENTER YOUR EMAIL</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="jd@example.com"
-                className="w-full border-b p-2 bg-transparent focus:outline-none focus:ring-0"
-                required
-              />
-            </div>
-            <div className="flex justify-between gap-2 w-full mt-5">
-              <button onClick={prevStep} className="bg-transparent border border-white p-2 rounded-md hover:bg-gray-700 cursor-pointer">
-                <ArrowLeftIcon className="w-6 h-6 text-white" />
-              </button>
-              <button onClick={handleSubmit} className="w-2/3 bg-white text-black p-2 rounded-md hover:bg-[#ebbb53] cursor-pointer">
-                Submit
-              </button>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
