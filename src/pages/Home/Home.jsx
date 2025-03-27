@@ -18,27 +18,9 @@ import background10 from "../../assets/images/background10.png";
 import background11 from "../../assets/images/background11.png";
 
 const Home = () => {
-  const imagesLeft = [
-    background1,
-    background3,
-    background9,
-    background4,
-    background5,
-  ];
-  const imagesCenter = [
-    background10,
-    background11,
-    background8,
-    background7,
-    background4,
-  ];
-  const imagesRight = [
-    background2,
-    background5,
-    background6,
-    background8,
-    background10,
-  ];
+  const imagesLeft = [background1, background3, background9, background4, background5];
+  const imagesCenter = [background10, background11, background8, background7, background4];
+  const imagesRight = [background2, background5, background6, background8, background10];
 
   const [showPops, setShowPops] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
@@ -78,13 +60,13 @@ const Home = () => {
     <>
       <motion.div className="relative w-full h-screen flex overflow-hidden">
         <div className="absolute inset-0 flex">
-          <div className="hidden md:block md:w-1/3 background-container">
+          <div className="md:w-1/3 background-container hidden md:block">
             <InfiniteScroll images={imagesLeft} direction="down" />
           </div>
-          <div className="hidden md:block md:w-1/3 background-container">
+          <div className="w-1/2 md:w-1/3 background-container">
             <InfiniteScroll images={imagesCenter} direction="up" />
           </div>
-          <div className="hidden md:block md:w-1/3 background-container">
+          <div className="w-1/2 md:w-1/3 background-container">
             <InfiniteScroll images={imagesRight} direction="down" />
           </div>
         </div>
@@ -98,7 +80,7 @@ const Home = () => {
           animate={{ opacity: showPops ? 0 : 1, scale: showPops ? 0.8 : 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <p className="text-white text-lg md:text-xl lg:text-2xl font-extrabold">
+         <p className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-wider">
             SCROLL TO <span className="text-yellow-400">ENTER</span>
           </p>
         </motion.div>

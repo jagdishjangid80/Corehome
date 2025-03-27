@@ -23,57 +23,39 @@ import move20 from "../../assets/images/about/move20.png";
 import move21 from "../../assets/images/about/move21.png";
 
 const images = [
-  move1,
-  move2,
-  move3,
-  move4,
-  move5,
-  move6,
-  move7,
-  move8,
-  move9,
-  move10,
-  move11,
-  move12,
-  move13,
-  move14,
-  move15,
-  move16,
-  move17,
-  move18,
-  move19,
-  move20,
-  move21,
+  move1, move2, move3, move4, move5, move6, move7, move8, move9, move10,
+  move11, move12, move13, move14, move15, move16, move17, move18, move19,
+  move20, move21,
 ];
 
 const Move = () => {
   return (
-    <div className="flex gap-6 overflow-hidden min-h-screen md:h-[400px] sm:h-[300px] relative w-full">
+    <div className="flex gap-6 overflow-hidden w-full min-h-screen md:h-[500px] sm:h-[400px] lg:h-[600px] xl:h-[700px] relative">
       <motion.div
-        className="flex flex-col gap-4"
+        className="flex flex-col gap-6"
         animate={{ y: ["0%", "-100%"] }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
       >
         {[...images, ...images].map((img, index) => (
           <img
             key={index}
             src={img}
             alt={`move${index}`}
-            className="w-auto max-w-full h-35 object-cover"
+            className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 object-contain"
           />
         ))}
       </motion.div>
       <motion.div
-        className="flex flex-col gap-4"
+        className="flex flex-col gap-6"
         animate={{ y: ["-100%", "0%"] }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
       >
         {[...images, ...images].map((img, index) => (
           <img
             key={index}
             src={img}
             alt={`move${index}`}
-            className="w-auto max-w-full h-35 object-cover"
+            className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 object-contain"
           />
         ))}
       </motion.div>

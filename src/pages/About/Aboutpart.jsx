@@ -1,154 +1,101 @@
-import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Support from "./Support";
-import aboutlast from "../../assets/images/about/about4.png";
-import aboutmain from "../../assets/images/about/aboutmain.png";
 import Materials from "./Materials";
-import Move from "./Move";
 import Brand from "../Brand/Brand";
 import PopsSection from "./PopsSection";
+import Move from "./Move";
+import aboutlast from "../../assets/images/about/about4.png";
+import aboutmain from "../../assets/images/about/aboutmain.png";
+import "../../assets/styles/about.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Aboutpart = () => {
-  const controls = useAnimation();
-  const totalSections = 4;
-  const isAnimating = useRef(false);
-  const [scrollIndex, setScrollIndex] = useState(0);
-  const [sectionWidth, setSectionWidth] = useState(0);
-
-  const getSectionWidth = () => {
-    return window.innerWidth; // Dynamically get the width of the window
-  };
+  const containerRef = useRef(null);
+  const sectionsRef = useRef([]);
+  const [showPops, setShowPops] = useState(false);
 
   useEffect(() => {
-    const updateWidth = () => {
-      setSectionWidth(getSectionWidth());
+    const sections = sectionsRef.current;
+    const container = containerRef.current;
+    const totalWidth = sections.length * window.innerWidth;
+
+    gsap.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        pin: true,
+        scrub: 0.5,
+        start: "top top",
+        end: () => `+=${totalWidth}`,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          setShowPops(self.progress > 0.95);
+        },
+      },
+    });
+
+    const handleResize = () => {
+      ScrollTrigger.refresh();
     };
 
-    // Listen to window resize
-    window.addEventListener("resize", updateWidth);
-
-    updateWidth(); // Set initial width on first render
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", updateWidth);
+      window.removeEventListener("resize", handleResize);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
-  const handleWheel = (event) => {
-    if (isAnimating.current) return;
-    event.preventDefault();
-    isAnimating.current = true;
-
-    setScrollIndex((prev) => {
-      let newIndex = prev;
-      if (event.deltaY > 0 && prev < totalSections - 1) {
-        newIndex += 1;
-      } else if (event.deltaY < 0 && prev > 0) {
-        newIndex -= 1;
-      }
-
-      newIndex = Math.max(0, Math.min(newIndex, totalSections - 1));
-
-      controls.start({ x: -newIndex * sectionWidth });
-
-      return newIndex;
-    });
-
-    setTimeout(() => (isAnimating.current = false), 800);
-  };
-
-  useEffect(() => {
-    window.addEventListener("wheel", handleWheel, { passive: false });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [controls, sectionWidth]);
-
-  const fadeVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    },
-    exit: {
-      opacity: 0,
-      y: -20,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    },
-  };
-
   return (
     <>
-      <div className="w-screen h-screen overflow-hidden bg-black">
-        <motion.div
-          animate={controls}
-          transition={{ type: "tween", duration: 1, ease: "easeInOut" }}
-          className="flex flex-nowrap"
-          style={{ width: `${totalSections * 100}vw` }}
-        >
-          {/* Section 1 */}
-          <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
-            <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row items-center text-center md:text-left gap-6 sm:gap-8 lg:gap-10 px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      <div ref={containerRef} className="w-screen h-screen overflow-hidden bg-black relative">
+        <div className="flex flex-nowrap h-full">
+          {/* Section 1: Where We Are */}
+          <div ref={(el) => (sectionsRef.current[0] = el)} className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
+            <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row items-center text-center md:text-left gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
               <div className="w-full md:w-1/2">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
                   Where We Are
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl mt-3 sm:mt-4 lg:mt-6">
-                  Find our in-house product developers, designers, engineers,
-                  marketing experts, and account managers based in NYC. We work
-                  closely with our own vertically integrated factories in China
-                  and partner factories around the world.
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl mt-2 sm:mt-3 lg:mt-4">
+                  Find our in-house product developers, designers, engineers, marketing experts, and account managers based in NYC. We work closely with our own vertically integrated factories in China and partner factories around the world.
                 </p>
               </div>
               <div className="w-full md:w-1/2 flex justify-center relative">
-                <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[480px] lg:max-w-[600px]">
-                  <img
-                    src={aboutlast}
-                    alt="Where We Are Background"
-                    className="w-full h-[280px] sm:h-[360px] md:h-[400px] lg:h-[480px] rounded-lg shadow-lg object-cover"
-                  />
-                  <img
-                    src={aboutmain}
-                    alt="Where We Are Overlay"
-                    className="w-[200px] sm:w-[260px] md:w-[300px] lg:w-[360px] h-[200px] sm:h-[260px] md:h-[300px] lg:h-[360px] rounded-lg shadow-lg object-cover absolute bottom-[-10%] right-[-20%] sm:right-[-10%] md:right-[-20%] lg:right-[-30%] z-10"
-                  />
+                <div className="relative w-full max-w-[250px] sm:max-w-[350px] md:max-w-[450px] lg:max-w-[600px]">
+                  <img src={aboutlast} alt="Where We Are Background" className="w-full h-[150px] sm:h-[200px] md:h-[250px] lg:h-[350px] rounded-lg shadow-lg object-cover" />
+                  <img src={aboutmain} alt="Where We Are Overlay" className="w-[100px] sm:w-[150px] md:w-[200px] lg:w-[250px] h-[100px] sm:h-[150px] md:h-[200px] lg:h-[250px] rounded-lg shadow-lg object-cover absolute bottom-[-10%] right-[-15%] sm:right-[-10%] lg:right-[-15%] z-10" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Section 2 */}
-          <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
+          {/* Section 2: Support */}
+          <div ref={(el) => (sectionsRef.current[1] = el)} className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
             <Support />
           </div>
 
-          {/* Section 3 */}
-          <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
+          {/* Section 3: Materials */}
+          <div ref={(el) => (sectionsRef.current[2] = el)} className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
             <Materials />
           </div>
 
-          {/* Section 4 */}
-          <div className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
+          {/* Section 4: Move */}
+          <div ref={(el) => (sectionsRef.current[3] = el)} className="h-full flex items-center justify-center text-white w-screen flex-shrink-0">
             <Move />
           </div>
-        </motion.div>
-      </div>
+        </div>
 
-      <AnimatePresence>
-        {scrollIndex === totalSections - 1 && (
-          <motion.div
-            key="pops-section"
-            variants={fadeVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
+        {showPops && (
+          <div className="absolute inset-0 bg-black bg-opacity-95 flex items-center justify-center fade-in">
             <PopsSection />
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </div>
       <Brand />
     </>
   );

@@ -1,0 +1,64 @@
+/* Fade-in animation for PopsSection */
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Smooth scrolling and overflow handling */
+  html, body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  /* Base styles for sections */
+  .w-screen {
+    width: 100vw;
+  }
+  
+  .h-screen {
+    height: 100vh;
+  }
+  
+  /* Image optimization */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Move section specific styles */
+  .move-container {
+    display: flex;
+    gap: 1rem; /* Default gap */
+  }
+  
+  @media (min-width: 640px) {
+    .move-container {
+      gap: 1.5rem; /* Slightly larger gap on small screens */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .move-container {
+      gap: 2rem; /* Larger gap on large screens */
+    }
+  }
+  
+  /* Ensure Move icons are responsive and small */
+  .move-container img {
+    transition: transform 0.3s ease;
+  }
+  
+  .move-container img:hover {
+    transform: scale(1.1); /* Subtle hover effect */
+  }
