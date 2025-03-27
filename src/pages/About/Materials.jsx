@@ -17,12 +17,22 @@ const Materials = () => {
         <p className="text-lg sm:text-xl md:text-2xl text-white">
           To find out more about <span className="text-amber-400">PFAs.</span>
         </p>
-
         <div className="flex justify-center">
           <img
             src={aboutlast}
             alt="Materials"
-            className="rounded-lg shadow-lg object-cover w-[90%] sm:w-[80%] md:w-[600px] h-auto max-h-[500px]"
+            className="rounded-lg shadow-xl object-cover 
+              w-full max-w-[90%] 
+              sm:max-w-[85%] 
+              md:max-w-[400px] 
+              lg:max-w-[500px] 
+              xl:max-w-[700px] 
+              h-auto 
+              max-h-[400px] 
+              sm:max-h-[350px] 
+              md:max-h-[400px] 
+              lg:max-h-[500px] 
+              xl:max-h-[550px]"
           />
         </div>
       </div>

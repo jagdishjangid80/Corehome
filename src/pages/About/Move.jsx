@@ -29,36 +29,67 @@ const images = [
 ];
 
 const Move = () => {
+  const scrollVariants = {
+    up: {
+      y: ["0%", "-50%"],
+      transition: { repeat: Infinity, duration: 20, ease: "linear" }
+    },
+    down: {
+      y: ["-50%", "0%"],
+      transition: { repeat: Infinity, duration: 20, ease: "linear" }
+    }
+  };
+
   return (
-    <div className="flex gap-6 overflow-hidden w-full min-h-screen md:h-[500px] sm:h-[400px] lg:h-[600px] xl:h-[700px] relative">
-      <motion.div
-        className="flex flex-col gap-6"
-        animate={{ y: ["0%", "-100%"] }}
-        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-      >
-        {[...images, ...images].map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={`move${index}`}
-            className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 object-contain"
-          />
-        ))}
-      </motion.div>
-      <motion.div
-        className="flex flex-col gap-6"
-        animate={{ y: ["-100%", "0%"] }}
-        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-      >
-        {[...images, ...images].map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={`move${index}`}
-            className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 object-contain"
-          />
-        ))}
-      </motion.div>
+    <div className="w-full h-screen overflow-hidden relative flex justify-center items-center px-4 sm:px-6 lg:px-8">
+      {/* Gradient overlays for blur effect with black color */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
+
+      <div className="flex gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 max-w-[100vw] h-full">
+        <motion.div
+          className="flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12"
+          variants={scrollVariants}
+          animate="up"
+          style={{ minHeight: '200%' }}
+        >
+          {[...images, ...images].map((img, index) => (
+            <img
+              key={`up-${index}`}
+              src={img}
+              alt={`move${index}`}
+              className="w-16 h-16 
+                sm:w-20 sm:h-20 
+                md:w-24 md:h-24 
+                lg:w-32 lg:h-32 
+                xl:w-40 xl:h-40 
+                2xl:w-48 2xl:h-48 
+                object-contain flex-shrink-0"
+            />
+          ))}
+        </motion.div>
+        <motion.div
+          className="flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12"
+          variants={scrollVariants}
+          animate="down"
+          style={{ minHeight: '200%' }}
+        >
+          {[...images, ...images].map((img, index) => (
+            <img
+              key={`down-${index}`}
+              src={img}
+              alt={`move${index}`}
+              className="w-16 h-16 
+                sm:w-20 sm:h-20 
+                md:w-24 md:h-24 
+                lg:w-32 lg:h-32 
+                xl:w-40 xl:h-40 
+                2xl:w-48 2xl:h-48 
+                object-contain flex-shrink-0"
+            />
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
 };

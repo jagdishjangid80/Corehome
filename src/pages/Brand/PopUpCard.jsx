@@ -11,6 +11,7 @@ const PopUpCard = ({ data, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center z-50 overflow-y-auto scrollbar-hide">
+      {/* Main Content */}
       <div
         className="relative w-full h-screen flex justify-center items-center overflow-hidden"
         style={{
@@ -37,7 +38,7 @@ const PopUpCard = ({ data, onClose }) => {
       </div>
 
       <div className="relative w-full flex flex-col justify-center items-center text-center py-10 px-6 min-h-[100vh] bg-gradient-to-b from-black to-black">
-        <div className="w-[90%] md:w-[60%] lg:w-[50%] xl:w-[40%] text-white">
+        <div className="w-[90%] md:w-[60%] lg:w-[70%] xl:w-[70%] text-white">
           <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold px-6 sm:px-10 md:px-16 lg:px-20">
             {data.description || "No Description Available"}
           </p>
@@ -47,57 +48,13 @@ const PopUpCard = ({ data, onClose }) => {
                 href={data.visitText}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-2 text-yellow-300 font-bold py-2 px-6 rounded-md hover:shadow-lg hover:text-yellow-500 transition-all duration-300 text-4xl"
+                className="inline-block mt-2 text-yellow-700 font-bold py-2 px-6 rounded-md hover:shadow-lg hover:text-yellow-500 transition-all duration-300 text-4xl"
               >
                 {data.visitText || "Click Here"}
               </a>
             </div>
           )}
         </div>
-      </div>
-
-      {/* Social Media Icons - Right Center */}
-      <div className="fixed top-1/2 right-6 transform -translate-y-1/2 flex flex-col space-y-5 text-3xl z-50">
-        {data.website && (
-          <a
-            href={data.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-500 transition-all duration-300"
-          >
-            <FaGlobe className="h-8 w-8 text-white hover:text-blue-500 transition-all duration-300" />
-          </a>
-        )}
-        {data.twitter && (
-          <a
-            href={data.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-all duration-300"
-          >
-            <FaTwitter className="h-8 w-8 text-white hover:text-blue-400 transition-all duration-300" />
-          </a>
-        )}
-        {data.instagram && (
-          <a
-            href={data.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-pink-500 transition-all duration-300"
-          >
-            <FaInstagram className="h-8 w-8 text-white hover:text-pink-500 transition-all duration-300" />
-          </a>
-        )}
-        {data.facebook && (
-          <a
-            href={data.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-700 transition-all duration-300"
-          >
-            <FaFacebook className="h-8 w-8 text-white hover:text-blue-700 transition-all duration-300" />
-          </a>
-        )}
       </div>
 
       {/* Image Grid */}
@@ -117,6 +74,44 @@ const PopUpCard = ({ data, onClose }) => {
             No Images Available
           </p>
         )}
+      </div>
+
+      <div className="fixed top-1/2 right-4 sm:right-6 transform -translate-y-1/2 flex flex-col space-y-4 sm:space-y-5 text-3xl z-[60]">
+        <a
+          href="https://example.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-3 rounded-sm bg-black group transition-all duration-300"
+        >
+          <FaGlobe className="h-6 w-6 sm:h-8 sm:w-8 text-white group-hover:text-gray-300" />
+        </a>
+
+        <a
+          href="https://twitter.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-3 rounded-sm bg-black group transition-all duration-300"
+        >
+          <FaTwitter className="h-6 w-6 sm:h-8 sm:w-8 text-white group-hover:text-blue-400" />
+        </a>
+
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-3 rounded-sm bg-black group transition-all duration-300"
+        >
+          <FaInstagram className="h-6 w-6 sm:h-8 sm:w-8 text-white group-hover:bg-gradient-to-r from-pink-500 to-yellow-500 p-1 rounded-full" />
+        </a>
+
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-3 rounded-sm bg-black group transition-all duration-300"
+        >
+          <FaFacebook className="h-6 w-6 sm:h-8 sm:w-8 text-white group-hover:text-blue-600" />
+        </a>
       </div>
     </div>
   );

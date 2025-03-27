@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InfiniteScroll from "../../components/InfiniteScroll";
 import About from "../About/About";
 import "../../assets/styles/Home.css";
@@ -17,6 +19,8 @@ import background9 from "../../assets/images/background9.png";
 import background10 from "../../assets/images/background10.png";
 import background11 from "../../assets/images/background11.png";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Home = () => {
   const imagesLeft = [background1, background3, background9, background4, background5];
   const imagesCenter = [background10, background11, background8, background7, background4];
@@ -24,55 +28,95 @@ const Home = () => {
 
   const [showPops, setShowPops] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
-  const [prevScrollY, setPrevScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState("down");
+
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+  const centerRef = useRef(null);
+  const logoRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    let timeout;
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-
-      if (currentScroll > 50 && currentScroll < 800) {
-        setShowPops(true);
-        setShowLogo(false);
-      } else if (currentScroll >= 800) {
-        setShowPops(false);
+    let lastScrollY = window.scrollY;
+    const handleScrollDirection = () => {
+      if (window.scrollY > lastScrollY) {
+        setScrollDirection("down");
       } else {
-        setShowLogo(true);
+        setScrollDirection("up");
       }
-
-      if (currentScroll < prevScrollY && currentScroll < 800) {
-        timeout = setTimeout(() => {
-          setShowPops(false);
-        }, 1000);
-      }
-
-      setPrevScrollY(currentScroll);
+      lastScrollY = window.scrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScrollDirection);
+
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: 2,
+        pin: true,
+        onUpdate: (self) => {
+          if (self.progress > 0.2) {
+            setShowLogo(false);
+            setShowPops(true);
+          } else {
+            setShowLogo(true);
+            setShowPops(false);
+          }
+        },
+      },
+    });
+
+    tl.to(leftRef.current, { y: "90%", duration: 4, ease: "power1.inOut" }, 0);
+    tl.to(rightRef.current, { y: "90%", duration: 4, ease: "power1.inOut" }, 0);
+    tl.to(centerRef.current, { y: "-90%", duration: 4, ease: "power1.inOut" }, 0);
+
+    tl.to(logoRef.current, {
+      scale: 0.5,
+      opacity: 0,
+      duration: 3,
+      ease: "power2.inOut",
+    });
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(timeout);
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener("scroll", handleScrollDirection);
     };
-  }, [prevScrollY]);
+  }, []);
+
+  useEffect(() => {
+    if (scrollDirection === "up") {
+      setShowPops(false); // Hide pops page when scrolling up
+      setShowLogo(true);  // Show logo back
+    }
+  }, [scrollDirection]);
 
   return (
     <>
-      <motion.div className="relative w-full h-screen flex overflow-hidden">
-        <div className="absolute inset-0 flex">
-          <div className="md:w-1/3 background-container hidden md:block">
+      <div ref={containerRef} className="relative w-full h-screen flex overflow-hidden bg-black">
+        <div className="absolute inset-0 flex flex-row">
+          {/* Left Side Images - Hidden on mobile, visible on sm and up */}
+          <div ref={leftRef} className="hidden sm:block sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesLeft} direction="down" />
           </div>
-          <div className="w-1/2 md:w-1/3 background-container">
+
+          {/* Center Images - Full width on mobile, 1/3 on larger screens */}
+          <div ref={centerRef} className="w-full sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesCenter} direction="up" />
           </div>
-          <div className="w-1/2 md:w-1/3 background-container">
+
+          {/* Right Side Images - Hidden on mobile, visible on sm and up */}
+          <div ref={rightRef} className="hidden sm:block sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesRight} direction="down" />
           </div>
         </div>
-        <LogoComponent showPops={showPops} showLogo={showLogo} />
-        <PopsComponent showPops={showPops} />
-        <div className="smoke-overlay-bottom"></div>
+
+        {/* Logo Animation */}
+        <LogoComponent ref={logoRef} showPops={showPops} showLogo={showLogo} />
+        
+        {/* Pops Component */}
+        {showPops && <PopsComponent showPops={showPops} />}
 
         <motion.div
           className="absolute bottom-10 w-full flex justify-center items-center text-center z-52"
@@ -80,13 +124,13 @@ const Home = () => {
           animate={{ opacity: showPops ? 0 : 1, scale: showPops ? 0.8 : 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-         <p className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-wider">
+          <p className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-wider">
             SCROLL TO <span className="text-yellow-400">ENTER</span>
           </p>
         </motion.div>
-      </motion.div>
+      </div>
 
-      <About />
+      <About className="mt-[100vh]" />
     </>
   );
 };

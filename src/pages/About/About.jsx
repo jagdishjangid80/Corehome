@@ -115,7 +115,7 @@ const About = () => {
       {/* About Us Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <div className="flex flex-col items-center md:items-start justify-center space-y-4 md:space-y-6">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-bold">
             About Us
           </h1>
           <img
@@ -126,7 +126,7 @@ const About = () => {
         </div>
         <div className="flex flex-col justify-center items-center md:items-start space-y-6 md:space-y-8">
           <motion.p
-            className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-center md:text-left"
+            className="text-sm sm:text-base md:text-lg lg:text-2xl leading-relaxed text-center md:text-left"
             initial="hidden"
             animate="visible"
             variants={fadeIn}
@@ -149,7 +149,7 @@ const About = () => {
           >
             <Link to="/brand">
               <motion.button
-                className="w-full sm:w-auto px-4 py-2 text-sm sm:text-base md:text-lg font-bold uppercase bg-white text-black rounded hover:bg-[#ebbb53] transition duration-300"
+                className="w-full sm:w-auto px-4 py-2 text-sm sm:text-base md:text-lg lg:text-2xl  uppercase bg-white text-black rounded hover:bg-[#ebbb53] transition duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -157,7 +157,7 @@ const About = () => {
               </motion.button>
             </Link>
             <motion.button
-              className="w-full sm:w-auto px-4 py-2 text-sm sm:text-base md:text-lg font-bold uppercase border border-white rounded hover:bg-white hover:text-black transition duration-300"
+              className="w-full sm:w-auto px-4 py-2 text-sm sm:text-base md:text-lg lg:text-2xl uppercase border border-white rounded hover:bg-white hover:text-black transition duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -183,10 +183,10 @@ const About = () => {
                   <img
                     src={images[index]}
                     alt={item}
-                    className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0"
+                    className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0"
                   />
                 )}
-                <span className="text-sm sm:text-base md:text-lg font-medium">
+                <span className="text-sm sm:text-base md:text-lg lg:text-lg font-medium">
                   {item}
                 </span>
               </motion.div>
@@ -209,7 +209,7 @@ const About = () => {
               hidden: { opacity: 0, y: 50 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
             }}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-bold"
           >
             Who We Are
           </motion.h1>
@@ -218,7 +218,7 @@ const About = () => {
               hidden: { opacity: 0, y: 50 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.9 } },
             }}
-            className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+            className="text-sm sm:text-base md:text-lg lg:text-2xl leading-relaxed"
           >
             A forward-thinking team of in-house product developers, designers,
             engineers, marketing experts, and account managers.
@@ -247,12 +247,12 @@ const About = () => {
                   transition: { duration: 0.7, delay: index * 0.3 },
                 },
               }}
-              className="space-y-2"
+              className="space-y-2 "
             >
-              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-amber-400">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold text-amber-400">
                 {item.title}
               </h2>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg lg:text-2xl leading-relaxed">
                 {item.text}
               </p>
             </motion.div>
@@ -283,10 +283,10 @@ const About = () => {
           viewport={{ once: true, amount: 0.2 }}
           className="space-y-6 md:space-y-8"
         >
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-bold">
             What We Do
           </h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-2xl leading-relaxed">
             We combine cutting-edge technology with bold aesthetics to produce
             home and lifestyle essentials.
           </p>
