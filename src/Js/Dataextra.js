@@ -59,6 +59,18 @@ const ExtraData = [
     ],
     buttontext: "JOIN THE TEAM",
   },
+    {
+    id: 5,
+    title: "Careers",
+    description: `Core Home is an Equal Opportunity Employer with a zero tolerance policy for discrimination on the basis of age, disability, sex, race, religion or belief, gender reassignment, marriage/civil partnership, pregnancy/maternity, or sexual orientation.
+           We commit ourselves to creating an inclusive and diverse environment where people of all backgrounds are welcome to express themselves and contribute their unique perspectives. In all spheres of operation, including hiring, we strive to acknowledge and move beyond our own biases so our company can promote equity-based decisions. We hire, employ, train, promote, and compensate individuals based on merit and performance-related qualifications. All are welcome to apply. `,
+    buttonText: "Close",
+    images: [career1, career2 ,career3
+    ],
+    buttontext: "JOIN THE TEAM",
+  },
+  
+
 ];
 
 export default ExtraData;

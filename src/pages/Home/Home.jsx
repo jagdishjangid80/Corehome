@@ -7,6 +7,8 @@ import About from "../About/About";
 import "../../assets/styles/Home.css";
 import LogoComponent from "../../components/Home/LogoComponent";
 import PopsComponent from "../../components/Home/PopsComponent";
+import MenuBar from "../../components/Navbar/Navbar"; 
+
 import background1 from "../../assets/images/background1.png";
 import background2 from "../../assets/images/background2.png";
 import background3 from "../../assets/images/background3.png";
@@ -29,6 +31,7 @@ const Home = () => {
   const [showPops, setShowPops] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
   const [scrollDirection, setScrollDirection] = useState("down");
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Menu state
 
   const leftRef = useRef(null);
   const rightRef = useRef(null);
@@ -80,46 +83,48 @@ const Home = () => {
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       window.removeEventListener("scroll", handleScrollDirection);
     };
   }, []);
 
   useEffect(() => {
     if (scrollDirection === "up") {
-      setShowPops(false); // Hide pops page when scrolling up
-      setShowLogo(true);  // Show logo back
+      setShowPops(false);
+      setShowLogo(true);
     }
   }, [scrollDirection]);
 
   return (
     <>
-      <div ref={containerRef} className="relative w-full h-screen flex overflow-hidden bg-black">
+      {/* Menu Bar */}
+      <MenuBar isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+
+      <div
+        ref={containerRef}
+        className="relative w-full h-screen flex overflow-hidden bg-black"
+      >
         <div className="absolute inset-0 flex flex-row">
-          {/* Left Side Images - Hidden on mobile, visible on sm and up */}
           <div ref={leftRef} className="hidden sm:block sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesLeft} direction="down" />
           </div>
-
-          {/* Center Images - Full width on mobile, 1/3 on larger screens */}
           <div ref={centerRef} className="w-full sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesCenter} direction="up" />
           </div>
-
-          {/* Right Side Images - Hidden on mobile, visible on sm and up */}
           <div ref={rightRef} className="hidden sm:block sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesRight} direction="down" />
           </div>
         </div>
 
-        {/* Logo Animation */}
+        {/* Logo Component */}
         <LogoComponent ref={logoRef} showPops={showPops} showLogo={showLogo} />
         
         {/* Pops Component */}
         {showPops && <PopsComponent showPops={showPops} />}
 
+        {/* Scroll to Enter Message */}
         <motion.div
-          className="absolute bottom-10 w-full flex justify-center items-center text-center z-52"
+          className="absolute bottom-10 w-full flex justify-center items-center text-center z-50"
           initial={{ opacity: 1, scale: 1 }}
           animate={{ opacity: showPops ? 0 : 1, scale: showPops ? 0.8 : 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
@@ -130,6 +135,7 @@ const Home = () => {
         </motion.div>
       </div>
 
+      {/* About Section */}
       <About className="mt-[100vh]" />
     </>
   );
