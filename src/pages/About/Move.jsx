@@ -23,35 +23,55 @@ import move20 from "../../assets/images/about/move20.png";
 import move21 from "../../assets/images/about/move21.png";
 
 const images = [
-  move1, move2, move3, move4, move5, move6, move7, move8, move9, move10,
-  move11, move12, move13, move14, move15, move16, move17, move18, move19,
-  move20, move21,
+  move1,
+  move2,
+  move3,
+  move4,
+  move5,
+  move6,
+  move7,
+  move8,
+  move9,
+  move10,
+  move11,
+  move12,
+  move13,
+  move14,
+  move15,
+  move16,
+  move17,
+  move18,
+  move19,
+  move20,
+  move21,
 ];
 
 const Move = () => {
   const scrollVariants = {
     up: {
       y: ["0%", "-50%"],
-      transition: { repeat: Infinity, duration: 20, ease: "linear" }
+      transition: { repeat: Infinity, duration: 20, ease: "linear" },
     },
     down: {
       y: ["-50%", "0%"],
-      transition: { repeat: Infinity, duration: 20, ease: "linear" }
-    }
+      transition: { repeat: Infinity, duration: 20, ease: "linear" },
+    },
   };
 
   return (
     <div className="w-full h-screen overflow-hidden relative flex justify-center items-center px-4 sm:px-6 lg:px-8">
-      {/* Gradient overlays for blur effect with black color */}
+      {/* Gradient overlays for blur effect */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
 
-      <div className="flex gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 max-w-[100vw] h-full">
+      {/* Scroll sections */}
+      <div className="flex gap-6 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24 max-w-[100vw] h-full">
+        {/* Scrolling upward */}
         <motion.div
-          className="flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12"
+          className="flex flex-col gap-6 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24"
           variants={scrollVariants}
           animate="up"
-          style={{ minHeight: '200%' }}
+          style={{ minHeight: "200%" }}
         >
           {[...images, ...images].map((img, index) => (
             <img
@@ -68,11 +88,13 @@ const Move = () => {
             />
           ))}
         </motion.div>
+
+        {/* Scrolling downward */}
         <motion.div
-          className="flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12"
+          className="flex flex-col gap-6 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24"
           variants={scrollVariants}
           animate="down"
-          style={{ minHeight: '200%' }}
+          style={{ minHeight: "200%" }}
         >
           {[...images, ...images].map((img, index) => (
             <img

@@ -10,7 +10,7 @@ const PopUpCard = ({ data, onClose }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center z-50 overflow-y-auto scrollbar-hide">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center z-50 overflow-y-auto">
       {/* Main Content */}
       <div
         className="relative w-full h-screen flex justify-center items-center overflow-hidden"
@@ -38,8 +38,8 @@ const PopUpCard = ({ data, onClose }) => {
       </div>
 
       <div className="relative w-full flex flex-col justify-center items-center text-center py-10 px-6 min-h-[100vh] bg-gradient-to-b from-black to-black">
-        <div className="w-[90%] md:w-[60%] lg:w-[70%] xl:w-[70%] text-white">
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold px-6 sm:px-10 md:px-16 lg:px-20">
+        <div className="w-full md:w-[80%] lg:w-[70%] xl:w-[60%] text-white">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
             {data.description || "No Description Available"}
           </p>
           {data.visitText && (
@@ -48,7 +48,7 @@ const PopUpCard = ({ data, onClose }) => {
                 href={data.visitText}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-2 text-yellow-700 font-bold py-2 px-6 rounded-md hover:shadow-lg hover:text-yellow-500 transition-all duration-300 text-4xl"
+                className="inline-block mt-2 text-yellow-700 font-bold py-2 px-6 rounded-md hover:shadow-lg hover:text-yellow-500 transition-all duration-300 text-base sm:text-xl"
               >
                 {data.visitText || "Click Here"}
               </a>
@@ -58,7 +58,7 @@ const PopUpCard = ({ data, onClose }) => {
       </div>
 
       {/* Image Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full mx-auto bg-gradient-to-t from-black to-transparent">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full mx-auto px-4 bg-gradient-to-t from-black to-transparent">
         {data.images && data.images.length > 0 ? (
           data.images.map((img, index) => (
             <div key={index} className="w-full flex justify-center">
@@ -76,7 +76,7 @@ const PopUpCard = ({ data, onClose }) => {
         )}
       </div>
 
-      <div className="fixed top-1/2 right-4 sm:right-6 transform -translate-y-1/2 flex flex-col space-y-4 sm:space-y-5 text-3xl z-[60]">
+      <div className="fixed top-1/2 right-4 sm:right-6 transform -translate-y-1/2 flex flex-col space-y-4 sm:space-y-5 text-2xl z-[60]">
         <a
           href="https://example.com"
           target="_blank"

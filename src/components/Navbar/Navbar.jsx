@@ -10,7 +10,7 @@ const Navbar = ({ closeMenu }) => {
   };
 
   return (
-    <nav className="absolute w-11/12 sm:w-3/4 md:w-1/2 lg:w-2/5 xl:w-1/3 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl flex flex-col gap-3">
+    <nav className="absolute w-11/12 sm:w-3/4 md:w-1/2 lg:w-2/5 xl:w-1/3 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-base sm:text-xl flex flex-col gap-3">
       {[
         { to: "/", label: "Home" },
         {
@@ -44,10 +44,10 @@ const Navbar = ({ closeMenu }) => {
         <div key={label} className="relative w-full">
           {subItems ? (
             <button
-              className="flex items-center w-full font-semibold transition-all"
+              className="flex items-center justify-between w-full font-semibold py-2 px-3 transition-all focus:outline-none bg-gray-800 rounded-md"
               onClick={() => toggleDropdown(label)}
             >
-              {label}
+              <span>{label}</span>
               <FaChevronDown
                 className={`ml-2 transition-transform ${
                   openDropdown === label ? "rotate-180" : ""
@@ -55,18 +55,22 @@ const Navbar = ({ closeMenu }) => {
               />
             </button>
           ) : (
-            <Link to={to} onClick={closeMenu} className="block w-full font-semibold hover:text-yellow-500">
+            <Link
+              to={to}
+              onClick={closeMenu}
+              className="block w-full font-semibold py-2 px-3 hover:text-yellow-500 transition-colors rounded-md"
+            >
               {label}
             </Link>
           )}
           {subItems && openDropdown === label && (
-            <div className="flex flex-col bg-gray-900 mt-2 py-2 px-4 rounded-lg shadow-lg">
+            <div className="flex flex-col bg-gray-900 mt-1 py-2 px-4 rounded-lg shadow-lg">
               {subItems.map(({ to, label }) => (
                 <Link
                   key={to}
                   to={to}
                   onClick={closeMenu}
-                  className="py-1 font-semibold transition hover:text-yellow-500"
+                  className="py-1 font-semibold hover:text-yellow-500 transition-colors"
                 >
                   {label}
                 </Link>
@@ -76,7 +80,6 @@ const Navbar = ({ closeMenu }) => {
         </div>
       ))}
     </nav>
-    
   );
 };
 

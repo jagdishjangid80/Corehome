@@ -6,6 +6,7 @@ import About from "./pages/About/About";
 import Brand from "./pages/Brand/Brand";
 import Contact from "./pages/Contact/Contact";
 import Innovation from "./pages/Innovation/Innovation";
+import NotFound from "./components/NotFound"; 
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { path: "brand", element: <Brand /> },
       { path: "contact", element: <Contact /> },
       { path: "innovation", element: <Innovation /> },
+      { path: "*", element: <NotFound /> }, 
     ],
   },
 ]);

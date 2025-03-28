@@ -7,7 +7,7 @@ import About from "../About/About";
 import "../../assets/styles/Home.css";
 import LogoComponent from "../../components/Home/LogoComponent";
 import PopsComponent from "../../components/Home/PopsComponent";
-import MenuBar from "../../components/Navbar/Navbar"; 
+import MenuBar from "../../components/Navbar/Navbar";
 
 import background1 from "../../assets/images/background1.png";
 import background2 from "../../assets/images/background2.png";
@@ -24,14 +24,32 @@ import background11 from "../../assets/images/background11.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
-  const imagesLeft = [background1, background3, background9, background4, background5];
-  const imagesCenter = [background10, background11, background8, background7, background4];
-  const imagesRight = [background2, background5, background6, background8, background10];
+  const imagesLeft = [
+    background1,
+    background3,
+    background9,
+    background4,
+    background5,
+  ];
+  const imagesCenter = [
+    background10,
+    background11,
+    background8,
+    background7,
+    background4,
+  ];
+  const imagesRight = [
+    background2,
+    background5,
+    background6,
+    background8,
+    background10,
+  ];
 
   const [showPops, setShowPops] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
   const [scrollDirection, setScrollDirection] = useState("down");
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Menu state
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const leftRef = useRef(null);
   const rightRef = useRef(null);
@@ -73,7 +91,11 @@ const Home = () => {
 
     tl.to(leftRef.current, { y: "90%", duration: 4, ease: "power1.inOut" }, 0);
     tl.to(rightRef.current, { y: "90%", duration: 4, ease: "power1.inOut" }, 0);
-    tl.to(centerRef.current, { y: "-90%", duration: 4, ease: "power1.inOut" }, 0);
+    tl.to(
+      centerRef.current,
+      { y: "-90%", duration: 4, ease: "power1.inOut" },
+      0
+    );
 
     tl.to(logoRef.current, {
       scale: 0.5,
@@ -97,7 +119,6 @@ const Home = () => {
 
   return (
     <>
-      {/* Menu Bar */}
       <MenuBar isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
 
       <div
@@ -108,21 +129,20 @@ const Home = () => {
           <div ref={leftRef} className="hidden sm:block sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesLeft} direction="down" />
           </div>
+
           <div ref={centerRef} className="w-full sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesCenter} direction="up" />
           </div>
+
           <div ref={rightRef} className="hidden sm:block sm:w-1/2 md:w-1/3">
             <InfiniteScroll images={imagesRight} direction="down" />
           </div>
         </div>
 
-        {/* Logo Component */}
         <LogoComponent ref={logoRef} showPops={showPops} showLogo={showLogo} />
-        
-        {/* Pops Component */}
+
         {showPops && <PopsComponent showPops={showPops} />}
 
-        {/* Scroll to Enter Message */}
         <motion.div
           className="absolute bottom-10 w-full flex justify-center items-center text-center z-50"
           initial={{ opacity: 1, scale: 1 }}
@@ -135,7 +155,6 @@ const Home = () => {
         </motion.div>
       </div>
 
-      {/* About Section */}
       <About className="mt-[100vh]" />
     </>
   );

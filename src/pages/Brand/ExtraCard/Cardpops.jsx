@@ -14,17 +14,14 @@ const ExtraPopUpCard = ({ data, onClose }) => {
         }}
       >
         <div className="overflow-y-auto w-full" style={{ maxHeight: "80vh" }}>
-          {/* Title */}
           <p className="font-extrabold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white mb-2 sm:mb-3 md:mb-4 lg:mb-5">
             {data.title || ""}
           </p>
 
-          {/* Description */}
           <p className="text-white mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
             {data.description || "No Description Available"}
           </p>
 
-          {/* Logos */}
           {data.logos && data.logos.length > 0 && (
             <div className="flex justify-center items-center flex-wrap gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-4 sm:mb-6">
               {data.logos.map((logo, index) => (
@@ -38,14 +35,12 @@ const ExtraPopUpCard = ({ data, onClose }) => {
             </div>
           )}
 
-          {/* Button */}
           {data.buttontext && (
             <button className="bg-white text-black font-bold w-full sm:w-3/4 md:w-1/2 lg:w-2/5 xl:w-1/3 mx-auto block rounded-md py-2 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg lg:text-xl transition hover:bg-[#ebbb53] hover:text-white mb-4 sm:mb-6 md:mb-8">
               {data.buttontext}
             </button>
           )}
 
-          {/* Grid for Text, Email, and Images */}
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-10 mt-4">
             {data.text && (
               <p className="text-white col-span-full text-sm sm:text-base md:text-lg lg:text-xl">
@@ -75,7 +70,6 @@ const ExtraPopUpCard = ({ data, onClose }) => {
           </div>
         </div>
 
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 p-1 sm:p-1.5 md:p-2 bg-[#ebbb53] text-white rounded-md transition hover:bg-white hover:text-black"

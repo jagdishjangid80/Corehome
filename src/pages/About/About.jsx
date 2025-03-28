@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Aboutpart from "../About/Aboutpart";
-
-// Import images (assuming these are correct paths)
 import image1 from "../../assets/images/about/about.png";
 import about1 from "../../assets/images/about/ab1.png";
 import about2 from "../../assets/images/about/ab2.png";
@@ -194,8 +192,6 @@ const About = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* Who We Are Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <motion.div
           initial="hidden"

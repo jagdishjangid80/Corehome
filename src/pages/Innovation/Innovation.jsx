@@ -47,9 +47,9 @@ const Innovation = () => {
   };
 
   return (
-    <div className="flex flex-row items-stretch min-h-screen w-full bg-black text-white">
+    <div className="flex flex-col md:flex-row items-stretch min-h-screen w-full bg-black text-white">
       {/* Left Image Section */}
-      <div className="w-1/2 h-screen relative">
+      <div className="md:w-1/2 h-1/2 md:h-screen relative">
         <div
           className="w-full h-full bg-cover bg-center"
           style={{ 
@@ -68,7 +68,8 @@ const Innovation = () => {
           </div>
         </div>
       </div>
-      <div className="w-1/2 p-6 sm:p-8 md:p-10 lg:p-12 flex items-center justify-center">
+
+      <div className="md:w-1/2 p-6 sm:p-8 md:p-10 lg:p-12 flex items-center justify-center">
         <div className="w-full max-w-xl">
           {step === 1 && (
             <div>
@@ -77,7 +78,7 @@ const Innovation = () => {
               </p>
               <p className="text-white mb-4 text-xl sm:text-2xl drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
                 Please fill in the details below so that we can get in
-                contact with you about our product
+                contact with you about our product.
               </p>
               <form className="space-y-6">
                 <div>

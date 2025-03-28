@@ -23,16 +23,16 @@ const Materials = () => {
             alt="Materials"
             className="rounded-lg shadow-xl object-cover 
               w-full max-w-[90%] 
-              sm:max-w-[85%] 
-              md:max-w-[400px] 
-              lg:max-w-[500px] 
-              xl:max-w-[700px] 
+              sm:max-w-[80%] 
+              md:max-w-[70%] 
+              lg:max-w-[60%] 
+              xl:max-w-[50%] 
               h-auto 
               max-h-[400px] 
               sm:max-h-[350px] 
               md:max-h-[400px] 
-              lg:max-h-[500px] 
-              xl:max-h-[550px]"
+              lg:max-h-[450px] 
+              xl:max-h-[500px]"
           />
         </div>
       </div>

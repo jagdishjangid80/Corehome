@@ -15,7 +15,7 @@ const Brand = () => {
 
   return (
     <div className="bg-black pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36 pb-6 sm:pb-8 md:pb-10 lg:pb-12 xl:pb-14 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
-      
+      {/* Brand Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 w-full max-w-full mx-auto">
         {brandData.map((brand, index) => (
           <div
@@ -44,13 +44,15 @@ const Brand = () => {
           </div>
         ))}
       </div>
+
+      {/* Marquee for List Data */}
       <div className="bg-black pt-4 sm:pt-5 md:pt-6 lg:pt-8 xl:pt-10 pb-4 sm:pb-5 md:pb-6 lg:pb-8 xl:pb-10 overflow-hidden whitespace-nowrap">
         <Marquee pauseOnHover speed={50} direction="left">
           <div className="flex gap-x-6 sm:gap-x-8 md:gap-x-10 lg:gap-x-12 xl:gap-x-14">
             {listData.concat(listData).map((item, index) => (
               <div
                 key={index}
-                className="flex items-center space-x-2 text-white text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold px-3 sm:px-4 md:px-5 lg:px-6 xl:px-8"
+                className="flex items-center space-x-2 text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-semibold px-3 sm:px-4 md:px-5 lg:px-6 xl:px-8"
               >
                 <span className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 flex items-center justify-center bg-[#ebbb53] rounded-full">
                   {item.icon}
@@ -61,9 +63,13 @@ const Brand = () => {
           </div>
         </Marquee>
       </div>
+
+      {/* Extra Card Pops Section */}
       <div className="pt-4 sm:pt-5 md:pt-6 lg:pt-8 xl:pt-10 pb-4 sm:pb-5 md:pb-6 lg:pb-8 xl:pb-10">
         <ExtraCardpops />
       </div>
+
+      {/* Sliding Images Marquee */}
       <Marquee
         pauseOnHover
         speed={50}
@@ -94,6 +100,7 @@ const Brand = () => {
         </div>
       </Marquee>
 
+      {/* Popup for Brand Details */}
       {activePopup !== null && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <PopUpCard
