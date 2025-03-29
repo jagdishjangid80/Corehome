@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom"; // Add NavLink for active state
+import { Link, NavLink } from "react-router-dom"; 
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
-import PopUpCard from "../../pages/Resources/leadership";
+import PopUpCard from "../../pages/Resources/leadership"; 
+import PopsPage from "../../pages/Support/Supportpops";  
 
 const Navbar = ({ closeMenu }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [showLeadershipPopup, setShowLeadershipPopup] = useState(false);
+  const [showPopsPopup, setShowPopsPopup] = useState(false);  
 
   const toggleDropdown = (label) => {
     setOpenDropdown(openDropdown === label ? null : label);
+  };
+
+  const handleCloseAndNavigate = (to) => {
+    closeMenu();
+    navigate(to);
   };
 
   return (
@@ -21,7 +28,7 @@ const Navbar = ({ closeMenu }) => {
             subItems: [
               { to: "/about", label: "About Us" },
               { label: "Leadership", action: () => setShowLeadershipPopup(true) },
-              { to: "/support", label: "Sustainability" },
+              { label: "Sustainability", action: () => setShowPopsPopup(true) },  
               { to: "/news_press", label: "News & Press" },
             ],
           },
@@ -60,9 +67,10 @@ const Navbar = ({ closeMenu }) => {
             ) : (
               <NavLink
                 to={to}
-                onClick={() => closeMenu()}
-                className="block text-white font-semibold py-2 px-3 transition-colors rounded-md"
-                activeClassName="text-amber-300" 
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  `block text-white font-semibold py-2 px-3 transition-colors rounded-md ${isActive ? "text-amber-300" : ""}` // active state
+                }
               >
                 {label}
               </NavLink>
@@ -105,6 +113,13 @@ const Navbar = ({ closeMenu }) => {
       {showLeadershipPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <PopUpCard onClose={() => setShowLeadershipPopup(false)} />
+        </div>
+      )}
+
+      {/* Pops Page Popup for Sustainability */}
+      {showPopsPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <PopsPage onClose={() => setShowPopsPopup(false)} />
         </div>
       )}
     </>

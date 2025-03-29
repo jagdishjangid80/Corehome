@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       { path: "innovation", element: <Innovation /> },
     ],
   },
-  { path: "*", element: <NotFound /> }, 
+  { path: "*", element: <NotFound /> },
 ]);
 
 const App = () => {

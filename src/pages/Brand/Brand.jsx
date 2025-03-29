@@ -99,8 +99,6 @@ const Brand = () => {
           ))}
         </div>
       </Marquee>
-
-      {/* Popup for Brand Details */}
       {activePopup !== null && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <PopUpCard
