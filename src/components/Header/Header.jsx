@@ -38,14 +38,14 @@ const Header = () => {
           <div className="header-content w-full flex justify-between items-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-2 text-white cursor-pointer p-2"
+              className="flex items-center gap-3 text-white cursor-pointer "
             >
               <div className="flex flex-col items-center justify-center w-5 h-5 cursor-pointer space-y-1 rotate-[120deg] transition-transform duration-300 hover:rotate-0">
                 <div className="w-4 h-1 bg-white rounded-full"></div>
                 <div className="w-6 h-1 bg-white rounded-full"></div>
                 <div className="w-4 h-1 bg-white rounded-full"></div>
               </div>
-              <span className="hidden md:inline text-lg md:text-xl font-bold">
+              <span className="hidden sm:inline text-sm md:text-lg lg:text-xl xl:text-2xl font-bold">
                 MENU
               </span>
             </button>
@@ -57,9 +57,10 @@ const Header = () => {
             />
 
             <button className="flex items-center gap-2 text-white cursor-pointer p-2">
-              <span className="hidden md:inline text-lg md:text-xl font-bold">
+              <span className="hidden sm:inline text-sm md:text-lg lg:text-xl xl:text-2xl font-bold">
                 SEARCH
               </span>
+
               <MagnifyingGlassIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
             </button>
           </div>

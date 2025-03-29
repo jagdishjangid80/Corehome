@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Support from "./Support";
-import Materials from "./Materials";
+import Support from "../Support/Support";
+import Materials from "../Our_material/Materials";
 import Brand from "../Brand/Brand";
-import PopsSection from "./PopsSection";
+import PopsSection from "../../components/PopsCard/PopsSection";
 import Move from "./Move";
-import aboutlast from "../../assets/images/about/about4.png";
-import aboutmain from "../../assets/images/about/aboutmain.png";
-import "../../assets/styles/about.css";
+import aboutLast from "../../assets/images/about/about4.png";
+import aboutMain from "../../assets/images/about/aboutmain.png";
+import "../../assets/styles/about.css"; // Ensure styles are included if needed
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,95 +18,121 @@ const AboutPart = () => {
   const [showPops, setShowPops] = useState(false);
 
   useEffect(() => {
-    const sections = sectionsRef.current;
+    const sections = sectionsRef.current.filter(Boolean); // Filter out null refs
     const container = containerRef.current;
 
-    sections.forEach((section) => {
-      section.style.width = `${window.innerWidth}px`;
-    });
+    const updateSectionWidths = () => {
+      const viewportWidth = window.innerWidth;
+      sections.forEach((section) => {
+        section.style.width = `${viewportWidth}px`;
+      });
+      ScrollTrigger.refresh();
+    };
 
-    const totalWidth = sections.length * window.innerWidth;
+    // Initial setup
+    updateSectionWidths();
 
-    gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
+    // GSAP animation
+    const animation = gsap.to(sections, {
+      x: () => -(sections.length - 1) * window.innerWidth,
       ease: "none",
       scrollTrigger: {
         trigger: container,
         pin: true,
         scrub: 0.5,
-        start: "top top",
-        end: `+=${totalWidth}`,
+        start: "top top+=100", // Adjusted start point
+        end: () => `+=${(sections.length - 1) * window.innerWidth}`,
         invalidateOnRefresh: true,
-        onUpdate: (self) => setShowPops(self.progress > 0.95),
+        onUpdate: (self) => {
+          // Trigger PopsSection when nearing the end (95% progress)
+          setShowPops(self.progress > 0.95);
+        },
       },
     });
 
+    // Debounced resize handler
+    let resizeTimeout;
     const handleResize = () => {
-      sections.forEach((section) => {
-        section.style.width = `${window.innerWidth}px`;
-      });
-      ScrollTrigger.refresh();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        updateSectionWidths();
+        animation.scrollTrigger.refresh();
+      }, 150);
     };
 
     window.addEventListener("resize", handleResize);
+
+    // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      animation.kill();
     };
   }, []);
 
+  const sectionsData = [
+    {
+      title: "Where We Are",
+      content: (
+        <div className="flex flex-col md:flex-row items-center text-center md:text-left p-4 max-w-[1280px] mx-auto md:gap-16">
+          <div className="w-full md:w-1/2 mb-4 md:mb-0">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-white">
+              Where We Are
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mt-3 text-white">
+              Find our in-house product developers, designers, engineers, marketing
+              experts, and account managers based in NYC. We work closely with our
+              vertically integrated factories in China and partner factories around
+              the world.
+            </p>
+          </div>
+          <div className="w-full md:w-1/2 flex justify-center relative">
+            <div className="relative w-full max-w-[500px]">
+              <img
+                src={aboutLast}
+                alt="Background Image"
+                className="w-[600px] h-[600px] rounded-lg shadow-lg object-cover"
+              />
+              <img
+                src={aboutMain}
+                alt="Overlay Image"
+                className="absolute top-[-10%] right-[-15%] md:top-[-6%] md:right-[-60%] w-[70%] h-auto rounded-lg shadow-lg object-cover z-10"
+              />
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    { title: "Support", content: <Support /> },
+    { title: "Materials", content: <Materials /> },
+    { title: "Move", content: <Move /> },
+  ];
+
   return (
-    <div className="pt-[80px]">
+    <div className="overflow-hidden">
       <div
         ref={containerRef}
-        className="w-screen h-screen overflow-hidden bg-black relative"
+        className="relative w-screen h-screen bg-black mt-[100px] overflow-hidden"
       >
-        <div className="flex h-full">
-          {["Where We Are", <Support />, <Materials />, <Move />].map(
-            (content, index) => (
-              <div
-                key={index}
-                ref={(el) => (sectionsRef.current[index] = el)}
-                className="h-full flex items-center justify-center text-white flex-shrink-0"
-              >
-                {typeof content === "string" ? (
-                  <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row items-center text-center md:text-left px-4 py-6">
-                    <div className="w-full md:w-1/2">
-                      <h1 className="text-3xl md:text-4xl font-semibold">
-                        {content}
-                      </h1>
-                      <p className="text-base md:text-lg mt-3">
-                        Find our in-house product developers, designers,
-                        engineers, marketing experts, and account managers based
-                        in NYC. We work closely with our own vertically
-                        integrated factories in China and partner factories
-                        around the world.
-                      </p>
-                    </div>
-                    <div className="w-full md:w-1/2 flex justify-center relative">
-                      <div className="relative w-full max-w-[500px]">
-                        <img
-                          src={aboutlast}
-                          alt="Where We Are Background"
-                          className="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-lg shadow-lg object-cover"
-                        />
-                        <img
-                          src={aboutmain}
-                          alt="Where We Are Overlay"
-                          className="w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[300px] md:h-[300px] rounded-lg shadow-lg object-cover absolute bottom-[-5%] right-[-10%] z-10"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  content
-                )}
-              </div>
-            )
-          )}
+        <div className="flex h-full flex-nowrap">
+          {sectionsData.map((section, index) => (
+            <div
+              key={index}
+              ref={(el) => (sectionsRef.current[index] = el)}
+              className="flex-shrink-0 h-full flex items-center justify-center text-white w-screen"
+            >
+              {section.content}
+            </div>
+          ))}
         </div>
+
+        {/* PopsSection Overlay */}
         {showPops && (
-          <div className="absolute inset-0 bg-black bg-opacity-95 flex items-center justify-center fade-in">
+          <div
+            className={`absolute inset-0 bg-black bg-opacity-95 flex items-center justify-center transition-opacity duration-500 z-20 ${
+              showPops ? "opacity-100" : "opacity-0"
+            }`}
+          >
             <PopsSection />
           </div>
         )}

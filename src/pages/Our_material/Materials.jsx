@@ -4,15 +4,11 @@ import aboutlast from "../../assets/images/brand/back.png";
 const Materials = () => {
   return (
     <div className="flex flex-col items-center text-center p-6">
-      <h4 className="font-bold text-4xl sm:text-5xl md:text-6xl mb-4 text-white">
-        Our Materials
-      </h4>
+      <h4 className="font-bold text-4xl sm:text-5xl md:text-6xl mb-4 text-white">Our Materials</h4>
 
       <div className="max-w-3xl space-y-6">
         <p className="text-lg sm:text-xl md:text-2xl text-white">
-          We pride ourselves on only using the highest quality, food-safe
-          materials to ensure optimal impact on the environment and our
-          customers.
+          We pride ourselves on only using the highest quality, food-safe materials to ensure optimal impact on the environment and our customers.
         </p>
         <p className="text-lg sm:text-xl md:text-2xl text-white">
           To find out more about <span className="text-amber-400">PFAs.</span>
@@ -21,18 +17,7 @@ const Materials = () => {
           <img
             src={aboutlast}
             alt="Materials"
-            className="rounded-lg shadow-xl object-cover 
-              w-full max-w-[90%] 
-              sm:max-w-[80%] 
-              md:max-w-[70%] 
-              lg:max-w-[60%] 
-              xl:max-w-[50%] 
-              h-auto 
-              max-h-[400px] 
-              sm:max-h-[350px] 
-              md:max-h-[400px] 
-              lg:max-h-[450px] 
-              xl:max-h-[500px]"
+            className="rounded-lg shadow-xl object-cover w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[600px] xl:max-w-[600px] h-auto max-h-[400px] sm:max-h-[350px] md:max-h-[400px] lg:max-h-[500px] xl:max-h-[500px]"
           />
         </div>
       </div>

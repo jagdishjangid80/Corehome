@@ -1,19 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
+// ✅ Add this config
 export default defineConfig({
-  plugins:
-   [react(),
-    tailwindcss(),
-
-   ],
-   server: {
-    historyApiFallback: true,
+  plugins: [react()],
+  server: {
+    historyApiFallback: true, 
   },
-  resolve: {
-    alias: {
-      "@": "/src"
-    }
-  }
-})
+});

@@ -6,7 +6,6 @@
     left: 0;
     height: 300px; 
     z-index: 50;
-    transition: background 0.3s ease-in-out;
   }
   
   
@@ -18,34 +17,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
-    z-index: 51; 
+    z-index: 51;
+    padding: 0px 35px; 
   }
   
-  
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 20px;
-    height: 100px;
-  }
-  
-  
-  nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 600;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  nav a:hover {
-    color: #ffd700;
-  }
-  
-  #grad1 {
-    height: 50px;
-    background: linear-gradient(to bottom, black, transparent);
-  }
   

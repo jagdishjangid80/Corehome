@@ -23,91 +23,83 @@ import move20 from "../../assets/images/about/move20.png";
 import move21 from "../../assets/images/about/move21.png";
 
 const images = [
-  move1,
-  move2,
-  move3,
-  move4,
-  move5,
-  move6,
-  move7,
-  move8,
-  move9,
-  move10,
-  move11,
-  move12,
-  move13,
-  move14,
-  move15,
-  move16,
-  move17,
-  move18,
-  move19,
-  move20,
-  move21,
+  move1, move2, move3, move4, move5, move6, move7, move8, move9, move10,
+  move11, move12, move13, move14, move15, move16, move17, move18, move19,
+  move20, move21,
 ];
 
 const Move = () => {
   const scrollVariants = {
     up: {
       y: ["0%", "-50%"],
-      transition: { repeat: Infinity, duration: 20, ease: "linear" },
+      transition: {
+        repeat: Infinity,
+        duration: 20,
+        ease: "linear",
+      },
     },
     down: {
       y: ["-50%", "0%"],
-      transition: { repeat: Infinity, duration: 20, ease: "linear" },
+      transition: {
+        repeat: Infinity,
+        duration: 20,
+        ease: "linear",
+      },
     },
   };
 
   return (
-    <div className="w-full h-screen overflow-hidden relative flex justify-center items-center px-4 sm:px-6 lg:px-8">
-      {/* Gradient overlays for blur effect */}
+    <div className="relative w-full h-screen overflow-hidden flex justify-center items-center px-4 sm:px-6 lg:px-8 bg-black">
+      {/* Gradient Overlays */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
 
-      {/* Scroll sections */}
-      <div className="flex gap-6 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24 max-w-[100vw] h-full">
-        {/* Scrolling upward */}
+      {/* Image Columns */}
+      <div className="flex gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 max-w-[100vw] h-full">
+        {/* Upward Scrolling Column */}
         <motion.div
-          className="flex flex-col gap-6 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24"
+          className="flex flex-col gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16"
           variants={scrollVariants}
           animate="up"
           style={{ minHeight: "200%" }}
+          initial={{ y: "0%" }}
         >
-          {[...images, ...images].map((img, index) => (
+          {images.map((img, index) => (
             <img
               key={`up-${index}`}
               src={img}
-              alt={`move${index}`}
-              className="w-16 h-16 
-                sm:w-20 sm:h-20 
-                md:w-24 md:h-24 
-                lg:w-32 lg:h-32 
-                xl:w-40 xl:h-40 
-                2xl:w-48 2xl:h-48 
+              alt={`move${index + 1}`}
+              className="w-12 h-12 
+                sm:w-16 sm:h-16 
+                md:w-20 md:h-20 
+                lg:w-24 lg:h-24 
+                xl:w-32 xl:h-32 
                 object-contain flex-shrink-0"
+              loading="lazy"
             />
           ))}
         </motion.div>
 
-        {/* Scrolling downward */}
+        {/* Downward Scrolling Column */}
         <motion.div
-          className="flex flex-col gap-6 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24"
+          className="flex flex-col gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16"
           variants={scrollVariants}
           animate="down"
           style={{ minHeight: "200%" }}
+          initial={{ y: "-50%" }}
         >
-          {[...images, ...images].map((img, index) => (
+          {images.map((img, index) => (
             <img
               key={`down-${index}`}
               src={img}
-              alt={`move${index}`}
-              className="w-16 h-16 
-                sm:w-20 sm:h-20 
-                md:w-24 md:h-24 
-                lg:w-32 lg:h-32 
-                xl:w-40 xl:h-40 
-                2xl:w-48 2xl:h-48 
+              alt={`move${index + 1}`}
+              className="w-12 h-12 
+                sm:w-16 sm:h-16 
+                md:w-20 md:h-20 
+                lg:w-24 lg:h-24 
+                xl:w-32 xl:h-32 
                 object-contain flex-shrink-0"
+              loading="lazy"
             />
           ))}
         </motion.div>

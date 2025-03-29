@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PopUpCard1 from "../ExtraCard/Cardpops";
+import PopUpCard1 from "../../../components/PopsCard/Cardpops";
 import popupData1 from "../../../Js/Dataextra";
 import { extraCards, collaborate, careerInnovationCards } from "../../../assets/images/brandImages";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Marquee from "react-fast-marquee";
 import { FaInstagram } from "react-icons/fa";
-import PopUpCard from "../Brand/PopUpCard";
+import PopUpCard from "../../components/PopsCard/PopUpCard";
 import popupData from "../../Js/popupData";
 import ExtraCardpops from "./ExtraCard/ExtraCardpops";
 import {

@@ -24,27 +24,9 @@ import background11 from "../../assets/images/background11.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
-  const imagesLeft = [
-    background1,
-    background3,
-    background9,
-    background4,
-    background5,
-  ];
-  const imagesCenter = [
-    background10,
-    background11,
-    background8,
-    background7,
-    background4,
-  ];
-  const imagesRight = [
-    background2,
-    background5,
-    background6,
-    background8,
-    background10,
-  ];
+  const imagesLeft = [background1, background3, background9, background4, background5];
+  const imagesCenter = [background10, background11, background8, background7, background4];
+  const imagesRight = [background2, background5, background6, background8, background10];
 
   const [showPops, setShowPops] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
@@ -91,11 +73,7 @@ const Home = () => {
 
     tl.to(leftRef.current, { y: "90%", duration: 4, ease: "power1.inOut" }, 0);
     tl.to(rightRef.current, { y: "90%", duration: 4, ease: "power1.inOut" }, 0);
-    tl.to(
-      centerRef.current,
-      { y: "-90%", duration: 4, ease: "power1.inOut" },
-      0
-    );
+    tl.to(centerRef.current, { y: "-90%", duration: 4, ease: "power1.inOut" }, 0);
 
     tl.to(logoRef.current, {
       scale: 0.5,
@@ -125,16 +103,19 @@ const Home = () => {
         ref={containerRef}
         className="relative w-full h-screen flex overflow-hidden bg-black"
       >
-        <div className="absolute inset-0 flex flex-row">
-          <div ref={leftRef} className="hidden sm:block sm:w-1/2 md:w-1/3">
+        <div className="absolute inset-0 flex">
+          {/* Left Images - Hidden on Mobile */}
+          <div ref={leftRef} className="hidden lg:block lg:w-1/3">
             <InfiniteScroll images={imagesLeft} direction="down" />
           </div>
 
-          <div ref={centerRef} className="w-full sm:w-1/2 md:w-1/3">
+          {/* Center Images - Always visible */}
+          <div ref={centerRef} className="w-1/2 lg:w-1/3">
             <InfiniteScroll images={imagesCenter} direction="up" />
           </div>
 
-          <div ref={rightRef} className="hidden sm:block sm:w-1/2 md:w-1/3">
+          {/* Right Images - Visible on mobile too */}
+          <div ref={rightRef} className="w-1/2 lg:w-1/3">
             <InfiniteScroll images={imagesRight} direction="down" />
           </div>
         </div>
