@@ -7,7 +7,7 @@ import NewsPress from "./pages/News/News_press";
 import Brand from "./pages/Brand/Brand";
 import Contact from "./pages/Contact/Contact";
 import Innovation from "./pages/Innovation/Innovation";
-import NotFound from "./components/NotFound";
+import NotFound from "./pages/Notfound/NotFound";
 
 const router = createBrowserRouter([
   {
