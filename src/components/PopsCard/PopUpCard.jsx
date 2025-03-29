@@ -23,7 +23,7 @@ const PopUpCard = ({ data, onClose }) => {
       >
         <button
           onClick={onClose}
-          className="absolute top-4 left-4 bg-white text-black px-10 py-6 rounded-md text-2xl font-semibold hover:bg-gray-400 transition-all duration-300 z-50"
+          className="absolute top-4 left-4 bg-white text-black px-10 py-6 rounded-md text-2xl font-semibold hover:bg-yellow-600 transition-all duration-300 z-50"
         >
           GO BACK
         </button>
