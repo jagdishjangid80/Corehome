@@ -69,11 +69,11 @@ const Move = () => {
               key={`up-${index}`}
               src={img}
               alt={`move${index + 1}`}
-              className="w-12 h-12 
-                sm:w-16 sm:h-16 
-                md:w-20 md:h-20 
-                lg:w-24 lg:h-24 
-                xl:w-32 xl:h-32 
+              className="w-30 h-30
+                sm:w-20 sm:h-20 
+                md:w-24 md:h-24 
+                lg:w-28 lg:h-28 
+                xl:w-38 xl:h-38 
                 object-contain flex-shrink-0"
               loading="lazy"
             />
@@ -93,11 +93,11 @@ const Move = () => {
               key={`down-${index}`}
               src={img}
               alt={`move${index + 1}`}
-              className="w-12 h-12 
-                sm:w-16 sm:h-16 
-                md:w-20 md:h-20 
-                lg:w-24 lg:h-24 
-                xl:w-32 xl:h-32 
+              className="w-30 h-30
+                sm:w-20 sm:h-20 
+                md:w-24 md:h-24 
+                lg:w-28 lg:h-28 
+                xl:w-38 xl:h-38 
                 object-contain flex-shrink-0"
               loading="lazy"
             />

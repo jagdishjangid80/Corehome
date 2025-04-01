@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
-import manu from "../../assets/images/manu.png";
+import menu from "../../assets/images/manu.png";
 import backgroundImage from "../../assets/images/background3.png";
 import "../../assets/styles/header.css";
 import Navbar from "../Navbar/Navbar";
@@ -18,14 +18,11 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > window.innerHeight * 1.05);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
@@ -66,20 +63,12 @@ const Header = () => {
       {menuOpen && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col text-white transition-opacity"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: "cover",
-          }}
+          style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: "cover" }}
         >
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 md:p-8">
-            <button
-              onClick={closeMenu}
-              className="flex items-center gap-2 mb-4 sm:mb-0"
-            >
+            <button onClick={closeMenu} className="flex items-center gap-2 mb-4 sm:mb-0">
               <XMarkIcon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10" />
-              <span className="text-lg sm:text-xl md:text-2xl xl:text-2xl">
-                MENU
-              </span>
+              <span className="text-lg sm:text-xl md:text-2xl xl:text-2xl">MENU</span>
             </button>
             <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-6">
               <span className="uppercase tracking-widest text-xs sm:text-sm md:text-lg">
@@ -99,8 +88,8 @@ const Header = () => {
           <Navbar closeMenu={closeMenu} />
           <div className="absolute bottom-4 right-4 p-4">
             <img
-              src={manu}
-              alt="Brand Logo"
+              src={menu}
+              alt="Menu Icon"
               className="w-20 sm:w-30 md:w-30 lg:w-30 h-auto"
             />
           </div>

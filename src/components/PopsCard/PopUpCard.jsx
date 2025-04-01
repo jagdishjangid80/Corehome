@@ -1,6 +1,5 @@
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
-
 const PopUpCard = ({ data, onClose }) => {
   React.useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -11,7 +10,6 @@ const PopUpCard = ({ data, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center z-50 overflow-y-auto">
-      {/* Main Content */}
       <div
         className="relative w-full h-screen flex justify-center items-center overflow-hidden"
         style={{
@@ -57,9 +55,7 @@ const PopUpCard = ({ data, onClose }) => {
         </div>
       </div>
 
-      {/* Image Grid */}
       <div className="w-full px-4 py-6">
-        {/* First Part: Two Full Width Images */}
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           {data.images && data.images.length > 1 ? (
             <>
@@ -85,9 +81,7 @@ const PopUpCard = ({ data, onClose }) => {
           )}
         </div>
 
-        {/* Second Part: Left Side - One Image on top, Right Side - One Image */}
         <div className="flex flex-col sm:flex-row gap-4 w-full">
-          {/* Left Column: One image on top and below it another image */}
           <div className="w-full sm:w-1/2 flex flex-col gap-4">
             {data.images && data.images.length > 2 ? (
               <>
@@ -112,8 +106,6 @@ const PopUpCard = ({ data, onClose }) => {
               </p>
             )}
           </div>
-
-          {/* Right Column: One image */}
           <div className="w-full sm:w-1/2 flex justify-center">
             {data.images && data.images.length > 4 ? (
               <img

@@ -4,9 +4,9 @@ import { FaInstagram } from "react-icons/fa";
 import PopUpCard from "../../components/PopsCard/PopUpCard";
 import popupData from "../../Js/popupData";
 import ExtraCardpops from "./ExtraCard/ExtraCardpops";
+import SlidingImagesPage from '../../components/SlidingImagesPage';
 import {
   brandData,
-  slidingImages,
   listData,
 } from "../../assets/images/brandImages";
 
@@ -70,7 +70,7 @@ const Brand = () => {
       </div>
 
       {/* Sliding Images Marquee */}
-      <Marquee
+      {/* <Marquee
         pauseOnHover
         speed={50}
         direction="left"
@@ -98,7 +98,8 @@ const Brand = () => {
             </div>
           ))}
         </div>
-      </Marquee>
+      </Marquee> */}
+      <SlidingImagesPage/>
       {activePopup !== null && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <PopUpCard

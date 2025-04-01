@@ -8,7 +8,7 @@ export default {
     extend: {
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
-        custom: ["CustomFont", "sans-serif"], 
+        custom: ["CustomFont", "sans-serif"],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in',
