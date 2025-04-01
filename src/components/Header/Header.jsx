@@ -4,7 +4,10 @@ import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
 import menu from "../../assets/images/manu.png";
-import backgroundImage from "../../assets/images/background3.png";
+import backgroundImage1 from "../../assets/images/background1.png";
+import backgroundImage2 from "../../assets/images/background2.png";
+import backgroundImage3 from "../../assets/images/background3.png";
+import backgroundImage4 from "../../assets/images/background4.png";
 import "../../assets/styles/header.css";
 import Navbar from "../Navbar/Navbar";
 
@@ -13,6 +16,14 @@ const Header = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [backgroundIndex, setBackgroundIndex] = useState(0);
+
+  const backgroundImages = [
+    backgroundImage1,
+    backgroundImage2,
+    backgroundImage3,
+    backgroundImage4,
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +33,22 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+    }, 6000); 
+
+    return () => clearInterval(intervalId); 
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    if (!menuOpen) {
+      setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+    }
+  };
 
   return (
     <>
@@ -32,7 +58,7 @@ const Header = () => {
         {isScrolled && (
           <div className="header-content w-full flex justify-between items-center">
             <button
-              onClick={() => setMenuOpen(!menuOpen)}
+              onClick={toggleMenu}
               className="flex items-center gap-3 text-white cursor-pointer"
             >
               <div className="flex flex-col items-center justify-center w-5 h-5 cursor-pointer space-y-1 rotate-[120deg] transition-transform duration-300 hover:rotate-0">
@@ -63,7 +89,10 @@ const Header = () => {
       {menuOpen && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col text-white transition-opacity"
-          style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: "cover" }}
+          style={{
+            backgroundImage: `url(${backgroundImages[backgroundIndex]})`,
+            backgroundSize: "cover",
+          }}
         >
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 md:p-8">
             <button onClick={closeMenu} className="flex items-center gap-2 mb-4 sm:mb-0">
