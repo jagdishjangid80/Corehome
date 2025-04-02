@@ -1,7 +1,16 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import Aboutpart from "../About/Aboutpart";
+import React, { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Support from "../Support/Support";
+import Materials from "../Our_material/Materials";
+import Brand from "../Brand/Brand";
+import PopsSection from "../../components/PopsCard/PopsSection";
+import Move from "./Move";
+import aboutLast from "../../assets/images/about/about4.png";
+import aboutMain from "../../assets/images/about/aboutmain.png";
+import "../../assets/styles/about.css";
 import image1 from "../../assets/images/about/about.png";
 import about1 from "../../assets/images/about/ab1.png";
 import about2 from "../../assets/images/about/ab2.png";
@@ -41,7 +50,7 @@ import ab18 from "../../assets/images/categories/ab18.png";
 import ab19 from "../../assets/images/categories/ab19.png";
 import ab20 from "../../assets/images/categories/ab20.png";
 
-// Data arrays
+// Data arrays (unchanged)
 const values = [
   "Revolutionize Kitchenware",
   "Capture Integrity",
@@ -75,7 +84,7 @@ const categoriesWithImages = [
   { name: "Sustainable Accessories", image: ab5 },
   { name: "Kitchen Electrics", image: ab10 },
   { name: "Health & Beauty", image: ab15 },
-  { name: "Home Textiles", image: ab20 },
+  { name: "Home textiles", image: ab20 },
 ];
 
 const imageArray = [about1, about2, about3, about4, about5];
@@ -84,7 +93,12 @@ const imageArray1 = [about6, about7, about8, about9, about4];
 const About = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [currentImage1, setCurrentImage1] = useState(0);
+  const [isMouseMoved, setIsMouseMoved] = useState(false); // Track mouse movement
+  const containerRef = useRef(null);
+  const sectionsRef = useRef([]);
+  const [showPops, setShowPops] = useState(false);
 
+  // Image slideshows (unchanged)
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % imageArray.length);
@@ -99,6 +113,85 @@ const About = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Detect mouse movement or scroll
+  useEffect(() => {
+    const handleMouseMove = () => {
+      setIsMouseMoved(true);
+      window.removeEventListener("mousemove", handleMouseMove); // Remove after first move
+    };
+
+    const handleScroll = () => {
+      setIsMouseMoved(true);
+      window.removeEventListener("scroll", handleScroll); // Remove after first scroll
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Horizontal scroll effect
+  useEffect(() => {
+    if (!isMouseMoved) return; // Only run if mouse has moved
+
+    gsap.registerPlugin(ScrollTrigger);
+    const sections = sectionsRef.current.filter(Boolean);
+    const container = containerRef.current;
+
+    const updateSectionWidths = () => {
+      const viewportWidth = window.innerWidth;
+      sections.forEach((section) => {
+        section.style.width = `${viewportWidth}px`;
+      });
+      ScrollTrigger.refresh();
+    };
+
+    updateSectionWidths();
+
+    const animation = gsap.to(sections, {
+      x: () => -(sections.length - 1) * window.innerWidth,
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        pin: true,
+        scrub: 2, // Slower scroll
+        start: "top top+=50",
+        end: () => `+=${(sections.length - 1) * window.innerWidth}`,
+        invalidateOnRefresh: true,
+        snap: {
+          snapTo: 1 / (sections.length - 1),
+          duration: { min: 0.2, max: 0.8 },
+          delay: 0.5,
+        },
+        onUpdate: (self) => {
+          const progress = self.progress;
+          setShowPops(progress > 0.95);
+        },
+      },
+    });
+
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        updateSectionWidths();
+        animation.scrollTrigger.refresh();
+      }, 150);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      animation.kill();
+    };
+  }, [isMouseMoved]);
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: (i) => ({
@@ -108,9 +201,57 @@ const About = () => {
     }),
   };
 
+  const sectionsData = [
+    {
+      title: "Where We Are",
+      content: (
+        <motion.div
+          initial={{ opacity: 0, y: 50 }} // Hidden by default
+          animate={isMouseMoved ? { opacity: 1, y: 0 } : {}} // Animate only if mouse moved
+          transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+          className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 h-full flex items-center"
+        >
+          <div className="flex flex-col md:flex-row items-center justify-between w-full gap-6 sm:gap-8 md:gap-12 lg:gap-16">
+            <div className="w-full md:w-1/2 text-center md:text-left">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white mb-4 sm:mb-6">
+                Where We Are
+              </h1>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white leading-relaxed">
+                Find our in-house product developers, designers, engineers,
+                marketing experts, and account managers based in NYC. We work
+                closely with our vertically integrated factories in China and
+                partner factories around the world.
+              </p>
+            </div>
+            <div className="w-full md:w-1/2 flex justify-center relative mt-6 md:mt-0">
+              <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[500px] xl:max-w-[600px]">
+                <img
+                  src={aboutLast}
+                  alt="Background Location Image"
+                  className="w-full h-auto min-h-[200px] sm:min-h-[250px] md:min-h-[300px] lg:h-[500px] xl:h-[700px] rounded-lg shadow-lg object-cover"
+                />
+                <img
+                  src={aboutMain}
+                  alt="Overlay Location Image"
+                  className="absolute top-[-8%] right-[-12%] sm:top-[-10%] sm:right-[-15%] 
+                    md:top-[-12%] md:right-[-20%] lg:top-[-15%] lg:right-[-25%] 
+                    xl:top-[-15%] xl:right-[-30%] w-[60%] sm:w-[65%] md:w-[70%] 
+                    h-auto rounded-lg shadow-lg object-cover z-10"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      ),
+    },
+    { title: "Support", content: <Support /> },
+    { title: "Materials", content: <Materials /> },
+    { title: "Move", content: <Move /> },
+  ];
+
   return (
     <div className="bg-black text-white min-h-screen pt-16 md:pt-20 lg:pt-24">
-      {/* About Us Section */}
+      {/* About Us Section (unchanged) */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <div className="flex flex-col items-center md:items-start justify-center space-y-4 md:space-y-6">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-bold">
@@ -147,7 +288,7 @@ const About = () => {
           >
             <Link to="/brand">
               <motion.button
-                className="w-full sm:w-auto px-4 py-2 text-sm sm:text-base md:text-lg lg:text-2xl  uppercase bg-white text-black rounded hover:bg-[#ebbb53] transition duration-300"
+                className="w-full sm:w-auto px-4 py-2 text-sm sm:text-base md:text-lg lg:text-2xl uppercase bg-white text-black rounded hover:bg-[#ebbb53] transition duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -192,6 +333,8 @@ const About = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Who We Are Section (unchanged) */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <motion.div
           initial="hidden"
@@ -243,7 +386,7 @@ const About = () => {
                   transition: { duration: 0.7, delay: index * 0.3 },
                 },
               }}
-              className="space-y-2 "
+              className="space-y-2"
             >
               <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold text-amber-400">
                 {item.title}
@@ -263,7 +406,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* What We Do Section */}
+      {/* What We Do Section (unchanged) */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <div className="flex justify-center md:justify-start">
           <img
@@ -310,7 +453,36 @@ const About = () => {
         </motion.div>
       </div>
 
-      <Aboutpart />
+      {/* Horizontal Scroll Section */}
+      <div className="overflow-hidden">
+        <div
+          ref={containerRef}
+          className="relative w-screen h-screen bg-black mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-[100px] overflow-hidden"
+        >
+          <div className="flex h-full flex-nowrap">
+            {sectionsData.map((section, index) => (
+              <div
+                key={index}
+                ref={(el) => (sectionsRef.current[index] = el)}
+                className="flex-shrink-0 h-full w-screen flex items-center justify-center text-white"
+              >
+                {section.content}
+              </div>
+            ))}
+          </div>
+
+          {showPops && (
+            <div
+              className={`absolute inset-0 bg-black bg-opacity-95 flex items-center justify-center transition-opacity duration-500 z-20 ${
+                showPops ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <PopsSection />
+            </div>
+          )}
+        </div>
+        <Brand />
+      </div>
     </div>
   );
 };
