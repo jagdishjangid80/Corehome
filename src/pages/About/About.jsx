@@ -117,12 +117,12 @@ const About = () => {
   useEffect(() => {
     const handleMouseMove = () => {
       setIsMouseMoved(true);
-      window.removeEventListener("mousemove", handleMouseMove); // Remove after first move
+      window.removeEventListener("mousemove", handleMouseMove); 
     };
 
     const handleScroll = () => {
       setIsMouseMoved(true);
-      window.removeEventListener("scroll", handleScroll); // Remove after first scroll
+      window.removeEventListener("scroll", handleScroll); 
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -134,9 +134,8 @@ const About = () => {
     };
   }, []);
 
-  // Horizontal scroll effect
   useEffect(() => {
-    if (!isMouseMoved) return; // Only run if mouse has moved
+    if (!isMouseMoved) return; 
 
     gsap.registerPlugin(ScrollTrigger);
     const sections = sectionsRef.current.filter(Boolean);
@@ -197,7 +196,7 @@ const About = () => {
     visible: (i) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.2, duration: 0.8 },
+      transition: { delay: i * 0.2, duration: 0.10 },
     }),
   };
 
@@ -206,9 +205,9 @@ const About = () => {
       title: "Where We Are",
       content: (
         <motion.div
-          initial={{ opacity: 0, y: 50 }} // Hidden by default
-          animate={isMouseMoved ? { opacity: 1, y: 0 } : {}} // Animate only if mouse moved
-          transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+          initial={{ opacity: 0, y: 50 }}
+          animate={isMouseMoved ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 2, ease: "easeOut" }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 h-full flex items-center"
         >
           <div className="flex flex-col md:flex-row items-center justify-between w-full gap-6 sm:gap-8 md:gap-12 lg:gap-16">
@@ -233,9 +232,9 @@ const About = () => {
                 <img
                   src={aboutMain}
                   alt="Overlay Location Image"
-                  className="absolute top-[-8%] right-[-12%] sm:top-[-10%] sm:right-[-15%] 
-                    md:top-[-12%] md:right-[-20%] lg:top-[-15%] lg:right-[-25%] 
-                    xl:top-[-15%] xl:right-[-30%] w-[60%] sm:w-[65%] md:w-[70%] 
+                  className="absolute bottom-0 right-0 sm:bottom-[-10%] sm:right-[-15%] 
+                    md:bottom-[-12%] md:right-[-20%] lg:bottom-[-15%] lg:right-[-25%] 
+                    xl:bottom-[-1%] xl:right-[-30%] w-[60%] sm:w-[65%] md:w-[70%] 
                     h-auto rounded-lg shadow-lg object-cover z-10"
                 />
               </div>

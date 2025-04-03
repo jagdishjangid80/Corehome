@@ -17,6 +17,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [backgroundIndex, setBackgroundIndex] = useState(0);
+  
 
   const backgroundImages = [
     backgroundImage1,
@@ -25,35 +26,52 @@ const Header = () => {
     backgroundImage4,
   ];
 
+  // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > window.innerHeight * 1.05);
+      const threshold = window.innerHeight;
+      setIsScrolled(window.scrollY > threshold);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
-    }, 6000); 
+      setBackgroundIndex(
+        (prevIndex) => (prevIndex + 1) % backgroundImages.length
+      );
+    }, 6000);
 
-    return () => clearInterval(intervalId); 
+    return () => clearInterval(intervalId);
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     if (!menuOpen) {
-      setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+      setBackgroundIndex(
+        (prevIndex) => (prevIndex + 1) % backgroundImages.length
+      );
     }
   };
+
+  // Close menu when navigating
+  useEffect(() => {
+    if (menuOpen) {
+      setMenuOpen(false);  // Close menu if URL changes
+    }
+  }, [location]);
 
   return (
     <>
       <header
-        className={`header-bg fixed top-0 w-full z-100 bg-black transition-all duration-300 h-[100px] flex items-center justify-between px-4 sm:px-6 md:px-8`}
+        className={`header-bg fixed top-0 w-full z-100 transition-all duration-300 h-[100px] flex items-center justify-between px-4 sm:px-6 md:px-8 ${
+          isScrolled
+            ? "bg-transparent"
+            : "bg-gradient-to-b from-black via-black to-transparent"
+        }`}
       >
         {isScrolled && (
           <div className="header-content w-full flex justify-between items-center">
@@ -86,6 +104,7 @@ const Header = () => {
           </div>
         )}
       </header>
+
       {menuOpen && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col text-white transition-opacity"
@@ -95,9 +114,14 @@ const Header = () => {
           }}
         >
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 md:p-8">
-            <button onClick={closeMenu} className="flex items-center gap-2 mb-4 sm:mb-0">
+            <button
+              onClick={closeMenu}
+              className="flex items-center gap-2 mb-4 sm:mb-0"
+            >
               <XMarkIcon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10" />
-              <span className="text-lg sm:text-xl md:text-2xl xl:text-2xl">MENU</span>
+              <span className="text-lg sm:text-xl md:text-2xl xl:text-2xl">
+                MENU
+              </span>
             </button>
             <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-6">
               <span className="uppercase tracking-widest text-xs sm:text-sm md:text-lg">
@@ -129,3 +153,82 @@ const Header = () => {
 };
 
 export default Header;
+
+// import { useState } from "react";
+
+// const Navbar = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   return (
+//     <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+//       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+//         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+//           <button
+//             onClick={() => setIsOpen(!isOpen)}
+//             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+//             aria-expanded={isOpen}
+//           >
+//             <span className="sr-only">Open main menu</span>
+//             <svg
+//               className="w-5 h-5"
+//               xmlns="http://www.w3.org/2000/svg"
+//               fill="none"
+//               viewBox="0 0 17 14"
+//             >
+//               <path
+//                 stroke="currentColor"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth="2"
+//                 d="M1 1h15M1 7h15M1 13h15"
+//               />
+//             </svg>
+//           </button>
+//         </div>
+//         <div
+//           className={`${
+//             isOpen ? "block" : "hidden"
+//           } md:flex md:items-center md:w-auto md:order-1 w-full`}
+//         >
+//           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+//             <li>
+//               <a
+//                 href="#"
+//                 className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+//                 aria-current="page"
+//               >
+//                 Home
+//               </a>
+//             </li>
+//             <li>
+//               <a
+//                 href="/about"
+//                 className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+//               >
+//                 About
+//               </a>
+//             </li>
+//             <li>
+//               <a
+//                 href="#"
+//                 className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+//               >
+//                 Services
+//               </a>
+//             </li>
+//             <li>
+//               <a
+//                 href="/contact"
+//                 className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+//               >
+//                 Contact
+//               </a>
+//             </li>
+//           </ul>
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
