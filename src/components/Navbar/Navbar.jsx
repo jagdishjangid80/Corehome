@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
-import PopUpCard from "../../pages/Resources/leadership";
-import PopsPage from "../../pages/Support/Supportpops";
+import PopUpCard from "../../pages/Resources/leadership"; // Ensure this path and component are correct
+import PopsPage from "../../pages/Support/Supportpops"; // Ensure this path and component are correct
 
 const Navbar = ({ closeMenu }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -13,9 +13,9 @@ const Navbar = ({ closeMenu }) => {
   };
 
   const handlePopupAction = (action) => {
-    action();
-    setOpenDropdown(null);
-    closeMenu();
+    action(); // Trigger the popup action (e.g., setShowLeadershipPopup(true))
+    setOpenDropdown(null); // Close the dropdown
+    closeMenu(); // Close the menu (assuming this is passed as a prop)
   };
 
   return (
@@ -75,6 +75,7 @@ const Navbar = ({ closeMenu }) => {
                 <a
                   href={href}
                   className="block text-white font-semibold py-2 px-3 transition-colors rounded-md text-base sm:text-lg md:text-xl lg:text-2xl hover:text-amber-300"
+                  onClick={closeMenu} 
                 >
                   {label}
                 </a>
@@ -95,6 +96,7 @@ const Navbar = ({ closeMenu }) => {
                         key={href}
                         href={href}
                         className="block w-full text-white py-1 font-semibold transition-colors text-left px-3 text-sm sm:text-base md:text-lg lg:text-xl hover:text-amber-300"
+                        onClick={closeMenu}
                       >
                         {label}
                       </a>
@@ -107,17 +109,19 @@ const Navbar = ({ closeMenu }) => {
         </div>
       </nav>
 
+      {/* Leadership Popup */}
       {showLeadershipPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-          <div className="w-full max-w-3xl">
+          <div className="relative w-full max-w-3xl bg-gray-800 rounded-lg shadow-lg">
             <PopUpCard onClose={() => setShowLeadershipPopup(false)} />
           </div>
         </div>
       )}
 
+      {/* Sustainability Popup */}
       {showPopsPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-          <div className="w-full max-w-3xl">
+          <div className="relative w-full max-w-3xl bg-gray-800 rounded-lg shadow-lg">
             <PopsPage onClose={() => setShowPopsPopup(false)} />
           </div>
         </div>

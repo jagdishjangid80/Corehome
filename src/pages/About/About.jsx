@@ -113,16 +113,15 @@ const About = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Detect mouse movement or scroll
   useEffect(() => {
     const handleMouseMove = () => {
       setIsMouseMoved(true);
-      window.removeEventListener("mousemove", handleMouseMove); 
+      window.removeEventListener("mousemove", handleMouseMove);
     };
 
     const handleScroll = () => {
       setIsMouseMoved(true);
-      window.removeEventListener("scroll", handleScroll); 
+      window.removeEventListener("scroll", handleScroll);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -135,7 +134,7 @@ const About = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMouseMoved) return; 
+    if (!isMouseMoved) return;
 
     gsap.registerPlugin(ScrollTrigger);
     const sections = sectionsRef.current.filter(Boolean);
@@ -157,7 +156,7 @@ const About = () => {
       scrollTrigger: {
         trigger: container,
         pin: true,
-        scrub: 2, // Slower scroll
+        scrub: 2,
         start: "top top+=50",
         end: () => `+=${(sections.length - 1) * window.innerWidth}`,
         invalidateOnRefresh: true,
@@ -170,9 +169,15 @@ const About = () => {
           const progress = self.progress;
           setShowPops(progress > 0.95);
         },
+
+        onEnter: () => {
+          /* Add logic to only start triggering the scroll effect once we are inside "Where We Are" */
+        },
+        onLeaveBack: () => {
+          /* Stop or pause scroll when leaving the section */
+        },
       },
     });
-
     let resizeTimeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
@@ -196,7 +201,7 @@ const About = () => {
     visible: (i) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.2, duration: 0.10 },
+      transition: { delay: i * 0.2, duration: 0.1 },
     }),
   };
 
@@ -210,9 +215,9 @@ const About = () => {
           transition={{ duration: 2, ease: "easeOut" }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 h-full flex items-center"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between w-full gap-6 sm:gap-8 md:gap-12 lg:gap-16">
+          <div className="flex flex-col md:flex-row items-center justify-between w-full gap-4 sm:gap-6 md:gap-8 lg:gap-10">
             <div className="w-full md:w-1/2 text-center md:text-left">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white mb-4 sm:mb-6">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white mb-3 sm:mb-4">
                 Where We Are
               </h1>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white leading-relaxed">
@@ -222,7 +227,7 @@ const About = () => {
                 partner factories around the world.
               </p>
             </div>
-            <div className="w-full md:w-1/2 flex justify-center relative mt-6 md:mt-0">
+            <div className="w-full md:w-1/2 flex justify-end relative mt-4 md:mt-0">
               <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[500px] xl:max-w-[600px]">
                 <img
                   src={aboutLast}
@@ -232,10 +237,10 @@ const About = () => {
                 <img
                   src={aboutMain}
                   alt="Overlay Location Image"
-                  className="absolute bottom-0 right-0 sm:bottom-[-10%] sm:right-[-15%] 
-                    md:bottom-[-12%] md:right-[-20%] lg:bottom-[-15%] lg:right-[-25%] 
-                    xl:bottom-[-1%] xl:right-[-30%] w-[60%] sm:w-[65%] md:w-[70%] 
-                    h-auto rounded-lg shadow-lg object-cover z-10"
+                  className="absolute bottom-0 right-0 sm:bottom-[-10%] sm:right-[-20%] 
+          md:bottom-[-12%] md:right-[-25%] lg:bottom-[-15%] lg:right-[-30%] 
+          xl:bottom-[-1%] xl:right-[-35%] w-[60%] sm:w-[65%] md:w-[70%] 
+          h-auto rounded-lg shadow-lg object-cover z-10"
                 />
               </div>
             </div>
