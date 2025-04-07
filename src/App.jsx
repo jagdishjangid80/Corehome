@@ -8,6 +8,7 @@ import Brand from "./pages/Brand/Brand";
 import Contact from "./pages/Contact/Contact";
 import Innovation from "./pages/Innovation/Innovation";
 import NotFound from "./pages/Notfound/NotFound";
+import Pfas from "./pages/pfaspage/pfaspage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "news_press", element: <NewsPress /> },
       { path: "contact", element: <Contact /> },
       { path: "innovation", element: <Innovation /> },
+      { path: "pfaspage", element: <Pfas /> },
     ],
   },
   { path: "*", element: <NotFound /> },

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
-import menu from "../../assets/images/manu.png";
+import menu from "../../assets/images/manu.png";  
 import backgroundImage1 from "../../assets/images/background1.png";
 import backgroundImage2 from "../../assets/images/background2.png";
 import backgroundImage3 from "../../assets/images/background3.png";
@@ -17,7 +17,6 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [backgroundIndex, setBackgroundIndex] = useState(0);
-  
 
   const backgroundImages = [
     backgroundImage1,
@@ -26,7 +25,6 @@ const Header = () => {
     backgroundImage4,
   ];
 
-  // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
       const threshold = window.innerHeight;
@@ -48,19 +46,11 @@ const Header = () => {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-    if (!menuOpen) {
-      setBackgroundIndex(
-        (prevIndex) => (prevIndex + 1) % backgroundImages.length
-      );
-    }
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Close menu when navigating
   useEffect(() => {
     if (menuOpen) {
-      setMenuOpen(false);  // Close menu if URL changes
+      setMenuOpen(false);
     }
   }, [location]);
 
@@ -69,8 +59,8 @@ const Header = () => {
       <header
         className={`header-bg fixed top-0 w-full z-100 transition-all duration-300 h-[80px] flex items-center justify-between px-4 sm:px-6 md:px-8 ${
           isScrolled
-            ? "bg-transparent"
-            : "bg-gradient-to-b from-black via-black to-transparent"
+            ? "bg-black"
+            : "bg-gradient-to-b from-black via-black to-black"
         }`}
       >
         {isScrolled && (

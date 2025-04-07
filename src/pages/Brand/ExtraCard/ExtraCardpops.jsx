@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PopUpCard1 from "../../../components/PopsCard/Cardpops";
 import popupData1 from "../../../Js/Dataextra";
 import { extraCards, collaborate, careerInnovationCards } from "../../../assets/images/brandImages";
+import CollaborateSection from "../../collaboration/collaboration";
 
 const ExtraCardpops = () => {
   const [activePopup, setActivePopup] = useState(null);
@@ -42,9 +43,9 @@ const ExtraCardpops = () => {
           </div>
         ))}
       </div>
-
+      <CollaborateSection/>
       {/* Collaborate Section */}
-      <div className="w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
+      {/* <div className="w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
         {collaborate.map((card, index) => (
           <div
             key={index}
@@ -68,7 +69,8 @@ const ExtraCardpops = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
+
 
       {/* Career & Innovation Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 w-full mt-5">

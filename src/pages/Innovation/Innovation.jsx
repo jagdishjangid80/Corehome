@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import back from "../../assets/images/about/innovation.png"; 
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Header from '../../components/Header/Header';
 
 const Innovation = () => {
   const [step, setStep] = useState(1);
@@ -47,21 +48,16 @@ const Innovation = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="flex flex-col md:flex-row items-stretch min-h-screen w-full bg-black text-white">
       {/* Left Image Section */}
-      <div className="md:w-1/2 h-1/2 md:h-screen relative">
+      <div className="md:w-1/2 h-1/2 md:h-auto relative">
         <div
           className="w-full h-full bg-cover bg-center"
-          style={{ 
-            backgroundImage: `url(${back})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
+          style={{ backgroundImage: `url(${back})`, backgroundSize: 'cover' }}
         />
-        <div 
-          className="absolute inset-0 bg-black/20 backdrop-blur-[2px]"
-        />
+        <div className="absolute inset-0 bg-black/20 backdrop-blur-md" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-white font-bold text-3xl sm:text-4xl lg:text-5xl">
             Let's Innovate
@@ -73,16 +69,16 @@ const Innovation = () => {
         <div className="w-full max-w-xl">
           {step === 1 && (
             <div>
-              <p className="text-white mb-4 text-xl sm:text-2xl drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+              <p className="text-white mb-4 text-xl sm:text-2xl drop-shadow-md">
                 Let's start with your names.
               </p>
-              <p className="text-white mb-4 text-xl sm:text-2xl drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+              <p className="text-white mb-4 text-xl sm:text-2xl drop-shadow-md">
                 Please fill in the details below so that we can get in
                 contact with you about our product.
               </p>
               <form className="space-y-6">
                 <div>
-                  <label htmlFor="firstName" className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                  <label htmlFor="firstName" className="block text-white text-lg drop-shadow-md">
                     FIRST NAME*
                   </label>
                   <input
@@ -97,7 +93,7 @@ const Innovation = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                  <label htmlFor="lastName" className="block text-white text-lg drop-shadow-md">
                     LAST NAME*
                   </label>
                   <input
@@ -112,7 +108,7 @@ const Innovation = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="productName" className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                  <label htmlFor="productName" className="block text-white text-lg drop-shadow-md">
                     PRODUCT NAME*
                   </label>
                   <input
@@ -147,7 +143,7 @@ const Innovation = () => {
                     key={option}
                     type="button"
                     onClick={() => handleOptionClick(option)}
-                    className={`w-full p-3 rounded-md border border-white cursor-pointer transition duration-300 ease-in-out text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] ${
+                    className={`w-full p-3 rounded-md border border-white cursor-pointer transition duration-300 ease-in-out text-lg drop-shadow-md ${
                       selectedOptions.includes(option) ? "bg-[#ebbb53] shadow-lg" : "bg-transparent text-white"
                     }`}
                   >
@@ -170,7 +166,7 @@ const Innovation = () => {
             <div>
               <form className="space-y-6">
                 <div>
-                  <label className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                  <label className="block text-white text-lg drop-shadow-md">
                     Have you previously had this product manufactured or prototyped? If yes, explain.*
                   </label>
                   <textarea 
@@ -180,7 +176,7 @@ const Innovation = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                  <label className="block text-white text-lg drop-shadow-md">
                     Do you have any CAD drawings, product blueprints? Or professional renderings of your products?*
                   </label>
                   <textarea 
@@ -205,7 +201,7 @@ const Innovation = () => {
             <div>
               <form className="space-y-6">
                 <div>
-                  <label className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                  <label className="block text-white text-lg drop-shadow-md">
                     Have you filed with the USPTO for a specific trademark?*
                   </label>
                   <textarea 
@@ -215,7 +211,7 @@ const Innovation = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                  <label className="block text-white text-lg drop-shadow-md">
                     Have you submitted your product idea to any other companies for consideration?*
                   </label>
                   <textarea 
@@ -238,14 +234,14 @@ const Innovation = () => {
 
           {step === 5 && (
             <div className="text-slate-50">
-              <h2 className="text-2xl font-bold mb-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+              <h2 className="text-2xl font-bold mb-4 drop-shadow-md">
                 Complete Submission
               </h2>
-              <p className="text-base sm:text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+              <p className="text-base sm:text-lg drop-shadow-md">
                 Thanks for taking the time to complete this form. <br /> Please enter your email below and we will be in contact with you shortly.
               </p>
               <div className="mt-4">
-                <label htmlFor="email" className="block text-white text-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                <label htmlFor="email" className="block text-white text-lg drop-shadow-md">
                   ENTER YOUR EMAIL
                 </label>
                 <input
@@ -272,6 +268,7 @@ const Innovation = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

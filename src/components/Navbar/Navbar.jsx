@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
-import PopUpCard from "../../pages/Resources/leadership"; // Ensure this path and component are correct
-import PopsPage from "../../pages/Support/Supportpops"; // Ensure this path and component are correct
+import PopUpCard from "../../pages/Resources/leadership"; 
+import PopsPage from "../../pages/Support/Supportpops"; 
+import CollaborationPopup from "../../pages/collaboration/CollaboratePopUp"; 
 
 const Navbar = ({ closeMenu }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [showLeadershipPopup, setShowLeadershipPopup] = useState(false);
   const [showPopsPopup, setShowPopsPopup] = useState(false);
+  const [showCollaborationPopup, setShowCollaborationPopup] = useState(false); 
 
   const toggleDropdown = (label) => {
     setOpenDropdown((prev) => (prev === label ? null : label));
   };
 
   const handlePopupAction = (action) => {
-    action(); // Trigger the popup action (e.g., setShowLeadershipPopup(true))
-    setOpenDropdown(null); // Close the dropdown
-    closeMenu(); // Close the menu (assuming this is passed as a prop)
+    action();
+    setOpenDropdown(null);
+    closeMenu();
   };
 
   return (
@@ -51,13 +53,17 @@ const Navbar = ({ closeMenu }) => {
               label: "Resources",
               subItems: [
                 { href: "/careers", label: "Careers" },
-                { href: "/pfas", label: "PFAs" },
+                { href: "/pfaspage", label: "PFAs" },
               ],
             },
-            { href: "/collaboration", label: "Collaboration" },
+            { 
+             
+              label: "Collaboration", 
+              action: () => setShowCollaborationPopup(true) 
+            },
             { href: "/innovation", label: "Innovation" },
             { href: "/contact", label: "Contact" },
-          ].map(({ href, label, subItems }) => (
+          ].map(({ href, label, subItems, action }) => (
             <div key={label} className="relative hover:text-amber-300">
               {subItems ? (
                 <button
@@ -75,7 +81,7 @@ const Navbar = ({ closeMenu }) => {
                 <a
                   href={href}
                   className="block text-white font-semibold py-2 px-3 transition-colors rounded-md text-base sm:text-lg md:text-xl lg:text-2xl hover:text-amber-300"
-                  onClick={closeMenu} 
+                  onClick={closeMenu}
                 >
                   {label}
                 </a>
@@ -93,7 +99,7 @@ const Navbar = ({ closeMenu }) => {
                       </button>
                     ) : (
                       <a
-                        key={href}
+                        key={label}
                         href={href}
                         className="block w-full text-white py-1 font-semibold transition-colors text-left px-3 text-sm sm:text-base md:text-lg lg:text-xl hover:text-amber-300"
                         onClick={closeMenu}
@@ -123,6 +129,15 @@ const Navbar = ({ closeMenu }) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
           <div className="relative w-full max-w-3xl bg-gray-800 rounded-lg shadow-lg">
             <PopsPage onClose={() => setShowPopsPopup(false)} />
+          </div>
+        </div>
+      )}
+
+      {/* Collaboration Popup */}
+      {showCollaborationPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
+          <div className="relative w-full max-w-3xl bg-gray-800 rounded-lg shadow-lg">
+            <CollaborationPopup onClose={() => setShowCollaborationPopup(false)} />
           </div>
         </div>
       )}

@@ -50,7 +50,7 @@ import ab18 from "../../assets/images/categories/ab18.png";
 import ab19 from "../../assets/images/categories/ab19.png";
 import ab20 from "../../assets/images/categories/ab20.png";
 
-// Data arrays (unchanged)
+// Data arrays
 const values = [
   "Revolutionize Kitchenware",
   "Capture Integrity",
@@ -93,12 +93,12 @@ const imageArray1 = [about6, about7, about8, about9, about4];
 const About = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [currentImage1, setCurrentImage1] = useState(0);
-  const [isMouseMoved, setIsMouseMoved] = useState(false); // Track mouse movement
+  const [isMouseMoved, setIsMouseMoved] = useState(false);
   const containerRef = useRef(null);
   const sectionsRef = useRef([]);
   const [showPops, setShowPops] = useState(false);
 
-  // Image slideshows (unchanged)
+  // Image slideshows
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % imageArray.length);
@@ -169,13 +169,6 @@ const About = () => {
           const progress = self.progress;
           setShowPops(progress > 0.95);
         },
-
-        onEnter: () => {
-          /* Add logic to only start triggering the scroll effect once we are inside "Where We Are" */
-        },
-        onLeaveBack: () => {
-          /* Stop or pause scroll when leaving the section */
-        },
       },
     });
     let resizeTimeout;
@@ -228,19 +221,19 @@ const About = () => {
               </p>
             </div>
             <div className="w-full md:w-1/2 flex justify-end relative mt-4 md:mt-0">
-              <div className="relative w-full max-w-[300px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[500px] xl:max-w-[600px]">
+              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
                 <img
                   src={aboutLast}
                   alt="Background Location Image"
-                  className="w-full h-auto min-h-[200px] sm:min-h-[250px] md:min-h-[300px] lg:h-[500px] xl:h-[700px] rounded-lg shadow-lg object-cover"
+                  className="w-full h-auto min-h-[200px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[400px] xl:min-h-[500px] rounded-lg shadow-lg object-cover"
                 />
                 <img
                   src={aboutMain}
                   alt="Overlay Location Image"
-                  className="absolute bottom-0 right-0 sm:bottom-[-10%] sm:right-[-20%] 
-          md:bottom-[-12%] md:right-[-25%] lg:bottom-[-15%] lg:right-[-30%] 
-          xl:bottom-[-1%] xl:right-[-35%] w-[60%] sm:w-[65%] md:w-[70%] 
-          h-auto rounded-lg shadow-lg object-cover z-10"
+                  className="absolute bottom-0 right-0 sm:bottom-[-10%] sm:right-[-10%] 
+      md:bottom-[-12%] md:right-[-15%] lg:bottom-[-15%] lg:right-[-20%] 
+      xl:bottom-[-5%] xl:right-[-25%] w-[60%] sm:w-[65%] md:w-[70%] 
+      h-auto rounded-lg shadow-lg object-cover z-10"
                 />
               </div>
             </div>
@@ -248,14 +241,38 @@ const About = () => {
         </motion.div>
       ),
     },
-    { title: "Support", content: <Support /> },
-    { title: "Materials", content: <Materials /> },
-    { title: "Move", content: <Move /> },
+    {
+      title: "Support",
+      content: (
+        <div
+          style={{ marginTop: "150px" }}
+          className="w-full h-full flex items-start justify-center"
+        >
+          <Support />
+        </div>
+      ),
+    },
+    {
+      title: "Materials",
+      content: (
+        <div className="w-full h-full flex items-center justify-center">
+          <Materials />
+        </div>
+      ),
+    },
+    {
+      title: "Move",
+      content: (
+        <div className="w-full h-full flex items-center justify-center">
+          <Move />
+        </div>
+      ),
+    },
   ];
 
   return (
     <div className="bg-black text-white min-h-screen pt-16 md:pt-20 lg:pt-24">
-      {/* About Us Section (unchanged) */}
+      {/* About Us Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <div className="flex flex-col items-center md:items-start justify-center space-y-4 md:space-y-6">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-bold">
@@ -338,7 +355,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* Who We Are Section (unchanged) */}
+      {/* Who We Are Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <motion.div
           initial="hidden"
@@ -410,7 +427,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* What We Do Section (unchanged) */}
+      {/* What We Do Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <div className="flex justify-center md:justify-start">
           <img
@@ -469,6 +486,7 @@ const About = () => {
                 key={index}
                 ref={(el) => (sectionsRef.current[index] = el)}
                 className="flex-shrink-0 h-full w-screen flex items-center justify-center text-white"
+                style={{ margin: 0, padding: 0 }} // Ensure no margin or padding
               >
                 {section.content}
               </div>
