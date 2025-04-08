@@ -6,7 +6,7 @@
   left: 0;
   height: 400px; 
   z-index: 50;
-  transition: background 0.3s ease-in-out;
+ 
 }
 
 .smoke-overlay-bottom {

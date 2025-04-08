@@ -47,82 +47,68 @@ const Home = () => {
 
   const [showPops, setShowPops] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
-  const [scrollDirection, setScrollDirection] = useState("down");
 
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const centerRef = useRef(null);
   const logoRef = useRef(null);
+  const popsRef = useRef(null);
   const containerRef = useRef(null);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    const handleScrollDirection = () => {
-      setScrollDirection(window.scrollY > lastScrollY ? "down" : "up");
-      lastScrollY = window.scrollY;
-    };
-
-    window.addEventListener("scroll", handleScrollDirection);
-
     if (
       containerRef.current &&
       leftRef.current &&
       rightRef.current &&
-      centerRef.current
+      centerRef.current &&
+      logoRef.current &&
+      popsRef.current
     ) {
+ 
+      gsap.set(logoRef.current, { scale: 1, opacity: 1 });
+      gsap.set([leftRef.current, rightRef.current], { y: 0 });
+      gsap.set(centerRef.current, { y: 0 });
+      gsap.set(popsRef.current, { opacity: 0 });
+
+   
+      const scrollDistance = window.innerHeight * 2;
+
       let tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "bottom top",
-          scrub: 2,
+          end: `+=${scrollDistance}`,
+          scrub: 1,
           pin: true,
           onUpdate: (self) => {
-            setShowLogo(self.progress <= 0.2);
-            setShowPops(self.progress > 0.2);
+            const progress = self.progress;
+            setShowLogo(progress < 0.75); 
+            setShowPops(progress > 0.5);  
           },
         },
       });
 
-      tl.to(
-        leftRef.current,
-        { y: "90%", duration: 4, ease: "power1.inOut" },
-        0
-      );
-      tl.to(
-        rightRef.current,
-        { y: "90%", duration: 4, ease: "power1.inOut" },
-        0
-      );
-      tl.to(
-        centerRef.current,
-        { y: "-90%", duration: 4, ease: "power1.inOut" },
-        0
-      );
+      // Background and logo animations
+      tl.to(leftRef.current, { y: "100%", ease: "none" }, 0)
+        .to(rightRef.current, { y: "100%", ease: "none" }, 0)
+        .to(centerRef.current, { y: "-100%", ease: "none" }, 0)
+        .to(logoRef.current, { 
+          scale: 0.3, 
+          opacity: 0, 
+          ease: "none" 
+        }, 0)
+        .to(popsRef.current, { 
+          opacity: 1, 
+          ease: "power1.in", 
+          duration: 0.3 
+        }, 0.2); 
 
-      if (logoRef.current) {
-        tl.to(logoRef.current, {
-          scale: 0.5,
-          opacity: 0,
-          duration: 3,
-          ease: "power2.inOut",
-        });
-      }
     }
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      window.removeEventListener("scroll", handleScrollDirection);
     };
   }, []);
-
-  useEffect(() => {
-    if (scrollDirection === "up") {
-      setShowPops(false);
-      setShowLogo(true);
-    }
-  }, [scrollDirection]);
 
   return (
     <>
@@ -141,8 +127,18 @@ const Home = () => {
             <InfiniteScroll images={imagesRight} direction="down" />
           </div>
         </div>
-        <LogoComponent showPops={showPops} showLogo={showLogo} />
-        {showPops && <PopsComponent showPops={showPops} />}
+        <div
+          ref={logoRef}
+          className="absolute inset-0 flex items-center justify-center z-40"
+        >
+          <LogoComponent showPops={showPops} showLogo={showLogo} />
+        </div>
+        <div
+          ref={popsRef}
+          className="absolute inset-0 flex items-center justify-center z-30"
+        >
+          {showPops && <PopsComponent showPops={showPops} />}
+        </div>
         <motion.div
           className="absolute bottom-10 w-full flex justify-center items-center text-center z-50"
           initial={{ opacity: 1, scale: 1 }}

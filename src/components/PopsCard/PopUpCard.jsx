@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import SlidingImagesPage from "../SlidingImagesPage";
 import { FaFacebook, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
 import {
   XMarkIcon,
@@ -17,8 +18,6 @@ const PopUpCard = ({ data, onClose }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showArrows, setShowArrows] = useState(false);
-  const scrollRef = useRef(null);
 
   const handleImageClick = (index) => {
     setCurrentImageIndex(index);
@@ -37,15 +36,6 @@ const PopUpCard = ({ data, onClose }) => {
     setCurrentImageIndex((prev) =>
       prev - 1 >= 0 ? prev - 1 : data.images?.length - 1
     );
-  };
-
-  const handleScroll = () => {
-    const scrollLeft = scrollRef.current.scrollLeft;
-    const scrollWidth = scrollRef.current.scrollWidth;
-    const clientWidth = scrollRef.current.clientWidth;
-
-    // Show arrows if the scroll position is not at the start or end
-    setShowArrows(scrollLeft > 0 || scrollLeft < scrollWidth - clientWidth);
   };
 
   return (
@@ -103,11 +93,7 @@ const PopUpCard = ({ data, onClose }) => {
       </div>
 
       <div className="w-full px-4 py-6 bg-black">
-        <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 overflow-x-auto scrollbar-hide"
-        >
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           {data?.images?.length > 1 ? (
             data.images.slice(0, 2).map((img, i) => (
               <div key={i} className="w-full flex justify-center">
@@ -170,9 +156,7 @@ const PopUpCard = ({ data, onClose }) => {
 
           <button
             onClick={handlePrev}
-            className={`absolute left-4 top-1/2 -translate-y-1/2 text-white ${
-              !showArrows ? "hidden" : ""
-            }`}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white"
           >
             <ChevronLeftIcon className="h-9 w-9" />
           </button>
@@ -185,9 +169,7 @@ const PopUpCard = ({ data, onClose }) => {
 
           <button
             onClick={handleNext}
-            className={`absolute right-4 top-1/2 -translate-y-1/2 text-white ${
-              !showArrows ? "hidden" : ""
-            }`}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white"
           >
             <ChevronRightIcon className="h-9 w-9" />
           </button>
@@ -213,13 +195,12 @@ const PopUpCard = ({ data, onClose }) => {
         </div>
       )}
 
-      {/* Social Icons */}
-      <div className="fixed top-1/2 right-4 sm:right-6 transform -translate-y-1/2 flex flex-col space-y-1 text-2xl z-[60]">
+      <div className="fixed top-1/2 right-4 sm:right-6 transform -translate-y-1/2 flex flex-col overflow-hidden bg-black z-[60]">
         <a
           href="https://example.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 rounded-sm bg-black hover:bg-gray-300 transition-all duration-300"
+          className="p-3 hover:bg-gray-300 transition-all duration-300"
         >
           <FaGlobe className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
         </a>
@@ -227,7 +208,7 @@ const PopUpCard = ({ data, onClose }) => {
           href="https://twitter.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 rounded-sm bg-black hover:bg-blue-400 transition-all duration-300"
+          className="p-3 hover:bg-blue-400 transition-all duration-300"
         >
           <FaTwitter className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
         </a>
@@ -235,18 +216,23 @@ const PopUpCard = ({ data, onClose }) => {
           href="https://instagram.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 rounded-sm bg-black hover:bg-gradient-to-r from-pink-500 to-yellow-500 transition-all duration-300"
+          className="p-3 hover:bg-gradient-to-r from-pink-500 to-yellow-500 transition-all duration-300"
         >
-          <FaInstagram className="h-6 w-6 sm:h-8 sm:w-8 text-white p-1 rounded-full" />
+          <FaInstagram className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
         </a>
         <a
           href="https://facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 rounded-sm bg-black hover:bg-blue-600 transition-all duration-300"
+          className="p-3 hover:bg-blue-600 transition-all duration-300"
         >
           <FaFacebook className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
         </a>
+      </div>
+
+      {/* Infinite Scroll Sliding Images */}
+      <div className="mt-10 w-full">
+        <SlidingImagesPage />
       </div>
     </div>
   );

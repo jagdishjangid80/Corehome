@@ -1,4 +1,3 @@
-import React from "react";
 import { FaInstagram } from "react-icons/fa";
 import Marquee from "react-fast-marquee";
 import { slidingImages } from "../assets/images/brandImages";
