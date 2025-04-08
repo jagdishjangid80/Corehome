@@ -154,9 +154,10 @@ const PopUpCard = ({ data, onClose }) => {
             <XMarkIcon className="h-7 w-7" />
           </button>
 
+          {/* LEFT ICON (hidden on mobile) */}
           <button
             onClick={handlePrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white"
+            className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 text-white"
           >
             <ChevronLeftIcon className="h-9 w-9" />
           </button>
@@ -167,9 +168,10 @@ const PopUpCard = ({ data, onClose }) => {
             className="max-w-[90%] max-h-[70vh] object-contain"
           />
 
+          {/* RIGHT ICON (hidden on mobile) */}
           <button
             onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white"
+            className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 text-white"
           >
             <ChevronRightIcon className="h-9 w-9" />
           </button>

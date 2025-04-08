@@ -56,13 +56,14 @@ const Header = () => {
 
   return (
     <>
-      <header
-        className={`header-bg fixed top-0 w-full z-100 transition-all duration-300 h-[80px] flex items-center justify-between px-4 sm:px-6 md:px-8 ${
-          isScrolled
-            ? "bg-black"
-            : "bg-gradient-to-b from-black via-black to-black"
-        }`}
-      >
+     <header
+  className={`fixed top-0 w-full z-50 transition-all duration-300 ease-in-out px-4 sm:px-6 md:px-8 flex items-center justify-between ${
+    isScrolled
+      ? "bg-black h-[100px]"
+      : "bg-gradient-to-b from-black via-black to-transparent h-[200px]"
+  }`}
+>
+
         {isScrolled && (
           <div className="header-content w-full flex justify-between items-center">
             <button

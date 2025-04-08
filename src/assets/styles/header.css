@@ -1,13 +1,12 @@
-
 .header-bg {
+  height: 150px;
   background: linear-gradient(to bottom, black, black, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4), transparent);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  height: 150px; 
-  z-index: 50;
-  transition: height 0.3s ease, background-color 0.3s ease; 
+  transition: height 0.3s ease, background-color 0.3s ease;
+}
+
+.header-bg.scrolled {
+  height: 70px;
+  background-color: black;
 }
 
 

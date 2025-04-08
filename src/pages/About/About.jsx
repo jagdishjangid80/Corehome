@@ -225,7 +225,7 @@ const About = () => {
                 <img
                   src={aboutLast}
                   alt="Background Location Image"
-                  className="w-full h-auto min-h-[200px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[400px] xl:min-h-[500px] rounded-lg shadow-lg object-cover"
+                  className="w-full h-auto min-h-[200px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[650px] xl:min-h-[650px] rounded-lg shadow-lg object-cover"
                 />
                 <img
                   src={aboutMain}
@@ -427,7 +427,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* What We Do Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <div className="flex justify-center md:justify-start">
           <img
@@ -474,7 +473,6 @@ const About = () => {
         </motion.div>
       </div>
 
-      {/* Horizontal Scroll Section */}
       <div className="overflow-hidden">
         <div
           ref={containerRef}
@@ -486,7 +484,7 @@ const About = () => {
                 key={index}
                 ref={(el) => (sectionsRef.current[index] = el)}
                 className="flex-shrink-0 h-full w-screen flex items-center justify-center text-white"
-                style={{ margin: 0, padding: 0 }} // Ensure no margin or padding
+                style={{ margin: 0, padding: 0 }} 
               >
                 {section.content}
               </div>

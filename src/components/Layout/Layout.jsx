@@ -21,7 +21,7 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <main className="pt-24">
+      <main className="">
         <Outlet />
         <ScrollToTopButton/>
       </main>
