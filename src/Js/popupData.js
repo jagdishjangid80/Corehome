@@ -186,7 +186,7 @@ const popupData = [
       storage, and decor made from organic, FSC-certified bamboo. Each item is designed to be durable and reliable, 
       created using waste-minimizing techniques.`,
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     background: background1,
     logo: logo1,
     images: [pops1, pops2, pops3, pops4, pops5, pops6, pops7],
@@ -196,7 +196,7 @@ const popupData = [
     description:
       "Core Kitchen is one of our mainstay brands for kitchen tools that are anything but boring. With a range combining essentials with unique inventions you didn’t know you needed, there’s something for every home chef, meal prepper, and aspiring neat freak.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     background: background2,
     logo: logo2,
     images: [pops8, pops9, pops10, pops11, pops12, pops13, pops14],
@@ -206,7 +206,7 @@ const popupData = [
     description:
       "Manna Hydration is a stylish solution to reducing waste. Over 150 unique silhouettes with the option of over 50 finishes. From boldly designed tumblers, jugs and accessories. Plus, a broad collection of reusable straws made from six distinctive materials.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo3,
     background: background3,
     images: [pops15, pops16, pops17, pops18, pops19, pops20, pops21],
@@ -228,7 +228,7 @@ const popupData = [
     description:
       "Contemporary designs for a range of water bottles, brushes, and straws to meet every hydration need.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo5,
     background: background5,
     images: [pops29, pops30, pops31, pops32, pops33, pops34, pops35],
@@ -239,7 +239,7 @@ const popupData = [
     description:
       "Wherever you choose to explore, there’s a Hydragear bottle built for the journey. Our troupe of bottles, tumblers, mugs, and accessories are practical and universal in design to suit every lifestyle.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo6,
     background: background6,
     images: [pops36, pops37, pops38, pops39, pops40, pops41, pops42],
@@ -250,7 +250,7 @@ const popupData = [
     description:
       "Here at Thyme&Table we aim to curate kitchenware that transcends function. Our mission is to infuse passion and vitality into the kitchen through unique finishes, bold colors and innovative technology. Our collections of cookware, dinnerware, kitchen tools, and barware boast unique character and versatility, promising added flair to your cooking routine.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo7,
     background: background7,
     images: [pops43, pops44, pops45, pops46, pops47, pops48, pops49],
@@ -261,7 +261,7 @@ const popupData = [
     description:
       "Here at Wild & Woofy we make pet toys, accessories, grooming tools and more to set tails wagging! We’re passionate about the super special friendship between pets and their humans. In creating uniquely adorable and functional pet products, we hope to strengthen these bonds through play, proper hygiene, and healthy diets. Your furry friends are family and deserve only the pawsitively best in show.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo8,
     background: background8,
     images: [pops50, pops51, pops52, pops53, pops54, pops55, pops56],
@@ -272,7 +272,7 @@ const popupData = [
     description:
       "An ode to the effortless beauty of the Mediterranean region, Arête & Athene offers an entire apothecary of personal care products to refine your routines. Arête refers to the Greek philosophy of excellence and Athene captures the essence of wisdom; combined, these powerful pillars of our brand will infuse your life with luscious lather, refreshing scents, and eye-catching prints.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo9,
     background: background9,
     images: [pops57, pops58, pops59, pops60, pops61, pops62, pops63],
@@ -283,7 +283,7 @@ const popupData = [
     description:
       "Dreamed up and designed in NYC, the home of the yellow cab, the Yellow Cab Games brand is fueled by the kind of joy that only comes from creativity, entertainment, and good old-fashioned fun. Made for quality time, our unique range of puzzles, board games, cards and more are the epitome of amusement and inspiration.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo10,
     background: background10,
     images: [pops64, pops65, pops66, pops67, pops68, pops69, pops70],
@@ -294,7 +294,7 @@ const popupData = [
     description:
       "Sweet Sugar Fantasy is a beauty brand designed for dreamers to glitter, gloss, and gleam with self-expression. Our products sprinkle a magical dose of beauty and creativity into everyday self-care with shades and scents nothing short of dancing sugar plums. Everything we whip up is paraben-free, phalate-free, ethically produced, and never tested on animals. The only limit is your imagination.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo11,
     background: background11,
     images: [pops71, pops72, pops73, pops74, pops75, pops76, pops77],
@@ -305,7 +305,7 @@ const popupData = [
     description:
       "Love to travel? Obsessed with function? Can’t get enough comfort? Us too! Whether you’re braving a red eye to a dream destination or the second-shift driver on the road trip of a lifetime, it’s important to be prepared for anything and everything. But you already knew that. Harmonizing savvy design and premium materials is our thing. Kinda like always having the coolest, most useful gadgets and relaxation essentials is yours.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo12,
     background: background12,
     images: [pops78, pops79, pops80, pops81, pops82, pops83, pops84],
@@ -316,7 +316,7 @@ const popupData = [
     description:
       "Inspired by the refreshment and vitality of water, Mayim promotes a lifestyle with wellness and healing at its core by carefully crafting hydration and personal care products. Fine materials meet sleek design to transform home into an oasis. Our products are certified cruelty-free, paraben free, ethically produced and never tested on animals because we believe feeling good comes from doing good.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo13,
     background: background13,
     images: [pops85, pops86, pops87, pops88, pops89, pops90, pops91],
@@ -327,7 +327,7 @@ const popupData = [
     description:
       "Like picking a bouquet of fresh lavender from the garden, the Maison de Base collection brings the natural luxuries of provincial France into your life for just the right amount of everyday opulence. Make each little moment magnificent.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo14,
     background: background14,
     images: [pops92, pops93, pops94, pops95, pops96, pops97, pops98],
@@ -337,7 +337,7 @@ const popupData = [
     description:
       "Inspired by the legendary streets of New York, BKLYN Refinery brings urban artistry and modern sophistication to your daily hygiene routines. Using a blend of the finest ingredients, our collection of body cleansers, moisturizers, brushes and more are equal parts innovative and classic, just like the city itself.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo15,
     background: background15,
     images: [pops99, pops100, pops101, pops102, pops103, pops104, pops105],
@@ -347,7 +347,7 @@ const popupData = [
     description:
       "Every body gets a little dirty…so why not be the best-smelling dude in the room? Well & Dowd stands by the idea that real men scrub up. Meet your new self-care wingmen. Taking care of yourself is a right of passage You should be just as attractive the night before as you are the morning after.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo16,
     background: background16,
     images: [pops106, pops107, pops108, pops109, pops110, pops111, pops112],
@@ -357,7 +357,7 @@ const popupData = [
     description:
       "At Medici, we invite you to add regal textures and gilded trim into your life, to luxuriate as though under an olive tree with a goblet in your hand. We source inspiration and materials for our heirloom-inspired textiles, ceramics, glassware, and wooden serveware from artisans around the globe to bring only the finest into your home.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo17,
     background: background17,
     images: [pops113, pops114, pops115, pops116, pops117, pops118, pops119],
@@ -367,7 +367,7 @@ const popupData = [
     description:
       "At Scribble & Scribe, we believe every idea is worth capturing on paper. That’s why our mission is to create quality writing tools for everything from planning to doodling and anything in between. Turn the page, click the pen, and unlock your inner scribe with us.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo18,
     background: background18,
     images: [pops120, pops121, pops122, pops123, pops124, pops125, pops126],
@@ -377,7 +377,7 @@ const popupData = [
     description:
       "Get to know the real us! Based in: NYC Likes: Beauty routines, spa days, long walks on the beach, glitter, Dislikes: a life without moisturizer, animal testing, parabens Looking for: skincare-obsessed besties who like to have fun The TL;DR TFW is proud to inject fun into beauty and lifestyle products that will make you wonder…did someone create this just for me?",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo19,
     background: background19,
     images: [pops127, pops128, pops129, pops130, pops131, pops132, pops133],
@@ -387,7 +387,7 @@ const popupData = [
     description:
       "We know you crave new horizons (and clever puns) as much as we do. Our tools are made for modern wanderers and wonderers with wild hearts just like you. Whether you’re a city biker, a mountain hiker, or just like to be prepared for all the winding roads life has to offer, W+W invites you to adventure with us.",
     buttonText: "Close",
-    visitText: "Visit Website",
+    visitText: "VISIT WEBSITE",
     logo: logo20,
     background: background20,
     images: [pops134, pops135, pops136, pops137, pops138, pops139, pops140],

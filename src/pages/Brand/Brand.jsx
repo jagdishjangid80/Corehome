@@ -44,21 +44,22 @@ const Brand = () => {
       {/* Marquee for List Data */}
       <div className="bg-black pt-4 sm:pt-5 md:pt-6 lg:pt-8 xl:pt-10 pb-4 sm:pb-5 md:pb-6 lg:pb-8 xl:pb-10 overflow-hidden whitespace-nowrap">
         <Marquee pauseOnHover speed={50} direction="left">
-          <div className="flex gap-x-6 sm:gap-x-8 md:gap-x-10 lg:gap-x-12 xl:gap-x-14">
+          <div className="flex gap-x-4 sm:gap-x-5 md:gap-x-6 lg:gap-x-7 xl:gap-x-8">
             {listData.concat(listData).map((item, index) => (
               <div
                 key={index}
-                className="flex items-center space-x-2 text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-semibold px-3 sm:px-4 md:px-5 lg:px-6 xl:px-8"
+                className="flex items-center text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-semibold"
               >
-                <span className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 flex items-center justify-center bg-[#ebbb53] rounded-full">
+                <span className="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center bg-[#ebbb53] rounded-full shrink-0">
                   {item.icon}
                 </span>
-                <span>{item.name}</span>
+                <span className="ml-2 whitespace-nowrap">{item.name}</span>
               </div>
             ))}
           </div>
         </Marquee>
       </div>
+
       <div className="pt-4 sm:pt-5 md:pt-6 lg:pt-8 xl:pt-10 pb-4 sm:pb-5 md:pb-6 lg:pb-8 xl:pb-10">
         <ExtraCardpops />
       </div>

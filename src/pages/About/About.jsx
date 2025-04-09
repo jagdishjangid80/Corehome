@@ -484,7 +484,7 @@ const About = () => {
                 key={index}
                 ref={(el) => (sectionsRef.current[index] = el)}
                 className="flex-shrink-0 h-full w-screen flex items-center justify-center text-white"
-                style={{ margin: 0, padding: 0 }} 
+                style={{ margin: 0, padding: 0 }}
               >
                 {section.content}
               </div>

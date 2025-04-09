@@ -53,7 +53,7 @@ const PopUpCard = ({ data, onClose }) => {
       >
         <button
           onClick={onClose}
-          className="absolute top-4 left-4 bg-white text-black px-4 py-2 rounded-md text-lg font-semibold hover:bg-yellow-600 transition-all duration-300 z-50"
+          className="absolute top-4 left-4 bg-white text-black px-6 py-3 rounded-md text-2xl font-semibold shadow-[4px_4px_0px_#000000] hover:shadow-[2px_2px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] hover:bg-[#ebbb53] transition-all duration-200 z-50"
         >
           GO BACK
         </button>
@@ -64,7 +64,7 @@ const PopUpCard = ({ data, onClose }) => {
           <img
             src={data.logo}
             alt="Brand Logo"
-            className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain drop-shadow-lg"
+            className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-100 lg:h-100 object-contain drop-shadow-md rounded-lg  p-2"
           />
         )}
 
@@ -73,20 +73,23 @@ const PopUpCard = ({ data, onClose }) => {
 
       <div className="relative w-full flex flex-col justify-center items-center text-center py-10 px-6 min-h-[100vh] bg-black">
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
-        <div className="relative z-20 w-full md:w-[80%] lg:w-[70%] xl:w-[60%] text-white">
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
+        <div className="relative z-20 w-full md:w-[40%] lg:w-[40%] xl:w-[40%] text-white">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl ">
             {data?.description || "No Description Available"}
           </p>
           {data?.visitText && (
             <div className="mt-4 flex justify-center">
-              <a
-                href={data.visitText}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-2 text-yellow-400 font-bold text-2xl sm:text-3xl md:text-4xl py-2 px-6 rounded-md hover:shadow-lg hover:text-yellow-500 transition-all duration-300"
-              >
-                {data.visitText}
-              </a>
+              <div className="relative inline-block group">
+                <div className="absolute inset-0 bg-[#ffe7a3] blur-xl opacity-0 group-hover:opacity-60 transition duration-500 rounded-md z-0"></div>
+                <a
+                  href={data.visitText}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 inline-block mt-2 text-[#ebbb53] font-bold text-2xl sm:text-3xl md:text-4xl py-2 px-6 rounded-md hover:text-[#ebbb53] transition-all duration-300"
+                >
+                  {data.visitText}
+                </a>
+              </div>
             </div>
           )}
         </div>
@@ -149,12 +152,11 @@ const PopUpCard = ({ data, onClose }) => {
         <div className="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center z-[9999] px-4 py-6">
           <button
             onClick={handleCloseModal}
-            className="absolute top-4 right-4 text-white"
+            className="absolute top-4 right-4 text-white "
           >
-            <XMarkIcon className="h-7 w-7" />
+            <XMarkIcon className="h-7 w-7 hover:text-red-500" />
           </button>
 
-          {/* LEFT ICON (hidden on mobile) */}
           <button
             onClick={handlePrev}
             className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 text-white"
@@ -168,7 +170,6 @@ const PopUpCard = ({ data, onClose }) => {
             className="max-w-[90%] max-h-[70vh] object-contain"
           />
 
-          {/* RIGHT ICON (hidden on mobile) */}
           <button
             onClick={handleNext}
             className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 text-white"

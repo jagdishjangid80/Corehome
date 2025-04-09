@@ -43,9 +43,9 @@ const ExtraCardpops = () => {
           </div>
         ))}
       </div>
-      <CollaborateSection/>
-      {/* Collaborate Section */}
-      {/* <div className="w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
+       <CollaborateSection/>
+   
+       {/* <div className="w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
         {collaborate.map((card, index) => (
           <div
             key={index}

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
-import menu from "../../assets/images/manu.png";  
+import menu from "../../assets/images/manu.png";
 import backgroundImage1 from "../../assets/images/background1.png";
 import backgroundImage2 from "../../assets/images/background2.png";
 import backgroundImage3 from "../../assets/images/background3.png";
@@ -28,12 +28,17 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const threshold = window.innerHeight;
-      setIsScrolled(window.scrollY > threshold);
+      if (location.pathname === "/") {
+        setIsScrolled(window.scrollY > threshold);
+      } else {
+        setIsScrolled(true);
+      }
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -41,12 +46,8 @@ const Header = () => {
         (prevIndex) => (prevIndex + 1) % backgroundImages.length
       );
     }, 6000);
-
     return () => clearInterval(intervalId);
   }, []);
-
-  const closeMenu = () => setMenuOpen(false);
-  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
     if (menuOpen) {
@@ -54,27 +55,32 @@ const Header = () => {
     }
   }, [location]);
 
+  const closeMenu = () => setMenuOpen(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
   return (
     <>
-     <header
-  className={`fixed top-0 w-full z-50 transition-all duration-300 ease-in-out px-4 sm:px-6 md:px-8 flex items-center justify-between ${
-    isScrolled
-      ? "bg-black h-[100px]"
-      : "bg-gradient-to-b from-black via-black to-transparent h-[200px]"
-  }`}
->
-
+      <header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ease-in-out px-4 sm:px-6 md:px-8 flex items-center justify-between ${
+          isScrolled
+            ? "bg-black h-[100px]"
+            : location.pathname === "/"
+            ? "bg-gradient-to-b from-black via-black to-transparent h-[200px]"
+            : "hidden"
+        }`}
+      >
         {isScrolled && (
           <div className="header-content w-full flex justify-between items-center">
             <button
               onClick={toggleMenu}
               className="flex items-center gap-3 text-white cursor-pointer"
             >
-              <div className="flex flex-col items-center justify-center w-5 h-5 cursor-pointer space-y-1 rotate-[120deg] transition-transform duration-300 hover:rotate-0">
-                <div className="w-4 h-1 bg-white rounded-full"></div>
-                <div className="w-6 h-1 bg-white rounded-full"></div>
-                <div className="w-4 h-1 bg-white rounded-full"></div>
+              <div className="flex flex-col items-center justify-center w-6 h-6 cursor-pointer space-y-1 rotate-[120deg] transition-transform duration-300 hover:rotate-[180deg] group">
+                <div className="w-4 h-[3px] bg-white rounded-full transition-all duration-300 group-hover:w-6"></div>
+                <div className="w-6 h-[3px] bg-white rounded-full transition-all duration-300"></div>
+                <div className="w-4 h-[3px] bg-white rounded-full transition-all duration-300 group-hover:w-6"></div>
               </div>
+
               <span className="text-sm md:text-lg lg:text-xl xl:text-2xl font-bold">
                 MENU
               </span>

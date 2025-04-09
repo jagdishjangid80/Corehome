@@ -84,10 +84,11 @@ export const extraCards = [
     { title: "Private Label", image: private1, link: "#" },
     { title: "Licensing", image: lis, link: "#" },
     { title: "Giving Back", image: giving1, link: "#" },
+    
 ];
 
 export const collaborate = [
-    { title: "Collaborations With Us", image: coll, link: "#" },
+    { title: "Collaborations With Us", image: coll, link: "" },
 ];
 
 export const careerInnovationCards = [

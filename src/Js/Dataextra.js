@@ -17,6 +17,7 @@ import cob2 from "../assets/images/brand/cob2.png";
 import career1 from "../assets/images/brand/career1.png";
 import career2 from "../assets/images/brand/career2.png";
 import career3 from "../assets/images/brand/career3.png";
+
 const ExtraData = [
   {
     id: 1,
@@ -33,7 +34,6 @@ const ExtraData = [
     images: [Licensing],
     logos: [Yellowstone, logoimg2, logoimg3, logoimg4, logoimg5],
   },
-
   {
     id: 3,
     title: "Giving Back",
@@ -44,33 +44,18 @@ const ExtraData = [
   {
     id: 4,
     title: "Collaborations With Us",
-    text: "Are You a Content Creator Who Loves Our Products? ",
-    description: `We’re always looking for enthusiastic, creative collaborators to bring our range of items to life on social media. Whether you’re an avid home cook or baker, outdoor adventurer, or face mask enthusiast, Core Home has something for everyone. `,
+    text: "Are You a Content Creator Who Loves Our Products?",
+    description: `We’re always looking for enthusiastic, creative collaborators to bring our range of items to life on social media. Whether you’re an avid home cook or baker, outdoor adventurer, or face mask enthusiast, Core Home has something for everyone.`,
     images: [cob1, cob2],
     buttontext: "CONTACT OUR MARKETING TEAM TO GET THINGS STARTED",
   },
   {
     id: 5,
     title: "Careers",
-    description: `Core Home is an Equal Opportunity Employer with a zero tolerance policy for discrimination on the basis of age, disability, sex, race, religion or belief, gender reassignment, marriage/civil partnership, pregnancy/maternity, or sexual orientation.
-           We commit ourselves to creating an inclusive and diverse environment where people of all backgrounds are welcome to express themselves and contribute their unique perspectives. In all spheres of operation, including hiring, we strive to acknowledge and move beyond our own biases so our company can promote equity-based decisions. We hire, employ, train, promote, and compensate individuals based on merit and performance-related qualifications. All are welcome to apply. `,
-    buttonText: "Close",
-    images: [career1, career2 ,career3
-    ],
-    buttontext: "JOIN THE TEAM",
+    description: `Core Home is an Equal Opportunity Employer with a zero tolerance policy for discrimination on the basis of age, disability, sex, race, religion or belief, gender reassignment, marriage/civil partnership, pregnancy/maternity, or sexual orientation. We commit ourselves to creating an inclusive and diverse environment where people of all backgrounds are welcome to express themselves and contribute their unique perspectives. In all spheres of operation, including hiring, we strive to acknowledge and move beyond our own biases so our company can promote equity-based decisions. We hire, employ, train, promote, and compensate individuals based on merit and performance-related qualifications. All are welcome to apply.`,
+    buttonText: "JOIN THE TEAM",
+    images: [career1, career2, career3],
   },
-    {
-    id: 5,
-    title: "Careers",
-    description: `Core Home is an Equal Opportunity Employer with a zero tolerance policy for discrimination on the basis of age, disability, sex, race, religion or belief, gender reassignment, marriage/civil partnership, pregnancy/maternity, or sexual orientation.
-           We commit ourselves to creating an inclusive and diverse environment where people of all backgrounds are welcome to express themselves and contribute their unique perspectives. In all spheres of operation, including hiring, we strive to acknowledge and move beyond our own biases so our company can promote equity-based decisions. We hire, employ, train, promote, and compensate individuals based on merit and performance-related qualifications. All are welcome to apply. `,
-    buttonText: "Close",
-    images: [career1, career2 ,career3
-    ],
-    buttontext: "JOIN THE TEAM",
-  },
-  
-
 ];
 
 export default ExtraData;
