@@ -17,7 +17,7 @@ const Materials = () => {
           <img
             src={aboutlast}
             alt="Materials"
-            className="rounded-lg shadow-xl object-cover w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[600px] xl:max-w-[600px] h-auto max-h-[400px] sm:max-h-[350px] md:max-h-[400px] lg:max-h-[500px] xl:max-h-[500px]"
+            className="rounded-lg shadow-xl object-cover w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[700px] xl:max-w-[700px] h-auto max-h-[500px] sm:max-h-[350px] md:max-h-[400px] lg:max-h-[550px] xl:max-h-[550px]"
           />
         </div>
       </div>

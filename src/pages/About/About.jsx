@@ -157,7 +157,7 @@ const About = () => {
         trigger: container,
         pin: true,
         scrub: 2,
-        start: "top top+=50",
+        start: "top top",
         end: () => `+=${(sections.length - 1) * window.innerWidth}`,
         invalidateOnRefresh: true,
         snap: {
@@ -171,6 +171,7 @@ const About = () => {
         },
       },
     });
+
     let resizeTimeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
