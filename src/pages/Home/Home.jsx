@@ -126,6 +126,9 @@ const Home = () => {
         </motion.div>
       </div>
 
+      
+
+
       <About className="mt-[100vh]" />
     </>
   );

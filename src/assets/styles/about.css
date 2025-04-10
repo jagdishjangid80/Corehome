@@ -7,15 +7,42 @@
   display: flex;
   flex-wrap: nowrap;
   width: 100vw;
+  overflow-x: auto; /* Ensures scrolling */
 }
 
 .section-item {
-  flex: 0 0 100vw;
+  flex: 0 0 100vw; /* Makes each item take up 100% of the viewport width */
   height: 100%;
 }
 
+/* Media query for tablets and smaller devices (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .horizontal-scroll-container {
+    overflow-x: auto; /* Horizontal scrolling enabled */
+    padding: 0 20px; /* Add padding if needed */
+  }
+
+  .section-item {
+    min-width: 250px; /* Minimum width for items */
+    max-width: 90%; /* Max width of items */
+  }
+}
+
+/* Media query for mobile devices (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  .horizontal-scroll-container {
+    padding: 0 20px; /* Padding for small screens */
+  }
+
+  .section-item {
+    min-width: 200px; /* Minimum width for items */
+    max-width: 85%; /* Max width of items */
+  }
+}
+
+/* Extra padding for .section-item on smaller screens */
 @media (max-width: 768px) {
   .section-item {
-    padding: 10px;
+    padding: 10px; /* Add some padding for smaller screens */
   }
 }

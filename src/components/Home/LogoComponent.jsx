@@ -18,7 +18,7 @@ const LogoComponent = ({ showPops, showLogo }) => {
         <img
           src={logo}
           alt="Logo"
-          className="w-[600px] sm:w-[220px] md:w-[400px] lg:w-[600px]"
+          className="w-[800px] sm:w-[300px] md:w-[500px] lg:w-[800px]"
         />
       </motion.div>
     )
