@@ -28,35 +28,31 @@ const images = [
   move20, move21,
 ];
 
-const Move = () => {
-  const scrollVariants = {
-    up: {
-      y: ["0%", "-50%"],
-      transition: {
-        repeat: Infinity,
-        duration: 20,
-        ease: "linear",
-      },
+const scrollVariants = {
+  up: {
+    y: ["0%", "-50%"],
+    transition: {
+      repeat: Infinity,
+      duration: 20,
+      ease: "linear",
     },
-    down: {
-      y: ["-50%", "0%"],
-      transition: {
-        repeat: Infinity,
-        duration: 20,
-        ease: "linear",
-      },
+  },
+  down: {
+    y: ["-50%", "0%"],
+    transition: {
+      repeat: Infinity,
+      duration: 20,
+      ease: "linear",
     },
-  };
+  },
+};
 
+const Move = () => {
   return (
-    <div className="relative w-full h-screen  justify-center items-center px-4 sm:px-6 lg:px-8 bg-black">
-      {/* Gradient Overlays */}
+    <div className="relative w-full h-screen bg-black overflow-hidden  justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
-
-      {/* Image Columns */}
-      <div className="flex gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 max-w-[100vw] h-full">
-        {/* Upward Scrolling Column */}
+      <div className="flex gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 h-full max-w-[100vw]">
         <motion.div
           className="flex flex-col gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16"
           variants={scrollVariants}
@@ -69,18 +65,13 @@ const Move = () => {
               key={`up-${index}`}
               src={img}
               alt={`move${index + 1}`}
-              className="w-30 h-30
-                sm:w-20 sm:h-20 
-                md:w-24 md:h-24 
-                lg:w-28 lg:h-28 
-                xl:w-38 xl:h-38 
-                object-contain flex-shrink-0"
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 object-contain flex-shrink-0"
               loading="lazy"
             />
           ))}
         </motion.div>
 
-        {/* Downward Scrolling Column */}
+        {/* Column Down */}
         <motion.div
           className="flex flex-col gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16"
           variants={scrollVariants}
@@ -93,12 +84,7 @@ const Move = () => {
               key={`down-${index}`}
               src={img}
               alt={`move${index + 1}`}
-              className="w-30 h-30
-                sm:w-20 sm:h-20 
-                md:w-24 md:h-24 
-                lg:w-28 lg:h-28 
-                xl:w-38 xl:h-38 
-                object-contain flex-shrink-0"
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 object-contain flex-shrink-0"
               loading="lazy"
             />
           ))}
