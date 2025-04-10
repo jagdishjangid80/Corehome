@@ -49,7 +49,7 @@ const Move = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden flex justify-center items-center px-4 sm:px-6 lg:px-8 bg-black">
+    <div className="relative w-full h-screen  justify-center items-center px-4 sm:px-6 lg:px-8 bg-black">
       {/* Gradient Overlays */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />

@@ -50,7 +50,6 @@ import ab18 from "../../assets/images/categories/ab18.png";
 import ab19 from "../../assets/images/categories/ab19.png";
 import ab20 from "../../assets/images/categories/ab20.png";
 
-// Data arrays
 const values = [
   "Revolutionize Kitchenware",
   "Capture Integrity",
@@ -98,7 +97,6 @@ const About = () => {
   const sectionsRef = useRef([]);
   const [showPops, setShowPops] = useState(false);
 
-  // Image slideshows
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % imageArray.length);
