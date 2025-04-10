@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import logo from "../../assets/images/manu.png";
 
 const LogoComponent = ({ showPops, showLogo }) => {
+  console.log("LogoComponent rendered | logo:", logo);
+
   return (
     showLogo && (
       <motion.div

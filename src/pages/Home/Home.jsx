@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InfiniteScroll from "../../components/InfiniteScroll";
@@ -23,27 +23,9 @@ import background11 from "../../assets/images/background11.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
-  const imagesLeft = [
-    background1,
-    background3,
-    background9,
-    background4,
-    background5,
-  ];
-  const imagesCenter = [
-    background10,
-    background11,
-    background8,
-    background7,
-    background4,
-  ];
-  const imagesRight = [
-    background2,
-    background5,
-    background6,
-    background8,
-    background10,
-  ];
+  const imagesLeft = [background1, background3, background9, background4, background5];
+  const imagesCenter = [background10, background11, background8, background7, background4];
+  const imagesRight = [background2, background5, background6, background8, background10];
 
   const [showPops, setShowPops] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
@@ -55,60 +37,49 @@ const Home = () => {
   const popsRef = useRef(null);
   const containerRef = useRef(null);
 
-  useEffect(() => {
-    if (
-      containerRef.current &&
-      leftRef.current &&
-      rightRef.current &&
-      centerRef.current &&
-      logoRef.current &&
-      popsRef.current
-    ) {
- 
-      gsap.set(logoRef.current, { scale: 1, opacity: 1 });
-      gsap.set([leftRef.current, rightRef.current], { y: 0 });
-      gsap.set(centerRef.current, { y: 0 });
-      gsap.set(popsRef.current, { opacity: 0 });
+  useLayoutEffect(() => {
+    const left = leftRef.current;
+    const right = rightRef.current;
+    const center = centerRef.current;
+    const logo = logoRef.current;
+    const pops = popsRef.current;
+    const container = containerRef.current;
 
-   
-      const scrollDistance = window.innerHeight * 2;
+    if (!left || !right || !center || !logo || !pops || !container) return;
 
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: `+=${scrollDistance}`,
-          scrub: 1,
-          pin: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            setShowLogo(progress < 0.75); 
-            setShowPops(progress > 0.5);  
-          },
+    gsap.set(logo, { scale: 1, opacity: 1 });
+    gsap.set([left, right], { y: 0 });
+    gsap.set(center, { y: 0 });
+    gsap.set(pops, { opacity: 0 });
+
+    const scrollDistance = window.innerHeight * 2;
+
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: "top top",
+        end: `+=${scrollDistance}`,
+        scrub: 1,
+        pin: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          setShowLogo(progress < 0.75);
+          setShowPops(progress > 0.5);
         },
-      });
+      },
+    });
 
-      // Background and logo animations
-      tl.to(leftRef.current, { y: "100%", ease: "none" }, 0)
-        .to(rightRef.current, { y: "100%", ease: "none" }, 0)
-        .to(centerRef.current, { y: "-100%", ease: "none" }, 0)
-        .to(logoRef.current, { 
-          scale: 0.3, 
-          opacity: 0, 
-          ease: "none" 
-        }, 0)
-        .to(popsRef.current, { 
-          opacity: 1, 
-          ease: "power1.in", 
-          duration: 0.3 
-        }, 0.2); 
-
-    }
+    tl.to(left, { y: "100%", ease: "none" }, 0)
+      .to(right, { y: "100%", ease: "none" }, 0)
+      .to(center, { y: "-100%", ease: "none" }, 0)
+      .to(logo, { scale: 0.3, opacity: 0, ease: "none" }, 0)
+      .to(pops, { opacity: 1, ease: "power1.in", duration: 0.3 }, 0.2);
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      // Cleanup ScrollTriggers to prevent issues when component unmounts
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, []);
+  }, []);  // Ensure this effect runs once on mount
 
   return (
     <>
@@ -127,18 +98,22 @@ const Home = () => {
             <InfiniteScroll images={imagesRight} direction="down" />
           </div>
         </div>
+
         <div
           ref={logoRef}
           className="absolute inset-0 flex items-center justify-center z-40"
         >
           <LogoComponent showPops={showPops} showLogo={showLogo} />
         </div>
+
         <div
           ref={popsRef}
-          className="absolute inset-0 flex items-center justify-center z-30"
+          className="absolute inset-0 flex items-center justify-center z-30 transition-opacity duration-300 pointer-events-none"
+          style={{ opacity: showPops ? 1 : 0 }}
         >
-          {showPops && <PopsComponent showPops={showPops} />}
+          <PopsComponent showPops={showPops} />
         </div>
+
         <motion.div
           className="absolute bottom-10 w-full flex justify-center items-center text-center z-50"
           initial={{ opacity: 1, scale: 1 }}
