@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ closeMenu }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [popup, setPopup] = useState(null); // 'leadership', 'sustainability', 'collaboration'
-  const navbarRef = useRef(null); // To detect clicks outside the navbar
+  const [popup, setPopup] = useState(null); 
+  const navbarRef = useRef(null); 
   const navigate = useNavigate();
 
   const toggleDropdown = (label) => {
@@ -28,11 +28,11 @@ const Navbar = ({ closeMenu }) => {
 
   const closePopup = () => setPopup(null);
 
-  // Close dropdown if clicked outside
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-        setOpenDropdown(null); // Close the dropdown if clicked outside
+        setOpenDropdown(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);

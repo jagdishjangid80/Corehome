@@ -34,8 +34,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen w-full bg-black text-white px-4 sm:px-6 md:px-8 lg:px-16 py-8">
-      <div className="relative w-full lg:w-1/2 h-80 sm:h-96 md:h-screen">
+    <div className="overflow-hidden w-screen h-screen flex flex-col lg:flex-row bg-black text-white px-4 sm:px-6 md:px-8 lg:px-16 py-8">
+      {/* Left Background */}
+      <div className="relative w-full lg:w-1/2 h-80 sm:h-96 md:h-full">
         <div
           className="w-full h-full bg-cover bg-center"
           style={{
@@ -56,7 +57,8 @@ const Contact = () => {
         </motion.div>
       </div>
 
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center mt-8 lg:mt-0">
+      {/* Right Form */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center mt-8 lg:mt-0 overflow-hidden">
         <div className="bg-[#000000aa] shadow-lg shadow-black p-8 sm:p-12 md:p-16 w-full max-w-xl rounded-lg">
           <div className="mb-6 flex flex-col sm:flex-row gap-4 justify-center">
             {["Customer Service", "Sales Department"].map((dept) => (
@@ -126,10 +128,12 @@ const Contact = () => {
             </div>
 
             <div className="flex justify-center mt-6">
-              <ReCAPTCHA
-                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                onChange={() => setVerified(true)}
-              />
+              <div className="scale-[0.85] sm:scale-100 overflow-hidden">
+                <ReCAPTCHA
+                  sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                  onChange={() => setVerified(true)}
+                />
+              </div>
             </div>
 
             <div className="flex justify-center">

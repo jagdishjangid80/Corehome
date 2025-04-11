@@ -96,20 +96,20 @@ const About = () => {
   const containerRef = useRef(null);
   const sectionsRef = useRef([]);
   const [showPops, setShowPops] = useState(false);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % imageArray.length);
     }, 6000);
     return () => clearInterval(interval);
   }, []);
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage1((prev) => (prev + 1) % imageArray1.length);
     }, 8000);
     return () => clearInterval(interval);
   }, []);
+  
 
   useEffect(() => {
     const handleMouseMove = () => {
@@ -230,9 +230,9 @@ const About = () => {
                   src={aboutMain}
                   alt="Overlay Location Image"
                   className="absolute bottom-0 right-0 sm:bottom-[-10%] sm:right-[-10%] 
-      md:bottom-[-12%] md:right-[-15%] lg:bottom-[-15%] lg:right-[-20%] 
-      xl:bottom-[-5%] xl:right-[-25%] w-[60%] sm:w-[65%] md:w-[70%] 
-      h-auto rounded-lg shadow-lg object-cover z-10"
+                        md:bottom-[-12%] md:right-[-15%] lg:bottom-[-15%] lg:right-[-20%] 
+                        xl:bottom-[-5%] xl:right-[-25%] w-[60%] sm:w-[65%] md:w-[70%] 
+                        h-auto rounded-lg shadow-lg object-cover z-10"
                 />
               </div>
             </div>
