@@ -70,7 +70,7 @@ const Header = () => {
         }`}
       >
         {isScrolled && (
-          <div className="header-content w-full flex justify-between items-center">
+          <div className="header-content w-full flex justify-between items-center ">
             <button
               onClick={toggleMenu}
               className="flex items-center gap-3 text-white cursor-pointer"

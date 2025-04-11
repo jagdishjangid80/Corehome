@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ScrollToTopButton from "../ScrollToTopButton";
-
+import Leadership from '../../pages/Resources/leadership';
 const Layout = () => {
   useEffect(() => {
     const element = document.createElement("div");
@@ -21,9 +21,10 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <main className="">
-        <Outlet />
-        <ScrollToTopButton/>
+      <main>
+        <Outlet /> 
+        {/* <Leadership/> */}
+        <ScrollToTopButton />
       </main>
       <Footer />
     </>

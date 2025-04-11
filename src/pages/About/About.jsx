@@ -96,21 +96,33 @@ const About = () => {
   const containerRef = useRef(null);
   const sectionsRef = useRef([]);
   const [showPops, setShowPops] = useState(false);
+  const headerHeight = useRef(0);
+
+  // Calculate header height on mount
+  useEffect(() => {
+    const header = document.querySelector("header"); // Adjust selector based on your header
+    if (header) {
+      headerHeight.current = header.offsetHeight;
+    }
+  }, []);
+
+  // Image carousel for "Who We Are"
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % imageArray.length);
     }, 6000);
     return () => clearInterval(interval);
   }, []);
-  
+
+  // Image carousel for "What We Do"
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage1((prev) => (prev + 1) % imageArray1.length);
     }, 8000);
     return () => clearInterval(interval);
   }, []);
-  
 
+  // Detect mouse movement or scroll to activate GSAP animations
   useEffect(() => {
     const handleMouseMove = () => {
       setIsMouseMoved(true);
@@ -131,60 +143,72 @@ const About = () => {
     };
   }, []);
 
+  // GSAP Horizontal Scroll
   useEffect(() => {
     if (!isMouseMoved) return;
 
     gsap.registerPlugin(ScrollTrigger);
+
     const sections = sectionsRef.current.filter(Boolean);
     const container = containerRef.current;
 
+    // Set section widths to match viewport
     const updateSectionWidths = () => {
       const viewportWidth = window.innerWidth;
       sections.forEach((section) => {
         section.style.width = `${viewportWidth}px`;
       });
-      ScrollTrigger.refresh();
     };
 
     updateSectionWidths();
 
-    const animation = gsap.to(sections, {
-      x: () => -(sections.length - 1) * window.innerWidth,
-      ease: "none",
+    // GSAP animation for horizontal scroll
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         pin: true,
-        scrub: 2,
-        start: "top top",
-        end: () => `+=${(sections.length - 1) * window.innerWidth}`,
+        scrub: 1,
+        start: `top ${headerHeight.current}px`, // Offset by header height
+        end: () => `+=${sections.length * window.innerWidth}`,
         invalidateOnRefresh: true,
         snap: {
           snapTo: 1 / (sections.length - 1),
-          duration: { min: 0.2, max: 0.8 },
-          delay: 0.5,
+          duration: 0.4,
+          ease: "power1.inOut",
         },
         onUpdate: (self) => {
-          const progress = self.progress;
-          setShowPops(progress > 0.95);
+          setShowPops(self.progress > 0.95);
         },
       },
     });
 
+    tl.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: "none",
+    });
+
+    // Handle resize with debouncing
     let resizeTimeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
+        // Recalculate header height on resize
+        const header = document.querySelector("header");
+        if (header) {
+          headerHeight.current = header.offsetHeight;
+        }
         updateSectionWidths();
-        animation.scrollTrigger.refresh();
-      }, 150);
+        ScrollTrigger.refresh();
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
 
+    // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      animation.kill();
+      tl.kill();
     };
   }, [isMouseMoved]);
 
@@ -193,7 +217,7 @@ const About = () => {
     visible: (i) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.2, duration: 0.1 },
+      transition: { delay: i * 0.2, duration: 0.5 },
     }),
   };
 
@@ -204,7 +228,7 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isMouseMoved ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 2, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 h-full flex items-center"
         >
           <div className="flex flex-col md:flex-row items-center justify-between w-full gap-4 sm:gap-6 md:gap-8 lg:gap-10">
@@ -244,7 +268,6 @@ const About = () => {
       title: "Support",
       content: (
         <div
-          style={{ marginTop: "150px" }}
           className="w-full h-full flex items-start justify-center"
         >
           <Support />
@@ -426,6 +449,7 @@ const About = () => {
         </div>
       </div>
 
+      {/* What We Do Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         <div className="flex justify-center md:justify-start">
           <img
@@ -472,10 +496,12 @@ const About = () => {
         </motion.div>
       </div>
 
+      {/* Horizontal Scroll Section */}
       <div className="overflow-hidden">
         <div
           ref={containerRef}
-          className="relative w-screen h-screen bg-black mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-[100px] overflow-hidden"
+          className="relative w-screen h-screen bg-black"
+          style={{ marginTop: `${headerHeight.current}px` }} // Offset by header height
         >
           <div className="flex h-full flex-nowrap">
             {sectionsData.map((section, index) => (

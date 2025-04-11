@@ -46,7 +46,7 @@ const Navbar = ({ closeMenu }) => {
     <>
       <nav
         ref={navbarRef}
-        className="w-full max-w-full text-white px-4 py-6 sm:absolute sm:left-60 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm:w-auto md:px-6 lg:px-8 xl:px-10"
+        className="w-full  max-w-full text-white px-4 py-6 sm:absolute sm:left-60 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm:w-auto md:px-6 lg:px-8 xl:px-10"
       >
         <div className="flex flex-col space-y-4 sm:space-y-2 md:space-y-3 lg:space-y-4">
           {[
@@ -104,7 +104,7 @@ const Navbar = ({ closeMenu }) => {
               ) : (
                 <button
                   onClick={() => handleRoute(href)}
-                  className="block w-full text-left text-white font-semibold py-2 px-3 rounded-md transition-colors text-base sm:text-lg md:text-xl lg:text-2xl hover:text-amber-300"
+                  className="block w-full justify-center   text-left text-white font-semibold py-2 px-3 rounded-md transition-colors text-base sm:text-lg md:text-xl lg:text-2xl hover:text-amber-300"
                 >
                   {label}
                 </button>
