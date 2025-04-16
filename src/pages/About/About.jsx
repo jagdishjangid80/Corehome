@@ -92,7 +92,6 @@ const imageArray1 = [about6, about7, about8, about9, about4];
 const About = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [currentImage1, setCurrentImage1] = useState(0);
-  const [isMouseMoved, setIsMouseMoved] = useState(false);
   const containerRef = useRef(null);
   const sectionsRef = useRef([]);
   const [showPops, setShowPops] = useState(false);
@@ -100,7 +99,7 @@ const About = () => {
 
   // Calculate header height on mount
   useEffect(() => {
-    const header = document.querySelector("header"); // Adjust selector based on your header
+    const header = document.querySelector("header");
     if (header) {
       headerHeight.current = header.offsetHeight;
     }
@@ -122,31 +121,8 @@ const About = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Detect mouse movement or scroll to activate GSAP animations
-  useEffect(() => {
-    const handleMouseMove = () => {
-      setIsMouseMoved(true);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-
-    const handleScroll = () => {
-      setIsMouseMoved(true);
-      window.removeEventListener("scroll", handleScroll);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   // GSAP Horizontal Scroll
   useEffect(() => {
-    if (!isMouseMoved) return;
-
     gsap.registerPlugin(ScrollTrigger);
 
     const sections = sectionsRef.current.filter(Boolean);
@@ -162,18 +138,21 @@ const About = () => {
 
     updateSectionWidths();
 
+    // Calculate total width of all sections
+    const totalWidth = sections.length * window.innerWidth;
+
     // GSAP animation for horizontal scroll
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         pin: true,
         scrub: 1,
-        start: `top ${headerHeight.current}px`, // Offset by header height
-        end: () => `+=${sections.length * window.innerWidth}`,
+        start: `top ${headerHeight.current}px`,
+        end: `+=${totalWidth}`,
         invalidateOnRefresh: true,
         snap: {
           snapTo: 1 / (sections.length - 1),
-          duration: 0.4,
+          duration: { min: 0.1, max: 0.5 },
           ease: "power1.inOut",
         },
         onUpdate: (self) => {
@@ -192,7 +171,6 @@ const About = () => {
     const handleResize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        // Recalculate header height on resize
         const header = document.querySelector("header");
         if (header) {
           headerHeight.current = header.offsetHeight;
@@ -210,7 +188,7 @@ const About = () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       tl.kill();
     };
-  }, [isMouseMoved]);
+  }, []);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -227,7 +205,7 @@ const About = () => {
       content: (
         <motion.div
           initial={{ opacity: 0, y: 50 }}
-          animate={isMouseMoved ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16 h-full flex items-center"
         >
@@ -267,9 +245,7 @@ const About = () => {
     {
       title: "Support",
       content: (
-        <div
-          className="w-full h-full flex items-start justify-center"
-        >
+        <div className="w-full h-full flex items-start justify-center">
           <Support />
         </div>
       ),
@@ -501,7 +477,7 @@ const About = () => {
         <div
           ref={containerRef}
           className="relative w-screen h-screen bg-black"
-          style={{ marginTop: `${headerHeight.current}px` }} // Offset by header height
+          style={{ marginTop: `${headerHeight.current}px` }}
         >
           <div className="flex h-full flex-nowrap">
             {sectionsData.map((section, index) => (
